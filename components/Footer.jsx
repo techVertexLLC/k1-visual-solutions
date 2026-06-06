@@ -1,0 +1,114 @@
+"use client";
+
+import Image from "next/image";
+import { MailIcon, PhoneIcon } from "./ui/icons";
+
+const NAV = [
+  { label: "Technology", href: "#technology" },
+  { label: "Products", href: "#products" },
+  { label: "Scenarios", href: "#scenarios" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+const handleNav = (href) => (e) => {
+  e.preventDefault();
+  document
+    .querySelector(href)
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+export default function Footer() {
+  return (
+    <footer className="relative border-t border-white/10 bg-ink-900">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-3">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="relative h-10 w-10 overflow-hidden rounded-lg ring-1 ring-white/15 shadow-glow">
+                <Image
+                  src="/assets/images/k1-logo.jpg"
+                  alt="K1 Visual Solutions logo"
+                  fill
+                  sizes="40px"
+                  className="object-cover"
+                />
+              </span>
+              <div className="leading-tight">
+                <p className="font-bold text-white">K1 Visual Solutions</p>
+                <p className="text-xs text-white/45">K1trends Global Inc.</p>
+              </div>
+            </div>
+            <p className="mt-4 max-w-xs text-sm text-white/55">
+              LED Displays · Digital Signs · Endless Possibilities. Premium
+              transparent &amp; flexible LED solutions, distributed across North
+              America.
+            </p>
+          </div>
+
+          {/* Nav */}
+          <nav aria-label="Footer">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/80">
+              Explore
+            </h3>
+            <ul className="mt-4 grid grid-cols-2 gap-2">
+              {NAV.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    onClick={handleNav(l.href)}
+                    className="text-sm text-white/55 transition-colors hover:text-electric-cyan"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/80">
+              Contact
+            </h3>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li>
+                <a
+                  href="mailto:sales@k1trends.com"
+                  className="inline-flex items-center gap-2 text-white/55 transition-colors hover:text-electric-cyan"
+                >
+                  <span className="h-4 w-4">
+                    <MailIcon />
+                  </span>
+                  sales@k1trends.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+19050000000"
+                  className="inline-flex items-center gap-2 text-white/55 transition-colors hover:text-electric-cyan"
+                >
+                  <span className="h-4 w-4">
+                    <PhoneIcon />
+                  </span>
+                  +1 (905) 000-0000
+                </a>
+              </li>
+              <li className="text-white/55">Markham, Ontario, Canada</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
+          <p className="text-xs text-white/40">
+            © 2025 K1trends Global Inc. All rights reserved.
+          </p>
+          <p className="text-xs text-white/40">
+            Markham, Ontario, Canada · Serving North America
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

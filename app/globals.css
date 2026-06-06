@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a1a;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--bg);
+  color: #e5e7eb;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  /* Brand gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      #60a5fa 0%,
+      #818cf8 45%,
+      #c084fc 100%
+    );
+  }
+
+  .text-gradient-cyan {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #22d3ee 0%, #818cf8 100%);
+  }
+
+  /* Animated gradient background for hero / sections */
+  .bg-animated-gradient {
+    background: linear-gradient(
+      135deg,
+      #06060f 0%,
+      #11112b 40%,
+      #191942 100%
+    );
+    background-size: 200% 200%;
+  }
+
+  /* Glass card */
+  .glass {
+    background: rgba(17, 17, 43, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(129, 140, 248, 0.18);
+  }
+
+  /* LED glowing border on hover */
+  .led-border {
+    position: relative;
+    isolation: isolate;
+  }
+  .led-border::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #22d3ee, #7c3aed);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+  }
+  .led-border:hover::before {
+    opacity: 1;
+  }
+
+  /* LED dot-matrix texture overlay */
+  .led-grid {
+    background-image: radial-gradient(
+      rgba(129, 140, 248, 0.25) 1px,
+      transparent 1px
+    );
+    background-size: 14px 14px;
+  }
+
+  /* Scanline shimmer used on placeholder media */
+  .scanline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(34, 211, 238, 0.12),
+      transparent
+    );
+    height: 40%;
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #06060f;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#3b82f6, #7c3aed);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
