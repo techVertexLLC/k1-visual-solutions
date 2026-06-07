@@ -1,15 +1,15 @@
 "use client";
 
 /**
- * ProductCard
- * Shared product card — used on the catalog grid and the home featured preview.
- * Photograph (or illustrated stand-in) above; category chip, name, brief, key
- * spec, and a "View Details" link through to the product's detail page.
+ * ProductCard — Masonry-ready product card with hover overlay
  *
- * Hover reveal: on mouse-enter, the pixel pitch value slides up from a resting
- * position and the "View Details" link shifts into full prominence. Uses Framer
- * Motion so the animation is declarative and respects prefers-reduced-motion.
- * The card itself lifts on hover via pure CSS (no JS needed for the shadow).
+ * Design decisions:
+ * - variant="featured" → 16:9 image + larger typography (spec §4.4)
+ * - variant="regular"  → 4:3 image + text-xl name
+ * - Hover overlay: translucent glass panel slides up from bottom (spec §4.2)
+ *   Only shown on md+ breakpoints; mobile taps navigate directly (spec §4.3)
+ * - prefers-reduced-motion: disables translateY/scale, keeps opacity (spec §9)
+ * - :focus-within on card triggers overlay for keyboard accessibility (spec §9)
  */
 
 import { useState } from "react";
@@ -19,23 +19,58 @@ import FilmPlaceholder from "@/components/ui/FilmPlaceholder";
 import { COLOR, FONT, BLUR } from "@/components/home/tokens";
 import { CATEGORY_LABEL } from "@/lib/products";
 
-export default function ProductCard({ product }) {
+// Animation timing tokens (spec §6.3)
+const EASE_SPRING = [0.22, 1, 0.36, 1];
+const OVERLAY_ENTER = { duration: 0.35, ease: EASE_SPRING };
+const OVERLAY_EXIT  = { duration: 0.25, ease: "easeIn" };
+const CARD_LIFT     = { duration: 0.3,  ease: EASE_SPRING };
+
+export default function ProductCard({ product, variant = "regular" }) {
   const href = `/k1/products/${product.slug}`;
   const [hovered, setHovered] = useState(false);
   const shouldReduce = useReducedMotion();
+  const isFeatured = variant === "featured";
 
-  // When reduced motion is preferred, treat everything as "always hovered"
-  // (all spec text at full visibility, no movement).
-  const active = shouldReduce ? true : hovered;
+  // Overlay visible when hovered (or always when reduced motion — just opacity)
+  const overlayVisible = hovered;
+
+  // Spec overlay values pulled from product.specs (spec §10)
+  const overlaySpecs = [
+    { label: "Pixel pitch",  value: product.specs?.["Pixel pitch"]  ?? product.pixelPitch },
+    { label: "Brightness",   value: product.specs?.["Brightness"]   ?? "—" },
+    { label: "Transparency", value: product.specs?.["Transparency"] ?? "—" },
+  ];
 
   return (
     <article
-      className="group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_36px_-14px_rgba(26,26,26,0.22)]"
+      className={[
+        "group flex h-full flex-col overflow-hidden rounded-2xl",
+        // Card lift on hover — disabled when reduced motion prefers no movement
+        shouldReduce
+          ? "transition-shadow duration-300"
+          : "transition-all duration-300 hover:-translate-y-1",
+        "hover:shadow-[0_14px_36px_-14px_rgba(26,26,26,0.22)]",
+      ].join(" ")}
       style={{ border: `1px solid ${COLOR.gray}`, background: "#fff" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      // :focus-within triggers overlay for keyboard users (spec §9, AC#10)
+      onFocus={() => setHovered(true)}
+      onBlur={(e) => {
+        // Only close if focus left the card entirely
+        if (!e.currentTarget.contains(e.relatedTarget)) setHovered(false);
+      }}
     >
-      <a href={href} className="relative block aspect-[4/3] overflow-hidden">
+      {/* ── Image area with overlay ── */}
+      <a
+        href={href}
+        className={[
+          "relative block overflow-hidden",
+          isFeatured ? "aspect-video" : "aspect-[4/3]", // spec §6.1
+        ].join(" ")}
+        tabIndex={-1} // card article is the focus target; link inside for click
+        aria-hidden="true"
+      >
         {product.cardImage ? (
           <Image
             src={product.cardImage}
@@ -43,88 +78,143 @@ export default function ProductCard({ product }) {
             fill
             loading="lazy"
             quality={78}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes={
+              isFeatured
+                ? "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
+                : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            }
             placeholder="blur"
             blurDataURL={BLUR}
-            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+            className={[
+              "object-cover",
+              shouldReduce
+                ? "transition-opacity duration-300"
+                : "transition-transform duration-300 ease-out group-hover:scale-[1.03]",
+            ].join(" ")}
           />
         ) : (
           <FilmPlaceholder />
         )}
+
+        {/* Category badge — top-left pill */}
         <span
           className="absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] backdrop-blur-sm"
           style={{ background: `${COLOR.bg}e6`, color: COLOR.accent }}
         >
           {CATEGORY_LABEL[product.category]}
         </span>
+
+        {/* ── Hover Overlay — desktop only (spec §4.2, §4.3) ── */}
+        {/* Hidden on mobile via "hidden md:flex"; slides up from bottom */}
+        <div
+          className="absolute inset-x-0 bottom-0 hidden md:flex flex-col justify-end"
+          style={{
+            // Overlay covers ~55% of image height (spec §4.2)
+            height: "55%",
+            background: "rgba(26,26,26,0.85)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            // Slide animation via CSS transform + transition (avoids hydration mismatch)
+            transform: overlayVisible
+              ? "translateY(0)"
+              : shouldReduce
+              ? "translateY(0)"  // no motion: just opacity
+              : "translateY(100%)",
+            opacity: overlayVisible ? 1 : shouldReduce ? 0 : 1,
+            transition: overlayVisible
+              ? `transform ${OVERLAY_ENTER.duration}s cubic-bezier(${EASE_SPRING.join(",")}), opacity ${OVERLAY_ENTER.duration}s ease`
+              : `transform ${OVERLAY_EXIT.duration}s ${OVERLAY_EXIT.ease}, opacity ${OVERLAY_EXIT.duration}s ease`,
+            // Reduced motion: only opacity transition
+            ...(shouldReduce && {
+              transform: "translateY(0)",
+              opacity: overlayVisible ? 1 : 0,
+              transition: `opacity 0.3s ease`,
+            }),
+          }}
+          aria-hidden={!overlayVisible}
+        >
+          <div className="flex flex-col gap-3 p-5">
+            {/* Three spec rows (spec §4.2) */}
+            {overlaySpecs.map(({ label, value }) => (
+              <div key={label} className="flex items-baseline justify-between">
+                <span
+                  className="text-[11px] uppercase tracking-[0.14em]"
+                  style={{ color: "rgba(255,255,255,0.6)" }}
+                >
+                  {label}
+                </span>
+                <span className="text-sm font-medium text-white">{value}</span>
+              </div>
+            ))}
+
+            {/* CTA button (spec §4.2) */}
+            <a
+              href={href}
+              className="mt-1 inline-flex items-center justify-center rounded-full border border-white px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-white hover:text-[#1A1A1A]"
+            >
+              View Full Specs →
+            </a>
+          </div>
+        </div>
       </a>
 
+      {/* ── Card body ── */}
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <h3
-          className="text-xl leading-snug"
+          className={
+            isFeatured
+              ? "text-2xl lg:text-3xl leading-snug"
+              : "text-xl leading-snug"
+          }
           style={{ fontFamily: FONT.serif, color: COLOR.ink }}
         >
           <a href={href} className="transition-opacity hover:opacity-70">
             {product.name}
           </a>
         </h3>
+
         <p
-          className="mt-3 flex-1 text-sm leading-relaxed"
+          className={[
+            "mt-3 flex-1 text-sm leading-relaxed",
+            isFeatured ? "line-clamp-2" : "line-clamp-1",
+          ].join(" ")}
           style={{ color: COLOR.body }}
         >
           {product.shortDescription}
         </p>
 
-        {/* Spec + CTA row — animated on hover */}
+        {/* Spec + CTA footer row */}
         <div
           className="mt-5 flex items-center justify-between border-t pt-4"
           style={{ borderColor: COLOR.gray }}
         >
-          {/* Pixel pitch: label fades up, value slides in from below */}
-          <div style={{ overflow: "hidden" }}>
-            <motion.span
+          {/* Pixel pitch */}
+          <div>
+            <span
               className="block text-[10px] uppercase tracking-[0.16em]"
               style={{ color: COLOR.muted }}
-              animate={active ? { opacity: 1 } : { opacity: 0.55 }}
-              transition={{ duration: shouldReduce ? 0 : 0.25 }}
             >
               Pixel pitch
-            </motion.span>
-            <motion.span
+            </span>
+            <span
               className="block text-sm font-medium"
-              style={{ color: COLOR.ink, willChange: "transform, opacity" }}
-              animate={
-                active
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0.6, y: shouldReduce ? 0 : 6 }
-              }
-              transition={
-                shouldReduce ? { duration: 0 } : { duration: 0.32, ease: [0.22, 1, 0.36, 1] }
-              }
+              style={{ color: COLOR.ink }}
             >
               {product.pixelPitch}
-            </motion.span>
+            </span>
           </div>
 
-          {/* View Details: slides left → right into full opacity */}
-          <motion.a
+          {/* View Details link */}
+          <a
             href={href}
             className="group/btn inline-flex items-center gap-1.5 text-sm font-medium"
-            style={{ color: COLOR.accent, willChange: "transform, opacity" }}
-            animate={
-              active
-                ? { opacity: 1, x: 0 }
-                : { opacity: 0.65, x: shouldReduce ? 0 : -4 }
-            }
-            transition={
-              shouldReduce ? { duration: 0 } : { duration: 0.32, ease: [0.22, 1, 0.36, 1] }
-            }
+            style={{ color: COLOR.accent }}
           >
             View Details
             <span className="transition-transform duration-300 group-hover/btn:translate-x-1">
               →
             </span>
-          </motion.a>
+          </a>
         </div>
       </div>
     </article>
