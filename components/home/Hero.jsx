@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -8,8 +8,12 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { COLOR, FONT, BLUR } from "./tokens";
 import { TransparencyIcon, CheckIcon, PinIcon } from "@/components/ui/icons";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* Quick trust signals, absorbed from the old "Why K1" block. Kept light. */
 const TRUST = [
@@ -34,6 +38,8 @@ const item = {
 
 export default function Hero() {
   const ref = useRef(null);
+  const contentRef = useRef(null);
+  const overlayRef = useRef(null);
   const reduceMotion = useReducedMotion();
 
   // Subtle parallax: the photograph drifts a touch slower than the page.
@@ -42,6 +48,43 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 90]);
+
+  // GSAP ScrollTrigger: text content drifts up + fades; overlay intensifies.
+  // Complements the Framer Motion photo drift → three distinct depth layers.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (reduceMotion) return;
+    if (!ref.current) return;
+
+    const ctx = gsap.context(() => {
+      // Layer 2: warm overlay slightly darkens as you scroll — depth cue
+      gsap.to(overlayRef.current, {
+        opacity: 0.92,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top top",
+          end: "50% top",
+          scrub: 1,
+        },
+      });
+
+      // Layer 3: content block drifts up and exits
+      gsap.to(contentRef.current, {
+        yPercent: -8,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top top",
+          end: "55% top",
+          scrub: 1.2,
+        },
+      });
+    }, ref);
+
+    return () => ctx.revert();
+  }, [reduceMotion]);
 
   return (
     <section
@@ -70,17 +113,23 @@ export default function Hero() {
 
       {/* Warm-white wash — keeps the type effortless to read without darkening
           the image or introducing a cold/sci-fi cast. Strongest on the left,
-          under the headline. */}
+          under the headline. Layer 2: opacity transitions via GSAP for depth. */}
       <div
+        ref={overlayRef}
         className="absolute inset-0"
         aria-hidden
         style={{
           background: `linear-gradient(100deg, ${COLOR.bg}f2 0%, ${COLOR.bg}d9 38%, ${COLOR.bg}80 64%, ${COLOR.bg}40 100%)`,
+          willChange: "opacity",
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-28 lg:px-10">
+      {/* Content — Layer 3: drifts up + fades via GSAP ScrollTrigger */}
+      <div
+        ref={contentRef}
+        className="relative z-10 mx-auto w-full max-w-6xl px-6 py-28 lg:px-10"
+        style={{ willChange: "transform, opacity" }}
+      >
         <motion.div
           variants={container}
           initial="hidden"

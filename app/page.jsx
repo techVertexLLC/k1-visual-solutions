@@ -1,9 +1,17 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/home/Hero";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import CaseStudiesPreview from "@/components/home/CaseStudiesPreview";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
 import { pageMetadata } from "@/lib/seo";
+
+// SmoothScrollProvider: client-only (Lenis + GSAP ticker), ssr:false prevents
+// hydration mismatch. Falls back gracefully (no-op) on prefers-reduced-motion.
+const SmoothScrollProvider = dynamic(
+  () => import("@/components/providers/SmoothScrollProvider"),
+  { ssr: false }
+);
 
 export const metadata = pageMetadata({
   title: {
@@ -28,12 +36,14 @@ export const metadata = pageMetadata({
  */
 export default function Home() {
   return (
-    <main id="main-content" className="min-h-screen bg-[#FAF8F5]">
-      <Hero />
-      <FeaturedProducts />
-      <CaseStudiesPreview />
-      <CtaBanner />
-      <SiteFooter />
-    </main>
+    <SmoothScrollProvider>
+      <main id="main-content" className="min-h-screen bg-[#FAF8F5]">
+        <Hero />
+        <FeaturedProducts />
+        <CaseStudiesPreview />
+        <CtaBanner />
+        <SiteFooter />
+      </main>
+    </SmoothScrollProvider>
   );
 }

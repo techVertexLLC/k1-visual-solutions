@@ -26,10 +26,21 @@ export default function Hero() {
       className="relative flex min-h-screen items-center overflow-hidden bg-animated-gradient animate-gradient-shift"
     >
       {/* Video placeholder layer — gradient + animated light effects.
-          (Real <video muted loop playsinline autoplay preload="metadata"> drops in here later.) */}
-      <div className="absolute inset-0" aria-hidden>
+          (Real <video muted loop playsinline autoplay preload="metadata"> drops in here later.)
+          data-parallax="bg" → GSAP ScrollTrigger drives the slow drift + fade. */}
+      <div
+        className="absolute inset-0"
+        aria-hidden
+        data-parallax="bg"
+        style={{ willChange: "transform, opacity" }}
+      >
         <div className="absolute inset-0 bg-brand-radial" />
-        <div className="absolute left-1/4 top-1/4 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-blue/30 blur-[120px] animate-led-pulse" />
+        {/* Primary light orb — marked as glow layer for faster parallax depth */}
+        <div
+          className="absolute left-1/4 top-1/4 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-blue/30 blur-[120px] animate-led-pulse"
+          data-parallax="glow"
+          style={{ willChange: "transform" }}
+        />
         <div className="absolute right-1/4 top-1/3 h-80 w-80 translate-x-1/2 rounded-full bg-brand-purple/30 blur-[130px] animate-float" />
         <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-electric-cyan/20 blur-[120px]" />
         {/* LED dot-matrix wash */}
@@ -38,7 +49,12 @@ export default function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-800 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-28 sm:px-6 lg:px-8">
+      {/* data-parallax="text" → drifts upward + fades as user scrolls down */}
+      <div
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 py-28 sm:px-6 lg:px-8"
+        data-parallax="text"
+        style={{ willChange: "transform, opacity" }}
+      >
         <motion.div
           variants={container}
           initial="hidden"
