@@ -15,6 +15,7 @@ import { COLOR, FONT } from "./home/tokens";
 
 const NAV_LINKS = [
   { label: "Products", href: "#products" },
+  { label: "Applications", href: "#applications" },
   { label: "Case Studies", href: "#cases" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },

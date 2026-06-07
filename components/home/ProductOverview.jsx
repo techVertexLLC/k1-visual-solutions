@@ -52,10 +52,21 @@ function Spec({ label, value }) {
   );
 }
 
-/* Tertiary, text-only action carrying the lone accent. */
+/* Smooth scroll to an in-page section. */
+const scrollTo = (id) => (e) => {
+  e.preventDefault();
+  document
+    .getElementById(id)
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+/* Tertiary, text-only action carrying the lone accent — links through to the
+   quote form (S3: every "Learn More" is now a real, clickable anchor). */
 function LearnMore() {
   return (
-    <span
+    <a
+      href="#contact"
+      onClick={scrollTo("contact")}
       className="group inline-flex items-center gap-2 text-sm font-medium tracking-wide"
       style={{ color: COLOR.accent }}
     >
@@ -63,7 +74,7 @@ function LearnMore() {
       <span className="transition-transform duration-300 group-hover:translate-x-1">
         →
       </span>
-    </span>
+    </a>
   );
 }
 
@@ -184,6 +195,64 @@ function FilmSilhouette() {
   );
 }
 
+/* Detail shots — different pitches, angles, and finishes of the transparent
+   poster screen. A quiet, horizontally scrollable strip beneath the two cards.
+   Leads with two full product photographs, then the 800px angle thumbnails. */
+const GALLERY = [
+  {
+    src: "/k1/assets/images/products/smd-p625-02.jpg",
+    alt: "K1 P6.25 transparent LED poster screen, detail",
+  },
+  {
+    src: "/k1/assets/images/products/smd-p104-02.jpg",
+    alt: "K1 P10.4 transparent LED poster screen, detail",
+  },
+  ...Array.from({ length: 8 }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    return {
+      src: `/k1/assets/images/thumbs/product-${n}.jpg`,
+      alt: `K1 transparent LED panel, angle ${i + 1}`,
+    };
+  }),
+];
+
+function ProductGallery() {
+  return (
+    <FadeUp className="mt-12 md:mt-16">
+      <div
+        className="mb-5 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.24em]"
+        style={{ color: COLOR.muted }}
+      >
+        <span>Detail &amp; finish — every angle</span>
+        <span aria-hidden className="h-px flex-1" style={{ background: COLOR.gray }} />
+      </div>
+      <div
+        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 lg:-mx-10 lg:px-10"
+        style={{ scrollbarWidth: "thin" }}
+      >
+        {GALLERY.map((item) => (
+          <div
+            key={item.src}
+            className="group relative aspect-square w-36 flex-none snap-start overflow-hidden rounded-xl sm:w-40"
+            style={{ border: `1px solid ${COLOR.gray}`, background: "#fff" }}
+          >
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              quality={70}
+              sizes="160px"
+              placeholder="blur"
+              blurDataURL={BLUR}
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+            />
+          </div>
+        ))}
+      </div>
+    </FadeUp>
+  );
+}
+
 export default function ProductOverview() {
   return (
     <section
@@ -261,6 +330,9 @@ export default function ProductOverview() {
             />
           </Card>
         </div>
+
+        {/* Product thumbnail gallery */}
+        <ProductGallery />
       </div>
     </section>
   );

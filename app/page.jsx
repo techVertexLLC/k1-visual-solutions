@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
 import ProductOverview from "@/components/home/ProductOverview";
+import Applications from "@/components/home/Applications";
 import CaseStudies from "@/components/home/CaseStudies";
 import About from "@/components/home/About";
 import Contact from "@/components/home/Contact";
@@ -12,13 +13,15 @@ import Footer from "@/components/home/Footer";
  * brand blue-purple as a whisper. Clean, refined, effortless — no neon, no glow,
  * no sci-fi. The warm surface here covers the root layout's body.
  *
- * Section flow: Hero → Products → Case Studies → About → Contact → Footer.
+ * Section flow: Hero → Products → Applications → Case Studies → About →
+ * Contact → Footer.
  */
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
       <Hero />
       <ProductOverview />
+      <Applications />
       <CaseStudies />
       <About />
       <Contact />
