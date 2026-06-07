@@ -110,6 +110,22 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.1} className="flex flex-col justify-center">
+            <div
+              className="relative mb-8 aspect-[16/10] overflow-hidden rounded-2xl"
+              style={{ border: `1px solid ${COLOR.gray}` }}
+            >
+              <Image
+                src="/k1/assets/images/k1-office-render.jpg"
+                alt="K1 Visual Solutions office — interior render"
+                fill
+                loading="lazy"
+                quality={82}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL={BLUR}
+                className="object-cover"
+              />
+            </div>
             <p className="text-lg leading-relaxed" style={{ color: COLOR.body }}>
               K1 Visual Solutions is a Markham, Ontario–based distributor of
               premium transparent, flexible, and self-adhesive LED display

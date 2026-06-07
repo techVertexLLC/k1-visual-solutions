@@ -54,7 +54,7 @@ export default function Hero() {
       <motion.div style={{ y }} className="absolute inset-0" aria-hidden>
         <div className="relative h-full w-full scale-125">
           <Image
-            src="/k1/assets/images/products/smd-p391-02.jpg"
+            src="/k1/assets/images/products/smd-holo-content-floral.jpg"
             alt="K1 transparent LED poster screen in a calm, light studio space"
             fill
             priority

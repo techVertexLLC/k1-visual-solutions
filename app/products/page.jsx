@@ -10,7 +10,7 @@ export const metadata = pageMetadata({
   description:
     "Browse the K1 range of transparent LED poster screens, SMD holographic panels, and self-adhesive flexible LED film. Filter by series and view full specifications.",
   path: "/k1/products",
-  image: "/k1/assets/images/products/smd-p625-01.jpg",
+  image: "/k1/assets/images/products/smd-p625-new-01.jpg",
   imageAlt: "K1 SMD holographic LED panel detail",
 });
 
@@ -26,7 +26,7 @@ export default function ProductsPage() {
         eyebrow="The Range"
         title="Transparent, holographic & flexible LED"
         description="A complete range of see-through display systems — engineered to disappear into architecture and reappear as motion, colour, and presence. Filter by series to find the right surface."
-        image="/k1/assets/images/products/smd-p625-01.jpg"
+        image="/k1/assets/images/products/smd-p625-new-01.jpg"
         imageAlt="K1 SMD holographic LED panel detail"
         breadcrumb={
           <>

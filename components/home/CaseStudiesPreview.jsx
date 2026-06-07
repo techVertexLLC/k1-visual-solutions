@@ -69,6 +69,14 @@ function CaseCard({ item }) {
         >
           {item.title}
         </h3>
+        {item.product && (
+          <span
+            className="mt-3 inline-flex w-fit items-center rounded-full px-3 py-1 text-[11px] font-medium tracking-[0.04em]"
+            style={{ background: COLOR.gray, color: COLOR.accent }}
+          >
+            {item.product}
+          </span>
+        )}
         <p className="mt-4 text-[15px] leading-relaxed" style={{ color: COLOR.body }}>
           {item.description}
         </p>
