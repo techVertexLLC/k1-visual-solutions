@@ -19,7 +19,7 @@ import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import CategorySidebar from "./CategorySidebar";
 import CatalogProductCard from "./CatalogProductCard";
-import { PRODUCTS, CATEGORIES } from "@/lib/products";
+import { CATALOG_PRODUCTS, CATALOG_CATEGORIES } from "@/lib/catalog-products";
 
 const COLOR = {
   bg: "#FAF8F5",
@@ -43,7 +43,7 @@ export default function CatalogLayout() {
   // Honour ?category= deep link (mirrors the existing /products ?series= pattern)
   useEffect(() => {
     const cat = params.get("category");
-    const validKeys = CATEGORIES.map((c) => c.key);
+    const validKeys = CATALOG_CATEGORIES.map((c) => c.key);
     if (cat && validKeys.includes(cat)) {
       setActive(cat);
     }
@@ -64,8 +64,8 @@ export default function CatalogLayout() {
   // Filter products by active category
   const filtered =
     active === "all"
-      ? PRODUCTS
-      : PRODUCTS.filter((p) => p.category === active);
+      ? CATALOG_PRODUCTS
+      : CATALOG_PRODUCTS.filter((p) => p.category === active);
 
   return (
     <section
@@ -91,7 +91,7 @@ export default function CatalogLayout() {
               {active !== "all" && (
                 <> in{" "}
                   <span className="font-semibold" style={{ color: COLOR.accent }}>
-                    {CATEGORIES.find((c) => c.key === active)?.label || active}
+                    {CATALOG_CATEGORIES.find((c) => c.key === active)?.label || active}
                   </span>
                 </>
               )}
