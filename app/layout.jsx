@@ -19,6 +19,11 @@ const dmSerif = DM_Serif_Display({
 
 const SITE_URL = "https://k1visualsolutions.com";
 
+// Hero product photo used for social-sharing previews. Path includes the
+// "/k1" basePath because openGraph/twitter images resolve against
+// metadataBase, not the basePath.
+const OG_IMAGE = "/k1/assets/images/products/smd-p391-02.jpg";
+
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -47,12 +52,29 @@ export const metadata = {
     title: "K1 Visual Solutions — Redefining Spaces with Invisible Displays",
     description:
       "Next-gen flexible & transparent LED solutions for retail, architecture, and exhibitions.",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "K1 Visual Solutions — transparent LED display",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "K1 Visual Solutions — Redefining Spaces with Invisible Displays",
     description:
       "Next-gen flexible & transparent LED solutions for retail, architecture, and exhibitions.",
+    images: [OG_IMAGE],
+  },
+  icons: {
+    icon: [
+      { url: "/k1/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/k1/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/k1/favicon.ico",
+    apple: [{ url: "/k1/apple-touch-icon.png", sizes: "180x180" }],
   },
   robots: { index: true, follow: true },
 };
