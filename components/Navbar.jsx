@@ -3,26 +3,33 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { COLOR, FONT } from "./home/tokens";
+
+/**
+ * Primary site navigation for K1 Visual Solutions.
+ *
+ * Built to the G1/G2 moodboard direction: warm white surface, warm-gray
+ * hairline border, brand blue-purple held back to the single CTA. Sticky so it
+ * stays with the reader on scroll; no glow, no gradient, no dark chrome.
+ */
 
 const NAV_LINKS = [
-  { label: "Technology", href: "#technology" },
   { label: "Products", href: "#products" },
-  { label: "Scenarios", href: "#scenarios" },
+  { label: "Case Studies", href: "#cases" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState("EN");
 
+  // Lock body scroll while the mobile sheet is open.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   const handleNav = (e, href) => {
     e.preventDefault();
@@ -33,51 +40,53 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-white/10 bg-ink-900/80 backdrop-blur-xl"
-          : "bg-transparent"
-      }`}
+    <motion.header
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="sticky top-0 z-50 border-b backdrop-blur-md"
+      style={{
+        backgroundColor: `${COLOR.bg}f2`,
+        borderColor: COLOR.gray,
+      }}
     >
       <nav
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
+        className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-10"
         aria-label="Primary"
       >
-        {/* Logo */}
+        {/* Logo + wordmark */}
         <a
           href="#hero"
           onClick={(e) => handleNav(e, "#hero")}
-          className="group flex items-center gap-3"
+          className="flex items-center gap-3"
         >
-          <span className="relative h-9 w-9 overflow-hidden rounded-lg ring-1 ring-white/15 shadow-glow">
-            <Image
-              src="/assets/images/k1-logo.jpg"
-              alt="K1 Visual Solutions logo"
-              fill
-              sizes="36px"
-              className="object-cover"
-              priority
-            />
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="text-sm font-bold tracking-wide text-white">
-              K1 <span className="text-gradient-cyan">Visual</span>
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.25em] text-white/40">
-              Solutions
-            </span>
+          <Image
+            src="/assets/images/k1-logo-transparent.png"
+            alt="K1 Visual Solutions logo"
+            width={40}
+            height={40}
+            priority
+            className="h-9 w-9 object-contain"
+          />
+          <span
+            className="text-base font-semibold tracking-tight"
+            style={{ fontFamily: FONT.serif, color: COLOR.ink }}
+          >
+            K1 Visual Solutions
           </span>
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-7 lg:flex">
+        <ul className="hidden items-center gap-9 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={(e) => handleNav(e, link.href)}
-                className="relative text-sm font-medium text-white/70 transition-colors hover:text-white after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-gradient-to-r after:from-electric-cyan after:to-brand-purple after:transition-all hover:after:w-full"
+                className="relative text-sm font-medium transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:transition-all hover:after:w-full"
+                style={{ color: COLOR.body }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.body)}
               >
                 {link.label}
               </a>
@@ -87,33 +96,11 @@ export default function Navbar() {
 
         {/* Right cluster */}
         <div className="flex items-center gap-3">
-          {/* Language switcher (UI placeholder) */}
-          <div
-            className="hidden items-center rounded-full border border-white/15 p-0.5 text-xs sm:flex"
-            role="group"
-            aria-label="Language switcher"
-          >
-            {["EN", "ES"].map((code) => (
-              <button
-                key={code}
-                onClick={() => setLang(code)}
-                aria-pressed={lang === code}
-                title={code === "ES" ? "Español (coming soon)" : "English"}
-                className={`rounded-full px-2.5 py-1 font-semibold transition-colors ${
-                  lang === code
-                    ? "bg-brand-gradient text-white"
-                    : "text-white/50 hover:text-white"
-                }`}
-              >
-                {code}
-              </button>
-            ))}
-          </div>
-
           <a
             href="#contact"
             onClick={(e) => handleNav(e, "#contact")}
-            className="hidden rounded-full bg-brand-gradient px-4 py-2 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-105 sm:inline-block"
+            className="hidden rounded-full px-5 py-2 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 sm:inline-block"
+            style={{ background: COLOR.accent }}
           >
             Request a Quote
           </a>
@@ -121,25 +108,29 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border md:hidden"
+            style={{ borderColor: COLOR.gray, color: COLOR.ink }}
             aria-label="Toggle menu"
             aria-expanded={open}
           >
             <div className="space-y-1.5">
               <span
-                className={`block h-0.5 w-5 bg-white transition-transform ${
+                className={`block h-0.5 w-5 transition-transform ${
                   open ? "translate-y-2 rotate-45" : ""
                 }`}
+                style={{ backgroundColor: COLOR.ink }}
               />
               <span
-                className={`block h-0.5 w-5 bg-white transition-opacity ${
+                className={`block h-0.5 w-5 transition-opacity ${
                   open ? "opacity-0" : ""
                 }`}
+                style={{ backgroundColor: COLOR.ink }}
               />
               <span
-                className={`block h-0.5 w-5 bg-white transition-transform ${
+                className={`block h-0.5 w-5 transition-transform ${
                   open ? "-translate-y-2 -rotate-45" : ""
                 }`}
+                style={{ backgroundColor: COLOR.ink }}
               />
             </div>
           </button>
@@ -154,15 +145,17 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-white/10 bg-ink-900/95 backdrop-blur-xl lg:hidden"
+            className="overflow-hidden border-t md:hidden"
+            style={{ borderColor: COLOR.gray, backgroundColor: COLOR.bg }}
           >
-            <ul className="space-y-1 px-4 py-4">
+            <ul className="space-y-1 px-6 py-4">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => handleNav(e, link.href)}
-                    className="block rounded-lg px-3 py-3 text-base font-medium text-white/80 hover:bg-white/5 hover:text-white"
+                    className="block rounded-lg px-3 py-3 text-base font-medium"
+                    style={{ color: COLOR.body }}
                   >
                     {link.label}
                   </a>
@@ -172,7 +165,8 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={(e) => handleNav(e, "#contact")}
-                  className="block rounded-full bg-brand-gradient px-4 py-3 text-center text-sm font-semibold text-white shadow-glow"
+                  className="block rounded-full px-4 py-3 text-center text-sm font-medium text-white"
+                  style={{ background: COLOR.accent }}
                 >
                   Request a Quote
                 </a>
@@ -181,6 +175,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

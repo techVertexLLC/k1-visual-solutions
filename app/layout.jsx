@@ -1,9 +1,19 @@
-import { Inter } from "next/font/google";
+import { Inter, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// Editorial serif for headlines — the chosen G1 pairing (DM Serif Display + Inter).
+const dmSerif = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-dmserif",
   display: "swap",
 });
 
@@ -48,15 +58,18 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0a0a1a",
+  themeColor: "#FAF8F5",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-ink-800 font-sans antialiased">{children}</body>
+    <html lang="en" className={`${inter.variable} ${dmSerif.variable}`}>
+      <body className="bg-[#FAF8F5] font-sans antialiased">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

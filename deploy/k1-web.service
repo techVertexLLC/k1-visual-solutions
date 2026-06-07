@@ -1,0 +1,16 @@
+[Unit]
+Description=K1 Visual Solutions - Next.js production server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/projects/k1-visual-solutions
+ExecStart=/home/ubuntu/.local/bin/npx next start -p 3100
+Restart=always
+RestartSec=5
+MemoryMax=1G
+Environment=NODE_ENV=production
+Environment=PATH=/home/ubuntu/.local/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=default.target
