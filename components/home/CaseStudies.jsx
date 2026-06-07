@@ -31,7 +31,7 @@ function FadeUp({ children, className = "", delay = 0 }) {
 
 const CASES = [
   {
-    src: "/assets/images/cases/changchun-01.jpg",
+    src: "/k1/assets/images/cases/changchun-01.jpg",
     location: "Changchun · China",
     title: "Changchun Tech Park",
     description:
@@ -39,7 +39,7 @@ const CASES = [
     alt: "Changchun Tech Park transparent LED media facade at dusk",
   },
   {
-    src: "/assets/images/cases/changchun-02.jpg",
+    src: "/k1/assets/images/cases/changchun-02.jpg",
     location: "Changchun · China",
     title: "Changchun Tech Park — Atrium",
     description:
@@ -47,7 +47,7 @@ const CASES = [
     alt: "Interior atrium of Changchun Tech Park with transparent LED screens",
   },
   {
-    src: "/assets/images/cases/mashan-01.jpg",
+    src: "/k1/assets/images/cases/mashan-01.jpg",
     location: "Mashan · China",
     title: "Mashan Resort",
     description:

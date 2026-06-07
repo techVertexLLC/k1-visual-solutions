@@ -224,7 +224,7 @@ export default function ProductOverview() {
           <Card>
             <div className="relative aspect-[4/3] overflow-hidden">
               <Image
-                src="/assets/images/products/smd-p391-01.jpg"
+                src="/k1/assets/images/products/smd-p391-01.jpg"
                 alt="K1 Series T transparent poster screen, freestanding in a studio"
                 fill
                 quality={80}

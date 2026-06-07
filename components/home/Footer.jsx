@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
               <Image
-                src="/assets/images/k1-logo-transparent.png"
+                src="/k1/assets/images/k1-logo-transparent.png"
                 alt="K1 Visual Solutions logo"
                 width={40}
                 height={40}
