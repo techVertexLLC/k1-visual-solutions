@@ -4,25 +4,58 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { COLOR, FONT } from "./home/tokens";
+import { SOCIAL_LINKS } from "./ui/social";
 
 /**
- * Primary site navigation for K1 Visual Solutions.
+ * Primary site navigation for K1 Visual Solutions — now a multi-page nav.
  *
- * Built to the G1/G2 moodboard direction: warm white surface, warm-gray
- * hairline border, brand blue-purple held back to the single CTA. Sticky so it
- * stays with the reader on scroll; no glow, no gradient, no dark chrome.
+ * Warm white surface, warm-gray hairline border, brand blue-purple held back to
+ * the single CTA. Sticky on scroll; no glow, no gradient, no dark chrome.
+ *
+ * Internal links carry the explicit "/k1" basePath and are plain anchors (the
+ * whole site addresses routes and assets as "/k1/...").
  */
 
-const NAV_LINKS = [
-  { label: "Products", href: "#products" },
-  { label: "Applications", href: "#applications" },
-  { label: "Case Studies", href: "#cases" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+const PRODUCT_SUBLINKS = [
+  { label: "Series T — Transparent Poster", href: "/k1/products?series=series-t" },
+  { label: "Series F — Flexible Film", href: "/k1/products?series=series-f" },
+  { label: "Holographic LED", href: "/k1/products?series=holographic" },
 ];
+
+const NAV_LINKS = [
+  { label: "Home", href: "/k1/" },
+  { label: "Products", href: "/k1/products", sublinks: PRODUCT_SUBLINKS },
+  { label: "Solutions", href: "/k1/solutions" },
+  { label: "About", href: "/k1/about" },
+  { label: "Contact", href: "/k1/contact" },
+];
+
+/* Compact social icon strip — icons only, used on the right of the desktop bar. */
+function NavSocial() {
+  return (
+    <div className="hidden items-center gap-1 lg:flex">
+      {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+        <a
+          key={label}
+          href={href}
+          target={href.startsWith("http") ? "_blank" : undefined}
+          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+          aria-label={label}
+          className="flex h-8 w-8 items-center justify-center rounded-full p-1.5 transition-colors"
+          style={{ color: COLOR.muted }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.accent)}
+          onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.muted)}
+        >
+          <Icon />
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   // Lock body scroll while the mobile sheet is open.
   useEffect(() => {
@@ -31,14 +64,6 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [open]);
-
-  const handleNav = (e, href) => {
-    e.preventDefault();
-    setOpen(false);
-    document
-      .querySelector(href)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
 
   return (
     <motion.header
@@ -52,25 +77,21 @@ export default function Navbar() {
       }}
     >
       <nav
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-10"
+        className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 lg:px-10"
         aria-label="Primary"
       >
-        {/* Logo + wordmark */}
-        <a
-          href="#hero"
-          onClick={(e) => handleNav(e, "#hero")}
-          className="flex items-center gap-3"
-        >
+        {/* Logo + wordmark — substantial, not tiny. */}
+        <a href="/k1/" className="flex items-center gap-3.5">
           <Image
             src="/k1/assets/images/k1-logo-transparent.png"
             alt="K1 Visual Solutions logo"
-            width={40}
-            height={40}
+            width={56}
+            height={56}
             priority
-            className="h-9 w-9 object-contain"
+            className="h-12 w-12 object-contain sm:h-14 sm:w-14"
           />
           <span
-            className="text-base font-semibold tracking-tight"
+            className="text-lg font-semibold tracking-tight sm:text-xl"
             style={{ fontFamily: FONT.serif, color: COLOR.ink }}
           >
             K1 Visual Solutions
@@ -78,29 +99,84 @@ export default function Navbar() {
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-9 md:flex">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={(e) => handleNav(e, link.href)}
-                className="relative text-sm font-medium transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:transition-all hover:after:w-full"
-                style={{ color: COLOR.body }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.body)}
+        <ul className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) =>
+            link.sublinks ? (
+              <li
+                key={link.href}
+                className="relative"
+                onMouseEnter={() => setProductsOpen(true)}
+                onMouseLeave={() => setProductsOpen(false)}
               >
-                {link.label}
-              </a>
-            </li>
-          ))}
+                <a
+                  href={link.href}
+                  className="flex items-center gap-1 text-sm font-medium transition-colors"
+                  style={{ color: COLOR.body }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.body)}
+                >
+                  {link.label}
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    aria-hidden
+                    className={`transition-transform duration-200 ${productsOpen ? "rotate-180" : ""}`}
+                  >
+                    <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+
+                <AnimatePresence>
+                  {productsOpen && (
+                    <motion.ul
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.18 }}
+                      className="absolute left-1/2 top-full w-64 -translate-x-1/2 overflow-hidden rounded-xl border pt-2 shadow-lg"
+                      style={{ background: "#fff", borderColor: COLOR.gray }}
+                    >
+                      {link.sublinks.map((sub) => (
+                        <li key={sub.href}>
+                          <a
+                            href={sub.href}
+                            className="block px-5 py-3 text-sm transition-colors hover:bg-[#FAF8F5]"
+                            style={{ color: COLOR.body }}
+                          >
+                            {sub.label}
+                          </a>
+                        </li>
+                      ))}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </li>
+            ) : (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium transition-colors"
+                  style={{ color: COLOR.body }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.body)}
+                >
+                  {link.label}
+                </a>
+              </li>
+            )
+          )}
         </ul>
 
         {/* Right cluster */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          <NavSocial />
           <a
-            href="#contact"
-            onClick={(e) => handleNav(e, "#contact")}
-            className="hidden rounded-full px-5 py-2 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 sm:inline-block"
+            href="/k1/contact"
+            className="hidden rounded-full px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 sm:inline-block"
             style={{ background: COLOR.accent }}
           >
             Request a Quote
@@ -109,28 +185,22 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-lg border md:hidden"
             style={{ borderColor: COLOR.gray, color: COLOR.ink }}
             aria-label="Toggle menu"
             aria-expanded={open}
           >
             <div className="space-y-1.5">
               <span
-                className={`block h-0.5 w-5 transition-transform ${
-                  open ? "translate-y-2 rotate-45" : ""
-                }`}
+                className={`block h-0.5 w-5 transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
                 style={{ backgroundColor: COLOR.ink }}
               />
               <span
-                className={`block h-0.5 w-5 transition-opacity ${
-                  open ? "opacity-0" : ""
-                }`}
+                className={`block h-0.5 w-5 transition-opacity ${open ? "opacity-0" : ""}`}
                 style={{ backgroundColor: COLOR.ink }}
               />
               <span
-                className={`block h-0.5 w-5 transition-transform ${
-                  open ? "-translate-y-2 -rotate-45" : ""
-                }`}
+                className={`block h-0.5 w-5 transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`}
                 style={{ backgroundColor: COLOR.ink }}
               />
             </div>
@@ -154,23 +224,57 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleNav(e, link.href)}
+                    onClick={() => setOpen(false)}
                     className="block rounded-lg px-3 py-3 text-base font-medium"
-                    style={{ color: COLOR.body }}
+                    style={{ color: COLOR.ink }}
                   >
                     {link.label}
                   </a>
+                  {link.sublinks && (
+                    <ul className="mb-1 ml-3 space-y-1 border-l pl-3" style={{ borderColor: COLOR.gray }}>
+                      {link.sublinks.map((sub) => (
+                        <li key={sub.href}>
+                          <a
+                            href={sub.href}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-lg px-3 py-2 text-sm"
+                            style={{ color: COLOR.body }}
+                          >
+                            {sub.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
+
               <li className="pt-2">
                 <a
-                  href="#contact"
-                  onClick={(e) => handleNav(e, "#contact")}
+                  href="/k1/contact"
+                  onClick={() => setOpen(false)}
                   className="block rounded-full px-4 py-3 text-center text-sm font-medium text-white"
                   style={{ background: COLOR.accent }}
                 >
                   Request a Quote
                 </a>
+              </li>
+
+              {/* Social row */}
+              <li className="flex items-center justify-center gap-3 pt-4">
+                {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    aria-label={label}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border p-2"
+                    style={{ borderColor: COLOR.gray, color: COLOR.muted }}
+                  >
+                    <Icon />
+                  </a>
+                ))}
               </li>
             </ul>
           </motion.div>

@@ -10,14 +10,6 @@ import {
 } from "framer-motion";
 import { COLOR, FONT, BLUR } from "./tokens";
 
-/* Smooth scroll to an in-page section. */
-const scrollTo = (id) => (e) => {
-  e.preventDefault();
-  document
-    .getElementById(id)
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-
 /* Load-in: a quiet fade-up, staggered. No bounce, no glow. */
 const container = {
   hidden: {},
@@ -118,8 +110,7 @@ export default function Hero() {
           >
             {/* Primary — the single accent-coloured action in view */}
             <a
-              href="#contact"
-              onClick={scrollTo("contact")}
+              href="/k1/contact"
               className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
               style={{ background: COLOR.accent }}
             >
@@ -128,8 +119,7 @@ export default function Hero() {
 
             {/* Secondary — calm outline, no fill */}
             <a
-              href="#products"
-              onClick={scrollTo("products")}
+              href="/k1/products"
               className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
               style={{ borderColor: COLOR.ink, color: COLOR.ink }}
             >
