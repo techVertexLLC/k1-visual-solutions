@@ -36,13 +36,51 @@ const item = {
   },
 };
 
+/* Hero 背景媒體層：
+   - reduceMotion=false → 播放影片（西安賽格廣場 720p，8s loop，無聲）
+   - reduceMotion=true  → 靜態 poster 圖（無動態，accessibility compliant）
+   設計考量：poster 與 Image 共用同一張照片，確保影片載入前無 FOUC。 */
+function HeroBackground({ reduceMotion }) {
+  if (reduceMotion) {
+    return (
+      <Image
+        src="/k1/assets/images/products/smd-holo-content-floral.jpg"
+        alt="K1 transparent LED poster screen in a calm, light studio space"
+        fill
+        priority
+        quality={82}
+        sizes="100vw"
+        placeholder="blur"
+        blurDataURL={BLUR}
+        className="object-cover"
+        style={{ objectPosition: "center 60%" }}
+      />
+    );
+  }
+  return (
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      poster="/k1/assets/images/products/smd-holo-content-floral.jpg"
+      className="absolute inset-0 h-full w-full object-cover"
+      style={{ objectPosition: "center 60%" }}
+      aria-hidden
+    >
+      <source src="/k1/assets/videos/hero-bg.mp4" type="video/mp4" />
+    </video>
+  );
+}
+
 export default function Hero() {
   const ref = useRef(null);
   const contentRef = useRef(null);
   const overlayRef = useRef(null);
   const reduceMotion = useReducedMotion();
 
-  // Subtle parallax: the photograph drifts a touch slower than the page.
+  // Subtle parallax: the background drifts a touch slower than the page.
+  // Works for both static image and video — same motion.div wrapper.
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -50,7 +88,7 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 90]);
 
   // GSAP ScrollTrigger: text content drifts up + fades; overlay intensifies.
-  // Complements the Framer Motion photo drift → three distinct depth layers.
+  // Complements the Framer Motion background drift → three distinct depth layers.
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (reduceMotion) return;
@@ -93,27 +131,18 @@ export default function Hero() {
       className="relative flex min-h-[92vh] items-center overflow-hidden"
       style={{ background: COLOR.bg }}
     >
-      {/* Parallax photograph layer */}
+      {/* Layer 1 — Parallax background: video (default) or static image (reduced-motion).
+          scale-125 給 parallax drift 留出 headroom，避免邊緣露白。 */}
       <motion.div style={{ y }} className="absolute inset-0" aria-hidden>
         <div className="relative h-full w-full scale-125">
-          <Image
-            src="/k1/assets/images/products/smd-holo-content-floral.jpg"
-            alt="K1 transparent LED poster screen in a calm, light studio space"
-            fill
-            priority
-            quality={82}
-            sizes="100vw"
-            placeholder="blur"
-            blurDataURL={BLUR}
-            className="object-cover"
-            style={{ objectPosition: "center 60%" }}
-          />
+          <HeroBackground reduceMotion={reduceMotion} />
         </div>
       </motion.div>
 
-      {/* Warm-white wash — keeps the type effortless to read without darkening
-          the image or introducing a cold/sci-fi cast. Strongest on the left,
-          under the headline. Layer 2: opacity transitions via GSAP for depth. */}
+      {/* Layer 2 — Warm-white wash overlay.
+          Keeps type effortless to read without darkening the image or introducing
+          a cold/sci-fi cast. Strongest on the left, under the headline.
+          GSAP ScrollTrigger transitions opacity for depth cue on scroll. */}
       <div
         ref={overlayRef}
         className="absolute inset-0"
@@ -124,7 +153,7 @@ export default function Hero() {
         }}
       />
 
-      {/* Content — Layer 3: drifts up + fades via GSAP ScrollTrigger */}
+      {/* Layer 3 — Content: drifts up + fades via GSAP ScrollTrigger */}
       <div
         ref={contentRef}
         className="relative z-10 mx-auto w-full max-w-6xl px-6 py-28 lg:px-10"
