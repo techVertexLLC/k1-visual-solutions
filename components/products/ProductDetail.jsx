@@ -270,13 +270,21 @@ export default function ProductDetail({ product, related }) {
                 Tell us about your space and we'll come back with a tailored spec
                 and an indicative price.
               </p>
-              <div className="mt-9">
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                 <a
                   href="/k1/contact"
                   className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
                   style={{ background: COLOR.accent }}
                 >
                   Request a Quote
+                </a>
+                <a
+                  href="/k1/products"
+                  className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
+                  style={{ borderColor: COLOR.ink, color: COLOR.ink }}
+                >
+                  Explore More Products
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </a>
               </div>
             </div>

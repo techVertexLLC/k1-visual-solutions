@@ -9,6 +9,14 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { COLOR, FONT, BLUR } from "./tokens";
+import { TransparencyIcon, CheckIcon, PinIcon } from "@/components/ui/icons";
+
+/* Quick trust signals, absorbed from the old "Why K1" block. Kept light. */
+const TRUST = [
+  { Icon: TransparencyIcon, label: "Up to 90% Transparency" },
+  { Icon: CheckIcon, label: "3-Year Warranty" },
+  { Icon: PinIcon, label: "North American Support" },
+];
 
 /* Load-in: a quiet fade-up, staggered. No bounce, no glow. */
 const container = {
@@ -129,6 +137,25 @@ export default function Hero() {
               </span>
             </a>
           </motion.div>
+
+          {/* Trust signals — small, warm-gray, evenly spaced. Subtle by design. */}
+          <motion.ul
+            variants={item}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-start"
+          >
+            {TRUST.map(({ Icon, label }) => (
+              <li
+                key={label}
+                className="flex items-center gap-2 text-xs font-medium"
+                style={{ color: COLOR.muted }}
+              >
+                <span className="h-4 w-4 flex-none" style={{ color: COLOR.accent }} aria-hidden>
+                  <Icon />
+                </span>
+                {label}
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
       </div>
     </section>

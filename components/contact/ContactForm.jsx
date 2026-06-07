@@ -46,8 +46,18 @@ function validateField(id, value) {
 
 const VALIDATED_FIELDS = ["name", "email", "scenario"];
 
-function Field({ id, label, type = "text", as = "input", error, ...rest }) {
-  const Tag = as;
+/* Product-interest dropdown options, in display order. The first is the
+   default for visitors who haven't settled on a product yet. */
+const PRODUCT_OPTIONS = [
+  "Not sure yet",
+  "Series T — Transparent Poster",
+  "Series F — Flexible Film",
+  "Holographic LED",
+  "Custom / Other",
+];
+
+function Field({ id, label, type = "text", as = "input", options, error, ...rest }) {
+  const Tag = options ? "select" : as;
   const invalid = Boolean(error);
   return (
     <div>
@@ -61,7 +71,7 @@ function Field({ id, label, type = "text", as = "input", error, ...rest }) {
       <Tag
         id={id}
         name={id}
-        type={as === "input" ? type : undefined}
+        type={Tag === "input" ? type : undefined}
         className={`${inputBase} ${invalid ? "" : "focus:border-[color:var(--accent)]"}`}
         style={{
           borderColor: invalid ? ERROR_RED : COLOR.gray,
@@ -70,7 +80,15 @@ function Field({ id, label, type = "text", as = "input", error, ...rest }) {
         aria-invalid={invalid || undefined}
         aria-describedby={invalid ? `${id}-error` : undefined}
         {...rest}
-      />
+      >
+        {options
+          ? options.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))
+          : undefined}
+      </Tag>
       {invalid && (
         <p
           id={`${id}-error`}
@@ -192,9 +210,10 @@ export default function ContactForm() {
       </div>
       <div className="mt-6">
         <Field
-          id="product"
-          label="Product of interest"
-          placeholder="e.g. Transparent LED Poster Screen, Holographic P3.91…"
+          id="productInterest"
+          label="Product Interest (optional)"
+          options={PRODUCT_OPTIONS}
+          defaultValue={PRODUCT_OPTIONS[0]}
         />
       </div>
       <div className="mt-6">

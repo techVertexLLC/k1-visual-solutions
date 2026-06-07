@@ -86,7 +86,7 @@ export default function CaseStudiesPreview() {
     <section
       id="cases"
       className="scroll-mt-24 py-24 lg:py-32"
-      style={{ background: COLOR.gray }}
+      style={{ background: COLOR.bg }}
     >
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <Reveal className="max-w-2xl">
@@ -94,7 +94,7 @@ export default function CaseStudiesPreview() {
             className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em]"
             style={{ color: COLOR.muted }}
           >
-            <span style={{ color: COLOR.accent }}>04</span>
+            <span style={{ color: COLOR.accent }}>02</span>
             <span aria-hidden className="h-px w-8" style={{ background: "#D4CFC8" }} />
             <span>Case Studies</span>
           </div>

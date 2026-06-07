@@ -33,7 +33,7 @@ export default function FeaturedProducts() {
               className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em]"
               style={{ color: COLOR.muted }}
             >
-              <span style={{ color: COLOR.accent }}>02</span>
+              <span style={{ color: COLOR.accent }}>01</span>
               <span aria-hidden className="h-px w-8" style={{ background: "#D4CFC8" }} />
               <span>Featured Products</span>
             </div>
