@@ -63,6 +63,7 @@ export default function ProductGallery({ images, name }) {
                 src={img.src}
                 alt={img.alt || `${name} thumbnail ${i + 1}`}
                 fill
+                loading="lazy"
                 quality={60}
                 sizes="120px"
                 placeholder="blur"

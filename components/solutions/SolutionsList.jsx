@@ -22,6 +22,7 @@ function SolutionRow({ item, index }) {
           src={item.src}
           alt={item.alt}
           fill
+          loading="lazy"
           quality={80}
           sizes="(max-width: 768px) 100vw, 50vw"
           placeholder="blur"

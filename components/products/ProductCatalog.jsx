@@ -35,22 +35,25 @@ export default function ProductCatalog() {
   return (
     <section className="py-16 lg:py-24" style={{ background: COLOR.bg }}>
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
-        {/* Filter tabs */}
-        <div className="flex flex-wrap gap-2.5">
+        {/* Filter tabs — compact pills, warm gray when inactive, brand accent
+            when active. Client-side only; no page reload. */}
+        <div className="flex flex-wrap gap-2.5" role="tablist" aria-label="Filter products by series">
           {CATEGORIES.map((cat) => {
             const isActive = active === cat.key;
             return (
               <button
                 key={cat.key}
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActive(cat.key)}
-                className="rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300"
+                className="rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-300 hover:-translate-y-px"
                 style={{
-                  borderColor: isActive ? COLOR.accent : COLOR.gray,
-                  background: isActive ? COLOR.accent : "transparent",
+                  borderColor: isActive ? COLOR.accent : "transparent",
+                  background: isActive ? COLOR.accent : COLOR.gray,
                   color: isActive ? "#fff" : COLOR.body,
                 }}
               >
-                {cat.label}
+                {cat.short}
               </button>
             );
           })}

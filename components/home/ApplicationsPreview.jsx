@@ -23,6 +23,7 @@ function ApplicationCard({ item }) {
         src={item.src}
         alt={item.alt}
         fill
+        loading="lazy"
         quality={76}
         sizes="(max-width: 640px) 50vw, 25vw"
         placeholder="blur"

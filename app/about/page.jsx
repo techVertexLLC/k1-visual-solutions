@@ -3,6 +3,7 @@ import PageBanner from "@/components/ui/PageBanner";
 import Reveal from "@/components/ui/Reveal";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
+import { CheckIcon, PinIcon, DualDriveIcon } from "@/components/ui/icons";
 import { COLOR, FONT, BLUR } from "@/components/home/tokens";
 
 export const metadata = {
@@ -23,6 +24,24 @@ const FACTS = [
   { label: "Serving", value: "North America" },
   { label: "Focus", value: "Transparent & flexible LED" },
   { label: "Parent", value: "K1trends Global Inc." },
+];
+
+const VALUES = [
+  {
+    Icon: CheckIcon,
+    title: "Honest Specs",
+    body: "We publish real-world numbers, not datasheet maximums. What you read is what you get on site.",
+  },
+  {
+    Icon: PinIcon,
+    title: "North American Support",
+    body: "Same-timezone response, local accountability, and a Markham showroom you can visit.",
+  },
+  {
+    Icon: DualDriveIcon,
+    title: "Integrator-Friendly",
+    body: "Every system ships with mounting docs, wiring diagrams, and clear content input specs. No guesswork for your installer.",
+  },
 ];
 
 const PRINCIPLES = [
@@ -150,8 +169,59 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Installation expertise */}
+      {/* Why K1 — values */}
       <section className="py-20 lg:py-28" style={{ background: COLOR.bg }}>
+        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+          <Reveal className="max-w-2xl">
+            <div
+              className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em]"
+              style={{ color: COLOR.muted }}
+            >
+              <span style={{ color: COLOR.accent }}>Why K1</span>
+            </div>
+            <h2
+              className="mt-6 text-3xl leading-tight sm:text-4xl"
+              style={{ fontFamily: FONT.serif, color: COLOR.ink }}
+            >
+              What you can count on
+            </h2>
+            <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
+              The things that make a K1 project easy to specify, easy to trust,
+              and easy to install.
+            </p>
+          </Reveal>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
+            {VALUES.map((v, i) => (
+              <Reveal key={v.title} delay={i * 0.08}>
+                <div
+                  className="flex h-full flex-col rounded-2xl p-8"
+                  style={{ background: "#fff", border: `1px solid #D4CFC8` }}
+                >
+                  <div
+                    className="flex h-11 w-11 items-center justify-center rounded-xl p-2.5"
+                    style={{ background: COLOR.gray, color: COLOR.accent }}
+                  >
+                    <v.Icon />
+                  </div>
+                  <h3
+                    className="mt-5 text-xl leading-snug"
+                    style={{ fontFamily: FONT.serif, color: COLOR.ink }}
+                  >
+                    {v.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed" style={{ color: COLOR.body }}>
+                    {v.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Installation expertise */}
+      <section className="py-20 lg:py-28" style={{ background: COLOR.gray }}>
         <Reveal className="mx-auto max-w-6xl px-6 lg:px-10">
           <div
             className="grid items-stretch gap-px overflow-hidden rounded-2xl md:grid-cols-2"
@@ -162,6 +232,7 @@ export default function AboutPage() {
                 src="/k1/assets/images/applications/install-guide.jpg"
                 alt="Installation diagram for a K1 transparent LED display system"
                 fill
+                loading="lazy"
                 quality={80}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 placeholder="blur"

@@ -24,6 +24,7 @@ export default function ProductCard({ product }) {
             src={product.cardImage}
             alt={`${product.name} — ${CATEGORY_LABEL[product.category]} display`}
             fill
+            loading="lazy"
             quality={78}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             placeholder="blur"

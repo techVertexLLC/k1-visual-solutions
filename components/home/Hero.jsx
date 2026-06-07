@@ -111,7 +111,7 @@ export default function Hero() {
             {/* Primary — the single accent-coloured action in view */}
             <a
               href="/k1/contact"
-              className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
+              className="cta-pulse rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
               style={{ background: COLOR.accent }}
             >
               Request a Quote

@@ -38,6 +38,7 @@ export default function SiteFooter() {
                 alt="K1 Visual Solutions logo"
                 width={56}
                 height={56}
+                loading="lazy"
                 className="h-12 w-12 object-contain"
               />
               <span
@@ -66,7 +67,7 @@ export default function SiteFooter() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm transition-colors hover:opacity-70"
+                    className="link-underline inline-block text-sm"
                     style={{ color: COLOR.body }}
                   >
                     {link.label}
@@ -89,7 +90,7 @@ export default function SiteFooter() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm transition-colors hover:opacity-70"
+                    className="link-underline inline-block text-sm"
                     style={{ color: COLOR.body }}
                   >
                     {link.label}

@@ -25,6 +25,7 @@ function CaseCard({ item }) {
           src={primary.src}
           alt={primary.alt}
           fill
+          loading="lazy"
           quality={78}
           sizes="(max-width: 768px) 100vw, 50vw"
           placeholder="blur"
@@ -45,6 +46,7 @@ function CaseCard({ item }) {
                   src={img.src}
                   alt={img.alt}
                   fill
+                  loading="lazy"
                   quality={64}
                   sizes="96px"
                   placeholder="blur"

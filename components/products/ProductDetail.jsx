@@ -14,6 +14,22 @@ import { CATEGORY_LABEL } from "@/lib/products";
  * application scenarios the product is built for, related products, and a quote
  * CTA. Server-safe data is passed in as props from the (static) route.
  */
+/**
+ * Key specs shown in the at-a-glance comparison grid. We resolve each value
+ * from the product's full spec sheet, accepting either "Cabinet size" or
+ * "Panel size" (flexible film has neither), and silently drop any that a given
+ * product doesn't carry so the grid never shows blanks.
+ */
+function keySpecs(specs) {
+  return [
+    ["Pixel pitch", specs["Pixel pitch"]],
+    ["Brightness", specs.Brightness],
+    ["Transparency", specs.Transparency],
+    ["Weight", specs.Weight],
+    ["Cabinet size", specs["Cabinet size"] || specs["Panel size"]],
+  ].filter(([, value]) => Boolean(value));
+}
+
 export default function ProductDetail({ product, related }) {
   const [showSticky, setShowSticky] = useState(false);
 
@@ -62,16 +78,11 @@ export default function ProductDetail({ product, related }) {
                 {product.description}
               </p>
 
-              {/* Quick stats */}
+              {/* Key specs at a glance — clean 2-column comparison grid */}
               <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl"
                 style={{ background: COLOR.gray, border: `1px solid ${COLOR.gray}` }}
               >
-                {[
-                  ["Pixel pitch", product.specs["Pixel pitch"]],
-                  ["Brightness", product.specs.Brightness],
-                  ["Transparency", product.specs.Transparency],
-                  ["Lifespan", product.specs.Lifespan],
-                ].map(([label, value]) => (
+                {keySpecs(product.specs).map(([label, value]) => (
                   <div key={label} className="p-4" style={{ background: "#fff" }}>
                     <dt
                       className="text-[10px] uppercase tracking-[0.16em]"
@@ -195,6 +206,7 @@ export default function ProductDetail({ product, related }) {
                       src={app.src}
                       alt={app.label}
                       fill
+                      loading="lazy"
                       quality={74}
                       sizes="(max-width: 640px) 100vw, 33vw"
                       placeholder="blur"

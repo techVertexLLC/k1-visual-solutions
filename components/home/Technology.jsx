@@ -64,6 +64,7 @@ function TechRow({ tech, index }) {
             src={tech.image}
             alt={tech.alt}
             fill
+            loading="lazy"
             quality={80}
             sizes="(max-width: 768px) 100vw, 50vw"
             placeholder="blur"
