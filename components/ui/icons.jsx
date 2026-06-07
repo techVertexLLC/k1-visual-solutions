@@ -112,6 +112,38 @@ export function EscalatorIcon(props) {
   );
 }
 
+export function HospitalityIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 8h11v4a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8Z" />
+      <path d="M16 9h2a2 2 0 0 1 0 4h-2" />
+      <path d="M8 3v2M11.5 3v2" opacity="0.6" />
+      <path d="M4 20h14" />
+    </svg>
+  );
+}
+
+export function CorporateIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M3 21h18" />
+      <path d="M6 21V6l8-3v18" />
+      <path d="M14 21V9l4 1.5V21" />
+      <path d="M9 8h.01M9 12h.01M9 16h.01" opacity="0.7" />
+    </svg>
+  );
+}
+
+export function SignageIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3v18" />
+      <path d="M12 5h7l2.5 2.5L19 10h-7z" />
+      <path d="M12 12H5l-2.5 2.5L5 17h7z" />
+    </svg>
+  );
+}
+
 export function PhoneIcon(props) {
   return (
     <svg {...base} {...props}>
