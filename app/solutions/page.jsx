@@ -2,12 +2,18 @@ import PageBanner from "@/components/ui/PageBanner";
 import SolutionsList from "@/components/solutions/SolutionsList";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Solutions — Applications for Transparent LED",
+  ogTitle: "LED Display Solutions — Retail, Architecture, Hospitality",
   description:
     "Retail, architecture, hospitality, corporate, entertainment, signage and more — see how K1 transparent and holographic LED displays serve every environment.",
-};
+  path: "/k1/solutions",
+  image: "/k1/assets/images/applications/app-architecture.jpg",
+  imageAlt:
+    "Architectural glass facade with an integrated transparent LED display",
+});
 
 /**
  * Solutions page — the Applications section expanded into a full page, one

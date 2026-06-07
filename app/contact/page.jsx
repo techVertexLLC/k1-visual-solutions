@@ -2,20 +2,24 @@ import PageBanner from "@/components/ui/PageBanner";
 import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/contact/ContactForm";
 import SiteFooter from "@/components/SiteFooter";
-import { MailIcon, PhoneIcon, PinIcon } from "@/components/ui/icons";
+import { MailIcon, PinIcon } from "@/components/ui/icons";
 import { SOCIAL_LINKS } from "@/components/ui/social";
 import { COLOR, FONT } from "@/components/home/tokens";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Contact — Request a Quote",
+  ogTitle: "Contact K1 Visual Solutions — Request a Quote",
   description:
     "Tell us about your space and the effect you're after. K1 Visual Solutions will come back with the right product, a spec, and an indicative price. Based in Markham, Ontario.",
-};
+  path: "/k1/contact",
+  image: "/k1/assets/images/applications/app-storefront.jpg",
+  imageAlt: "Storefront window with a transparent LED display",
+});
 
 const INFO = [
   { Icon: PinIcon, label: "Office", value: "Markham, Ontario, Canada" },
   { Icon: MailIcon, label: "Email", value: "info@k1visualsolutions.com", href: "mailto:info@k1visualsolutions.com" },
-  { Icon: PhoneIcon, label: "Phone", value: "+1 (000) 000-0000", href: "tel:+10000000000" },
 ];
 
 export default function ContactPage() {
@@ -98,30 +102,32 @@ export default function ContactPage() {
               ))}
             </ul>
 
-            {/* Social */}
-            <div className="mt-8">
-              <span
-                className="block text-[11px] uppercase tracking-[0.16em]"
-                style={{ color: COLOR.muted }}
-              >
-                Follow
-              </span>
-              <div className="mt-3 flex flex-wrap gap-2.5">
-                {SOCIAL_LINKS.map(({ label, href, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    aria-label={label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border p-2.5 transition-colors"
-                    style={{ borderColor: COLOR.gray, color: COLOR.muted }}
-                  >
-                    <Icon />
-                  </a>
-                ))}
+            {/* Social — only when real handles are configured */}
+            {SOCIAL_LINKS.length > 0 && (
+              <div className="mt-8">
+                <span
+                  className="block text-[11px] uppercase tracking-[0.16em]"
+                  style={{ color: COLOR.muted }}
+                >
+                  Follow
+                </span>
+                <div className="mt-3 flex flex-wrap gap-2.5">
+                  {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      aria-label={label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border p-2.5 transition-colors"
+                      style={{ borderColor: COLOR.gray, color: COLOR.muted }}
+                    >
+                      <Icon />
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Map placeholder */}
             <div

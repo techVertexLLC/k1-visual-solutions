@@ -19,11 +19,9 @@ const dmSerif = DM_Serif_Display({
 
 const SITE_URL = "https://k1visualsolutions.com";
 
-// Hero product photo used for social-sharing previews. Path includes the
-// "/k1" basePath because openGraph/twitter images resolve against
-// metadataBase, not the basePath.
-const OG_IMAGE = "/k1/assets/images/products/smd-p391-02.jpg";
-
+// Root metadata owns the site-wide defaults only: metadataBase, the title
+// template, keywords, icons, and the global robots directive. Each page
+// declares its own title/description/openGraph via lib/seo.js#pageMetadata.
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -44,30 +42,6 @@ export const metadata = {
     "B2B LED distributor Canada",
   ],
   authors: [{ name: "K1trends Global Inc." }],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: SITE_URL,
-    siteName: "K1 Visual Solutions",
-    title: "K1 Visual Solutions — Redefining Spaces with Invisible Displays",
-    description:
-      "Next-gen flexible & transparent LED solutions for retail, architecture, and exhibitions.",
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "K1 Visual Solutions — transparent LED display",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "K1 Visual Solutions — Redefining Spaces with Invisible Displays",
-    description:
-      "Next-gen flexible & transparent LED solutions for retail, architecture, and exhibitions.",
-    images: [OG_IMAGE],
-  },
   icons: {
     icon: [
       { url: "/k1/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -88,7 +62,19 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${dmSerif.variable}`}>
-      <body className="bg-[#FAF8F5] font-sans antialiased">
+      <head>
+        {/*
+          Animation fallback: framer-motion server-renders its reveal elements
+          with an inline `opacity:0`. If JavaScript never runs, that would hide
+          the content for good — so when scripting is unavailable we force those
+          elements visible. With JS on, framer-motion drives the animation as
+          normal and this rule does nothing.
+        */}
+        <noscript>
+          <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important;}`}</style>
+        </noscript>
+      </head>
+      <body className="bg-[#FAF8F5] font-sans antialiased overflow-x-hidden">
         <Navbar />
         {children}
       </body>

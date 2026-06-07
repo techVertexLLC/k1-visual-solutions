@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import ProductGallery from "./ProductGallery";
@@ -14,6 +15,14 @@ import { CATEGORY_LABEL } from "@/lib/products";
  * CTA. Server-safe data is passed in as props from the (static) route.
  */
 export default function ProductDetail({ product, related }) {
+  const [showSticky, setShowSticky] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowSticky(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div style={{ background: COLOR.bg }}>
       {/* Overview: gallery + summary */}
@@ -262,6 +271,25 @@ export default function ProductDetail({ product, related }) {
           </Reveal>
         </div>
       </section>
+
+      {/* Sticky mobile CTA — appears after scrolling past hero */}
+      {showSticky && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-4 px-5 py-4 shadow-2xl md:hidden"
+          style={{ background: "#fff", borderTop: "1px solid " + COLOR.gray }}
+        >
+          <span className="truncate text-sm font-medium" style={{ color: COLOR.ink }}>
+            {product.name}
+          </span>
+          <a
+            href="/k1/contact"
+            className="flex-none rounded-full px-5 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90"
+            style={{ background: COLOR.accent }}
+          >
+            Request a Quote
+          </a>
+        </div>
+      )}
     </div>
   );
 }

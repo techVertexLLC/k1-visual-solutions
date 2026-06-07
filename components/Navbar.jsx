@@ -30,8 +30,10 @@ const NAV_LINKS = [
   { label: "Contact", href: "/k1/contact" },
 ];
 
-/* Compact social icon strip — icons only, used on the right of the desktop bar. */
+/* Compact social icon strip — icons only, used on the right of the desktop bar.
+   Renders nothing until SOCIAL_LINKS has real entries. */
 function NavSocial() {
+  if (SOCIAL_LINKS.length === 0) return null;
   return (
     <div className="hidden items-center gap-1 lg:flex">
       {SOCIAL_LINKS.map(({ label, href, Icon }) => (
@@ -260,22 +262,24 @@ export default function Navbar() {
                 </a>
               </li>
 
-              {/* Social row */}
-              <li className="flex items-center justify-center gap-3 pt-4">
-                {SOCIAL_LINKS.map(({ label, href, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border p-2"
-                    style={{ borderColor: COLOR.gray, color: COLOR.muted }}
-                  >
-                    <Icon />
-                  </a>
-                ))}
-              </li>
+              {/* Social row — only when there are real links to show */}
+              {SOCIAL_LINKS.length > 0 && (
+                <li className="flex items-center justify-center gap-3 pt-4">
+                  {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      aria-label={label}
+                      className="flex h-9 w-9 items-center justify-center rounded-full border p-2"
+                      style={{ borderColor: COLOR.gray, color: COLOR.muted }}
+                    >
+                      <Icon />
+                    </a>
+                  ))}
+                </li>
+              )}
             </ul>
           </motion.div>
         )}

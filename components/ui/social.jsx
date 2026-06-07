@@ -5,12 +5,15 @@
  * dependency-free and the marks render in the brand's quiet, minimal style.
  * Icons inherit `currentColor`, so colour is set by the parent.
  *
- * WhatsApp number and the social URLs are placeholders to be swapped for the
- * client's real handles.
+ * SOCIAL_LINKS is intentionally empty: the client has no live social presence
+ * yet, so we render no icons rather than ship placeholder "#" links. Add real
+ * entries here — e.g. { label: "Instagram", href: "https://instagram.com/...",
+ * Icon: InstagramIcon } — and they will appear in the navbar and footer
+ * automatically. The icon components below are kept ready for that day.
  */
 
 export const SOCIAL_LINKS = [
-  { label: "WhatsApp", href: "https://wa.me/19050000000", Icon: WhatsAppIcon },
+  { label: "WhatsApp", href: "#", Icon: WhatsAppIcon },
   { label: "Instagram", href: "#", Icon: InstagramIcon },
   { label: "Facebook", href: "#", Icon: FacebookIcon },
   { label: "TikTok", href: "#", Icon: TikTokIcon },

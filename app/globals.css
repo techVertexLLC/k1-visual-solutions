@@ -9,6 +9,9 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  /* Belt-and-suspenders against horizontal scroll on mobile: some browsers
+     still let the page pan sideways when only <body> clips. */
+  overflow-x: hidden;
 }
 
 body {
@@ -17,6 +20,24 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+/* Prevent images from causing horizontal overflow on mobile */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Animation fallback (modern browsers): when scripting is disabled, framer-
+   motion never overrides its server-rendered `opacity:0`, so reveal content
+   would stay invisible. Force it visible. The <noscript> block in the document
+   head covers browsers without `scripting` media support. */
+@media (scripting: none) {
+  [style*="opacity:0"],
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @layer utilities {

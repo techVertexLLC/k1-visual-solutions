@@ -9,6 +9,13 @@ export const metadata = {
   title: "About — K1trends Global Inc.",
   description:
     "K1 Visual Solutions is a Markham, Ontario distributor of premium transparent, flexible and holographic LED display systems, serving architects, retail brands and integrators across North America.",
+  openGraph: {
+    title: "About K1trends Global Inc. — Our Mission & Story",
+    description:
+      "K1 Visual Solutions is a Markham, Ontario distributor of premium transparent, flexible and holographic LED display systems, serving architects, retail brands and integrators across North America.",
+    url: "https://k1visualsolutions.com/k1/about",
+    type: "website",
+  },
 };
 
 const FACTS = [

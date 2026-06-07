@@ -121,7 +121,7 @@ export default function Hero() {
             <a
               href="/k1/products"
               className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
-              style={{ borderColor: COLOR.ink, color: COLOR.ink }}
+              style={{ borderColor: COLOR.accent, color: COLOR.accent }}
             >
               Explore Products
               <span className="transition-transform duration-300 group-hover:translate-x-1">

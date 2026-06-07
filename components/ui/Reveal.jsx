@@ -1,9 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /**
  * Scroll-triggered reveal wrapper. Fades + slides children into view once.
+ *
+ * Respects prefers-reduced-motion for accessibility — when the user has
+ * requested reduced motion, children render as plain HTML with no animation.
+ * Initial state is always visible so content remains accessible if JS fails.
  */
 export default function Reveal({
   children,
@@ -12,6 +16,14 @@ export default function Reveal({
   className = "",
   as = "div",
 }) {
+  const shouldReduce = useReducedMotion();
+
+  // No animation for users who prefer reduced motion (accessibility)
+  if (shouldReduce) {
+    const Tag = as;
+    return <Tag className={className}>{children}</Tag>;
+  }
+
   const MotionTag = motion[as] || motion.div;
   return (
     <MotionTag

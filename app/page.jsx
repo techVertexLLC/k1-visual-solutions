@@ -6,6 +6,18 @@ import CaseStudiesPreview from "@/components/home/CaseStudiesPreview";
 import WhyK1 from "@/components/home/WhyK1";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: {
+    absolute:
+      "K1 Visual Solutions — Transparent & Flexible LED Displays | K1trends Global Inc.",
+  },
+  ogTitle: "K1 Visual Solutions — Redefining Spaces with Invisible Displays",
+  description:
+    "Premium transparent, flexible & holographic LED display solutions for architecture, retail, and exhibitions — distributed across North America by K1trends Global Inc.",
+  path: "/k1/",
+});
 
 /**
  * K1 Visual Solutions — home page.

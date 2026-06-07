@@ -4,7 +4,9 @@ import { useState } from "react";
 import { COLOR, FONT } from "@/components/home/tokens";
 
 /**
- * Quote-request form. No backend yet — confirms receipt locally on submit.
+ * Quote-request form.
+ * Submits to Formspree via fetch (pure frontend, no backend required).
+ * Handles success, error, and loading states with React state.
  */
 
 const inputBase =
@@ -35,10 +37,34 @@ function Field({ id, label, type = "text", as = "input", ...rest }) {
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError(null);
+    try {
+      const formData = new FormData(e.target);
+      const res = await fetch("https://formspree.io/f/xpznqkjw", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(
+          data.error ||
+            "Something went wrong. Please try again or email us directly."
+        );
+      }
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -48,10 +74,10 @@ export default function ContactForm() {
         style={{ borderColor: COLOR.gray, background: "#fff" }}
       >
         <h3 className="text-2xl" style={{ fontFamily: FONT.serif, color: COLOR.ink }}>
-          Thank you — we've got it.
+          Thank you!
         </h3>
         <p className="mt-3 text-base" style={{ color: COLOR.body }}>
-          A member of the K1 team will be in touch shortly.
+          We&apos;ll get back to you within 24 hours.
         </p>
       </div>
     );
@@ -88,12 +114,28 @@ export default function ContactForm() {
           required
         />
       </div>
+
+      {/* Error message */}
+      {error && (
+        <div
+          className="mt-6 rounded-lg px-4 py-3 text-sm"
+          style={{
+            background: "#FEF2F2",
+            color: "#B91C1C",
+            border: "1px solid #FECACA",
+          }}
+        >
+          {error}
+        </div>
+      )}
+
       <button
         type="submit"
-        className="mt-8 w-full rounded-full px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 sm:w-auto"
+        disabled={submitting}
+        className="mt-8 w-full rounded-full px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         style={{ background: COLOR.accent }}
       >
-        Request a Quote
+        {submitting ? "Sending…" : "Request a Quote"}
       </button>
     </form>
   );

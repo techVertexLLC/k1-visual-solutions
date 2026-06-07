@@ -2,12 +2,17 @@ import { Suspense } from "react";
 import PageBanner from "@/components/ui/PageBanner";
 import ProductCatalog from "@/components/products/ProductCatalog";
 import SiteFooter from "@/components/SiteFooter";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Products — Transparent, Holographic & Flexible LED",
+  ogTitle: "K1 Products — Transparent, Holographic & Flexible LED",
   description:
     "Browse the K1 range of transparent LED poster screens, SMD holographic panels, and self-adhesive flexible LED film. Filter by series and view full specifications.",
-};
+  path: "/k1/products",
+  image: "/k1/assets/images/products/smd-p625-01.jpg",
+  imageAlt: "K1 SMD holographic LED panel detail",
+});
 
 /**
  * Product catalog page. Photographic banner, then the filterable product grid.

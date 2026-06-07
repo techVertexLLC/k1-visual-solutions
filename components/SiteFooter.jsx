@@ -110,49 +110,51 @@ export default function SiteFooter() {
             <ul className="mt-4 space-y-3 text-sm" style={{ color: COLOR.body }}>
               <li>Markham, Ontario, Canada</li>
               <li>
-                <a href="mailto:info@k1visualsolutions.com" className="hover:opacity-70">
-                  info@k1visualsolutions.com
+                <a href="tel:+19050000000" className="hover:opacity-70">
+                  +1 (905) 000-0000
                 </a>
               </li>
               <li>
-                <a href="tel:+10000000000" className="hover:opacity-70">
-                  +1 (000) 000-0000
+                <a href="mailto:info@k1visualsolutions.com" className="hover:opacity-70">
+                  info@k1visualsolutions.com
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Social — all five, with labels */}
-        <div
-          className="mt-14 border-t pt-8"
-          style={{ borderColor: "#DAD5CE" }}
-        >
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            {SOCIAL_LINKS.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group inline-flex items-center gap-2 text-sm transition-colors"
-                style={{ color: COLOR.body }}
-              >
-                <span
-                  className="flex h-9 w-9 items-center justify-center rounded-full border p-2 transition-colors group-hover:border-[color:var(--accent)]"
-                  style={{ borderColor: "#DAD5CE", color: COLOR.muted, "--accent": COLOR.accent }}
+        {/* Social — rendered only once real handles exist (see lib/ui/social). */}
+        {SOCIAL_LINKS.length > 0 && (
+          <div
+            className="mt-14 border-t pt-8"
+            style={{ borderColor: "#DAD5CE" }}
+          >
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group inline-flex items-center gap-2 text-sm transition-colors"
+                  style={{ color: COLOR.body }}
                 >
-                  <Icon />
-                </span>
-                {label}
-              </a>
-            ))}
+                  <span
+                    className="flex h-9 w-9 items-center justify-center rounded-full border p-2 transition-colors group-hover:border-[color:var(--accent)]"
+                    style={{ borderColor: "#DAD5CE", color: COLOR.muted, "--accent": COLOR.accent }}
+                  >
+                    <Icon />
+                  </span>
+                  {label}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div
-          className="mt-10 text-xs"
-          style={{ color: COLOR.muted }}
+          className="mt-10 border-t pt-8 text-xs"
+          style={{ color: COLOR.muted, borderColor: "#DAD5CE" }}
         >
           © {2026} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.
         </div>

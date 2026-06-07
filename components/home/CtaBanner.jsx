@@ -39,8 +39,8 @@ export default function CtaBanner() {
               </a>
               <a
                 href="/k1/products"
-                className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
-                style={{ borderColor: COLOR.ink, color: COLOR.ink }}
+                className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-opacity-10"
+                style={{ borderColor: COLOR.accent, color: COLOR.accent }}
               >
                 Browse Products
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
