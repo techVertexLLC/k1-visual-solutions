@@ -28,6 +28,29 @@ img {
   height: auto;
 }
 
+/* Gentle page-load fade for inner-page main content. The hero animates itself,
+   so this is applied to the secondary pages only (see each page's <main>). */
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: pageFade 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+}
+
 /* Animation fallback (modern browsers): when scripting is disabled, framer-
    motion never overrides its server-rendered `opacity:0`, so reveal content
    would stay invisible. Force it visible. The <noscript> block in the document

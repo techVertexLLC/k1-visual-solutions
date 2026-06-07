@@ -15,20 +15,20 @@ export default function ProductCard({ product }) {
   const href = `/k1/products/${product.slug}`;
   return (
     <article
-      className="group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_36px_-14px_rgba(26,26,26,0.22)]"
       style={{ border: `1px solid ${COLOR.gray}`, background: "#fff" }}
     >
       <a href={href} className="relative block aspect-[4/3] overflow-hidden">
         {product.cardImage ? (
           <Image
             src={product.cardImage}
-            alt={product.name}
+            alt={`${product.name} — ${CATEGORY_LABEL[product.category]} display`}
             fill
             quality={78}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             placeholder="blur"
             blurDataURL={BLUR}
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
           />
         ) : (
           <FilmPlaceholder />

@@ -32,7 +32,7 @@ export const metadata = pageMetadata({
  */
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#FAF8F5]">
+    <main id="main-content" className="min-h-screen bg-[#FAF8F5]">
       <Hero />
       <Technology />
       <FeaturedProducts />

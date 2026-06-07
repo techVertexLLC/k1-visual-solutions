@@ -24,7 +24,7 @@ const INFO = [
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen" style={{ background: "#FAF8F5" }}>
+    <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
       <PageBanner
         eyebrow="Contact"
         title="Request a quote"
@@ -143,7 +143,7 @@ export default function ContactPage() {
                 }}
                 aria-hidden
               />
-              <div className="relative flex flex-col items-center text-center">
+              <div className="relative flex flex-col items-center px-6 text-center">
                 <span
                   className="flex h-11 w-11 items-center justify-center rounded-full p-2.5"
                   style={{ background: "#fff", color: COLOR.accent, border: `1px solid #D4CFC8` }}
@@ -154,10 +154,10 @@ export default function ContactPage() {
                   className="mt-3 text-sm font-medium"
                   style={{ color: COLOR.ink }}
                 >
-                  Markham, Ontario
+                  Markham, Ontario, Canada
                 </span>
                 <span className="mt-1 text-xs" style={{ color: COLOR.muted }}>
-                  Map coming soon
+                  Our facility — book a demo visit
                 </span>
               </div>
             </div>

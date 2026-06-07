@@ -30,7 +30,7 @@ export default function ProductPage({ params }) {
   const related = getRelatedProducts(params.slug, 3);
 
   return (
-    <main className="min-h-screen" style={{ background: "#FAF8F5" }}>
+    <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
       <ProductDetail product={product} related={related} />
       <SiteFooter />
     </main>

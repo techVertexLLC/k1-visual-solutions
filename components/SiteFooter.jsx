@@ -156,7 +156,7 @@ export default function SiteFooter() {
           className="mt-10 border-t pt-8 text-xs"
           style={{ color: COLOR.muted, borderColor: "#DAD5CE" }}
         >
-          © {2026} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.
+          © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 import PageBanner from "@/components/ui/PageBanner";
 import SolutionsList from "@/components/solutions/SolutionsList";
+import FaqAccordion from "@/components/solutions/FaqAccordion";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
 import { pageMetadata } from "@/lib/seo";
@@ -21,7 +22,7 @@ export const metadata = pageMetadata({
  */
 export default function SolutionsPage() {
   return (
-    <main className="min-h-screen" style={{ background: "#FAF8F5" }}>
+    <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
       <PageBanner
         eyebrow="Solutions"
         title="Where vision meets space"
@@ -37,6 +38,7 @@ export default function SolutionsPage() {
         }
       />
       <SolutionsList />
+      <FaqAccordion />
       <CtaBanner />
       <SiteFooter />
     </main>

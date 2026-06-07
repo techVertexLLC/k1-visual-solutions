@@ -1,6 +1,7 @@
 import { Inter, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import BackToTop from "@/components/ui/BackToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -75,8 +76,16 @@ export default function RootLayout({ children }) {
         </noscript>
       </head>
       <body className="bg-[#FAF8F5] font-sans antialiased overflow-x-hidden">
+        {/* Skip link — visible only on keyboard focus, jumps past the nav. */}
+        <a
+          href="#main-content"
+          className="sr-only z-[100] rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to content
+        </a>
         <Navbar />
         {children}
+        <BackToTop />
       </body>
     </html>
   );

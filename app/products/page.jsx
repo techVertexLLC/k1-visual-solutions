@@ -21,7 +21,7 @@ export const metadata = pageMetadata({
  */
 export default function ProductsPage() {
   return (
-    <main className="min-h-screen" style={{ background: "#FAF8F5" }}>
+    <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
       <PageBanner
         eyebrow="The Range"
         title="Transparent, holographic & flexible LED"

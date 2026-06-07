@@ -42,7 +42,7 @@ const PRINCIPLES = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen" style={{ background: "#FAF8F5" }}>
+    <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
       <PageBanner
         eyebrow="About"
         title="A quieter way to put light into a space"

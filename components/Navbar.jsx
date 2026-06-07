@@ -2,9 +2,19 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { COLOR, FONT } from "./home/tokens";
 import { SOCIAL_LINKS } from "./ui/social";
+
+/* usePathname() returns the route WITHOUT the "/k1" basePath, so we strip the
+   prefix off each nav href before comparing to decide the active link. */
+function isActivePath(href, pathname) {
+  const linkPath = href.replace(/^\/k1/, "") || "/";
+  return linkPath === "/"
+    ? pathname === "/"
+    : pathname === linkPath || pathname.startsWith(`${linkPath}/`);
+}
 
 /**
  * Primary site navigation for K1 Visual Solutions — now a multi-page nav.
@@ -58,6 +68,7 @@ function NavSocial() {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const pathname = usePathname();
 
   // Lock body scroll while the mobile sheet is open.
   useEffect(() => {
@@ -102,8 +113,9 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) =>
-            link.sublinks ? (
+          {NAV_LINKS.map((link) => {
+            const active = isActivePath(link.href, pathname);
+            return link.sublinks ? (
               <li
                 key={link.href}
                 className="relative"
@@ -112,10 +124,13 @@ export default function Navbar() {
               >
                 <a
                   href={link.href}
+                  aria-current={active ? "page" : undefined}
                   className="flex items-center gap-1 text-sm font-medium transition-colors"
-                  style={{ color: COLOR.body }}
+                  style={{ color: active ? COLOR.ink : COLOR.body }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.body)}
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = active ? COLOR.ink : COLOR.body)
+                  }
                 >
                   {link.label}
                   <svg
@@ -161,16 +176,19 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
+                  aria-current={active ? "page" : undefined}
                   className="text-sm font-medium transition-colors"
-                  style={{ color: COLOR.body }}
+                  style={{ color: active ? COLOR.ink : COLOR.body }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.body)}
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = active ? COLOR.ink : COLOR.body)
+                  }
                 >
                   {link.label}
                 </a>
               </li>
-            )
-          )}
+            );
+          })}
         </ul>
 
         {/* Right cluster */}
@@ -227,8 +245,14 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
+                    aria-current={isActivePath(link.href, pathname) ? "page" : undefined}
                     className="block rounded-lg px-3 py-3 text-base font-medium"
-                    style={{ color: COLOR.ink }}
+                    style={{
+                      color: COLOR.ink,
+                      background: isActivePath(link.href, pathname)
+                        ? "#fff"
+                        : "transparent",
+                    }}
                   >
                     {link.label}
                   </a>

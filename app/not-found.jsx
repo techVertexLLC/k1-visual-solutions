@@ -10,7 +10,8 @@ export const metadata = {
 export default function NotFound() {
   return (
     <main
-      className="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+      id="main-content"
+      className="page-enter flex min-h-screen flex-col items-center justify-center px-6 text-center"
       style={{ background: "#FAF8F5" }}
     >
       <p className="text-6xl font-light" style={{ color: "#C4BEB6" }}>
