@@ -39,10 +39,10 @@ export default function SiteFooter() {
                 width={200}
                 height={80}
                 loading="lazy"
-                className="h-32 w-auto object-contain"
+                className="h-40 w-auto object-contain"
               />
             </a>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed" style={{ color: COLOR.body }}>
+            <p className="mt-5 max-w-xs text-base leading-relaxed" style={{ color: COLOR.body }}>
               Premium transparent, flexible &amp; holographic LED display
               solutions, distributed across North America.
             </p>
@@ -51,7 +51,7 @@ export default function SiteFooter() {
           {/* Explore */}
           <div className="md:col-span-2">
             <h3
-              className="text-[11px] font-medium uppercase tracking-[0.2em]"
+              className="text-xs font-medium uppercase tracking-[0.2em]"
               style={{ color: COLOR.muted }}
             >
               Explore
@@ -61,7 +61,7 @@ export default function SiteFooter() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="link-underline inline-block text-sm"
+                    className="link-underline inline-block text-base"
                     style={{ color: COLOR.body }}
                   >
                     {link.label}
@@ -74,7 +74,7 @@ export default function SiteFooter() {
           {/* Products */}
           <div className="md:col-span-3">
             <h3
-              className="text-[11px] font-medium uppercase tracking-[0.2em]"
+              className="text-xs font-medium uppercase tracking-[0.2em]"
               style={{ color: COLOR.muted }}
             >
               Products
@@ -84,7 +84,7 @@ export default function SiteFooter() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="link-underline inline-block text-sm"
+                    className="link-underline inline-block text-base"
                     style={{ color: COLOR.body }}
                   >
                     {link.label}
@@ -97,12 +97,12 @@ export default function SiteFooter() {
           {/* Contact */}
           <div className="md:col-span-3">
             <h3
-              className="text-[11px] font-medium uppercase tracking-[0.2em]"
+              className="text-xs font-medium uppercase tracking-[0.2em]"
               style={{ color: COLOR.muted }}
             >
               Contact
             </h3>
-            <ul className="mt-4 space-y-3 text-sm" style={{ color: COLOR.body }}>
+            <ul className="mt-4 space-y-3 text-base" style={{ color: COLOR.body }}>
                <li>525 W Wrightwood Avenue, Elmhurst, IL</li>
               <li>
                  <a href="tel:+16303595931" className="hover:opacity-70">
@@ -148,7 +148,7 @@ export default function SiteFooter() {
         )}
 
         <div
-          className="mt-10 border-t pt-8 text-xs"
+          className="mt-10 border-t pt-8 text-sm"
           style={{ color: COLOR.muted, borderColor: "#DAD5CE" }}
         >
           © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.

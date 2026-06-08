@@ -31,10 +31,10 @@ export default function Footer() {
                 alt="K1 Visual Solutions logo"
                 width={200}
                 height={80}
-                className="h-28 w-auto object-contain brightness-0 invert"
+                className="h-40 w-auto object-contain brightness-0 invert"
               />
             </div>
-            <p className="mt-4 max-w-xs text-sm text-white/55">
+            <p className="mt-4 max-w-xs text-base text-white/55">
               LED Displays · Digital Signs · Endless Possibilities. Premium
               transparent &amp; flexible LED solutions, distributed across North
               America.
@@ -43,7 +43,7 @@ export default function Footer() {
 
           {/* Nav */}
           <nav aria-label="Footer">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/80">
+            <h3 className="text-base font-semibold uppercase tracking-wider text-white/80">
               Explore
             </h3>
             <ul className="mt-4 grid grid-cols-2 gap-2">
@@ -52,7 +52,7 @@ export default function Footer() {
                   <a
                     href={l.href}
                     onClick={handleNav(l.href)}
-                    className="text-sm text-white/55 transition-colors hover:text-electric-cyan"
+                    className="text-base text-white/55 transition-colors hover:text-electric-cyan"
                   >
                     {l.label}
                   </a>
@@ -63,10 +63,10 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/80">
+            <h3 className="text-base font-semibold uppercase tracking-wider text-white/80">
               Contact
             </h3>
-            <ul className="mt-4 space-y-3 text-sm">
+            <ul className="mt-4 space-y-3 text-base">
               <li>
                 <a
                   href="mailto:Andrewxu@vertexdistributor.com"
@@ -95,10 +95,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
-          <p className="text-xs text-white/40">
+          <p className="text-sm text-white/40">
             © 2025 K1trends Global Inc. All rights reserved.
           </p>
-          <p className="text-xs text-white/40">
+          <p className="text-sm text-white/40">
             Elmhurst, IL · Serving North America
           </p>
         </div>

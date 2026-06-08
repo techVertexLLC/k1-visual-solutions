@@ -24,10 +24,10 @@ export default function Footer() {
                 alt="K1 Visual Solutions logo"
                 width={200}
                 height={80}
-                className="h-28 w-auto object-contain"
+                className="h-40 w-auto object-contain"
               />
             </div>
-            <p className="mt-4 text-sm leading-relaxed" style={{ color: COLOR.body }}>
+            <p className="mt-4 text-base leading-relaxed" style={{ color: COLOR.body }}>
               Premium transparent &amp; flexible LED display solutions, distributed
               across North America.
             </p>
@@ -37,7 +37,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-12 sm:gap-20">
             <div>
               <h3
-                className="text-[11px] font-medium uppercase tracking-[0.2em]"
+                className="text-xs font-medium uppercase tracking-[0.2em]"
                 style={{ color: COLOR.muted }}
               >
                 Explore
@@ -47,7 +47,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-sm transition-colors hover:opacity-70"
+                      className="text-base transition-colors hover:opacity-70"
                       style={{ color: COLOR.body }}
                     >
                       {link.label}
@@ -59,12 +59,12 @@ export default function Footer() {
 
             <div>
               <h3
-                className="text-[11px] font-medium uppercase tracking-[0.2em]"
+                className="text-xs font-medium uppercase tracking-[0.2em]"
                 style={{ color: COLOR.muted }}
               >
                 Contact
               </h3>
-              <ul className="mt-4 space-y-3 text-sm" style={{ color: COLOR.body }}>
+              <ul className="mt-4 space-y-3 text-base" style={{ color: COLOR.body }}>
                  <li>525 W Wrightwood Avenue, Elmhurst, IL</li>
                 <li>
                    <a href="mailto:Andrewxu@vertexdistributor.com" className="hover:opacity-70">
@@ -82,7 +82,7 @@ export default function Footer() {
         </div>
 
         <div
-          className="mt-14 border-t pt-8 text-xs"
+          className="mt-14 border-t pt-8 text-sm"
           style={{ borderColor: "#DAD5CE", color: COLOR.muted }}
         >
           © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.
