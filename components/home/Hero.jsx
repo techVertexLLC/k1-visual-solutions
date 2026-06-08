@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -87,6 +87,155 @@ function HeroBackground({ reduceMotion }) {
   );
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   useParallaxInput — 陀螺儀 / 滑鼠視差輸入 hook
+   回傳 { bgRef, iosPermissionNeeded, requestIOSPermission }
+   - 手機：DeviceOrientationEvent（beta/gamma） → GSAP lerp → bgRef translateX/Y
+   - 桌面：mousemove → 反方向偏移，模擬「看進去」的窗口感
+   - iOS 13+ 需 requestPermission（必須在手勢事件中呼叫）
+   - prefers-reduced-motion → 完全不啟動，bgRef 不加 transform
+   最大偏移：±15px translate + 1.02 scale（背景已有 scale-125 headroom）
+───────────────────────────────────────────────────────────────────────────── */
+function useParallaxInput(reduceMotion) {
+  const bgRef = useRef(null);
+  const [iosPermissionNeeded, setIosPermissionNeeded] = useState(false);
+  const permissionGranted = useRef(false);
+  const rafId = useRef(null);
+
+  // GSAP quickTo targets — lazy-initialised after mount
+  const quickX = useRef(null);
+  const quickY = useRef(null);
+
+  // lerp-smoothed current values（fallback for browsers without quickTo）
+  const current = useRef({ x: 0, y: 0 });
+  const target = useRef({ x: 0, y: 0 });
+
+  // 偏移上限
+  const MAX = 15;
+
+  /* clamp helper */
+  const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+
+  /* 初始化 GSAP quickTo — 在 bgRef mount 後執行 */
+  const initQuick = useCallback(() => {
+    if (!bgRef.current || quickX.current) return;
+    quickX.current = gsap.quickTo(bgRef.current, "x", {
+      duration: 0.6,
+      ease: "power2.out",
+    });
+    quickY.current = gsap.quickTo(bgRef.current, "y", {
+      duration: 0.6,
+      ease: "power2.out",
+    });
+    // 確保 will-change 提示到位
+    gsap.set(bgRef.current, { willChange: "transform" });
+  }, []);
+
+  /* 套用偏移，走 GSAP quickTo */
+  const applyOffset = useCallback((x, y) => {
+    if (!bgRef.current) return;
+    if (!quickX.current) initQuick();
+    if (quickX.current) {
+      quickX.current(clamp(x, -MAX, MAX));
+      quickY.current(clamp(y, -MAX, MAX));
+    }
+  }, [initQuick]);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    if (typeof window === "undefined") return;
+
+    initQuick();
+
+    /* ── 桌面：mousemove ── */
+    const onMouseMove = (e) => {
+      if (window.matchMedia("(pointer: coarse)").matches) return; // 觸控裝置跳過
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      // 反方向偏移（滑鼠往右 → 背景往左），模擬視差感
+      const nx = -((e.clientX - cx) / cx) * MAX * 0.8;
+      const ny = -((e.clientY - cy) / cy) * MAX * 0.5;
+      applyOffset(nx, ny);
+    };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
+    /* ── 手機：DeviceOrientationEvent ── */
+    const startGyro = () => {
+      const onOrientation = (e) => {
+        // gamma = 左右傾斜（-90~90）, beta = 前後傾斜（-180~180）
+        // 中性位置約 beta=45（手機直立）/ gamma=0
+        const rawX = e.gamma ?? 0; // 左右
+        const rawY = (e.beta ?? 45) - 45; // 前後（減去直立偏移）
+        // 縮放到 ±MAX 範圍：gamma 通常 ±30 算大動作
+        const nx = clamp((rawX / 30) * MAX, -MAX, MAX);
+        const ny = clamp((rawY / 20) * MAX, -MAX, MAX);
+        applyOffset(nx, ny);
+      };
+      window.addEventListener("deviceorientation", onOrientation, {
+        passive: true,
+      });
+      return () => window.removeEventListener("deviceorientation", onOrientation);
+    };
+
+    let cleanupGyro = () => {};
+
+    // 偵測是否為觸控裝置
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) {
+      if (
+        typeof DeviceOrientationEvent !== "undefined" &&
+        typeof DeviceOrientationEvent.requestPermission === "function"
+      ) {
+        // iOS 13+ — 需要 permission，顯示按鈕
+        setIosPermissionNeeded(true);
+      } else {
+        // Android / 舊 iOS — 直接監聽
+        cleanupGyro = startGyro();
+      }
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      cleanupGyro();
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      // 復位
+      if (bgRef.current) {
+        gsap.to(bgRef.current, { x: 0, y: 0, duration: 0.4 });
+      }
+      quickX.current = null;
+      quickY.current = null;
+    };
+  }, [reduceMotion, applyOffset, initQuick]);
+
+  /* iOS permission request — 必須在用戶手勢中呼叫 */
+  const requestIOSPermission = useCallback(async () => {
+    if (typeof DeviceOrientationEvent?.requestPermission !== "function") return;
+    try {
+      const res = await DeviceOrientationEvent.requestPermission();
+      if (res === "granted") {
+        permissionGranted.current = true;
+        setIosPermissionNeeded(false);
+        // 開始監聽
+        const onOrientation = (e) => {
+          const rawX = e.gamma ?? 0;
+          const rawY = (e.beta ?? 45) - 45;
+          const nx = clamp((rawX / 30) * MAX, -MAX, MAX);
+          const ny = clamp((rawY / 20) * MAX, -MAX, MAX);
+          applyOffset(nx, ny);
+        };
+        window.addEventListener("deviceorientation", onOrientation, {
+          passive: true,
+        });
+      }
+    } catch {
+      // 用戶拒絕或不支援 — 靜默降級，按鈕消失
+      setIosPermissionNeeded(false);
+    }
+  }, [applyOffset]);
+
+  return { bgRef, iosPermissionNeeded, requestIOSPermission };
+}
+
 export default function Hero() {
   const ref = useRef(null);
   const contentRef = useRef(null);
@@ -100,6 +249,10 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 90]);
+
+  // 陀螺儀 / 滑鼠視差 hook
+  const { bgRef, iosPermissionNeeded, requestIOSPermission } =
+    useParallaxInput(reduceMotion);
 
   // GSAP ScrollTrigger: text content drifts up + fades; overlay intensifies.
   // Complements the Framer Motion background drift → three distinct depth layers.
@@ -146,9 +299,15 @@ export default function Hero() {
       style={{ background: COLOR.bg }}
     >
       {/* Layer 1 — Parallax background: video (default) or static image (reduced-motion).
-          scale-125 給 parallax drift 留出 headroom，避免邊緣露白。 */}
+          scale-125 給 parallax drift 留出 headroom，避免邊緣露白。
+          bgRef 接收陀螺儀/滑鼠的 GSAP translateX/Y，疊加在 Framer Motion scrollY 之上。*/}
       <motion.div style={{ y }} className="absolute inset-0" aria-hidden>
-        <div className="relative h-full w-full scale-125">
+        {/* 陀螺儀偏移容器：GSAP 操控此層的 x/y，scale-125 headroom 同時吸收 ±15px */}
+        <div
+          ref={bgRef}
+          className="relative h-full w-full scale-125"
+          style={{ willChange: "transform" }}
+        >
           <HeroBackground reduceMotion={reduceMotion} />
         </div>
       </motion.div>
@@ -166,6 +325,39 @@ export default function Hero() {
           willChange: "opacity",
         }}
       />
+
+      {/* iOS AR View permission button — 只在 iOS 13+ 觸控裝置上顯示，點擊後消失。
+          設計：低調 ghost button，不搶 CTA 視線，但位置明顯（右下角）。 */}
+      {iosPermissionNeeded && !reduceMotion && (
+        <button
+          onClick={requestIOSPermission}
+          className="absolute bottom-8 right-6 z-20 flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium backdrop-blur-sm transition-all duration-300 active:scale-95"
+          style={{
+            borderColor: `${COLOR.accent}60`,
+            color: COLOR.accent,
+            background: `${COLOR.bg}cc`,
+          }}
+          aria-label="Enable AR view with gyroscope"
+        >
+          {/* 小陀螺儀 icon */}
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+            <path d="M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" />
+          </svg>
+          Enable AR View
+        </button>
+      )}
 
       {/* Layer 3 — Content: drifts up + fades via GSAP ScrollTrigger */}
       <div
