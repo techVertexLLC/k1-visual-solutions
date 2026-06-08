@@ -6,6 +6,12 @@ import { SOCIAL_LINKS } from "./ui/social";
  * Shared site footer for every page. Warm-gray surface, multi-page navigation,
  * contact details, and the full set of social links shown with labels. Plain
  * anchors with the explicit "/k1" basePath.
+ *
+ * DC-019: 文字可讀性優化
+ * - 區塊標題：muted → ink，text-xs → text-sm，font-medium → font-semibold
+ * - 內文/連結：body → ink（#E8E4DF 背景對比 ≥ 4.5:1 WCAG AA）
+ * - Copyright：muted → body
+ * - 間距：py-16 → py-20，mt-4 → mt-5
  */
 
 const EXPLORE = [
@@ -25,7 +31,7 @@ const PRODUCT_LINKS = [
 export default function SiteFooter() {
   return (
     <footer
-      className="border-t py-16"
+      className="border-t py-20"
       style={{ background: COLOR.gray, borderColor: "#DAD5CE" }}
     >
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
@@ -50,19 +56,20 @@ export default function SiteFooter() {
 
           {/* Explore */}
           <div className="md:col-span-2">
+            {/* 標題加深 + 放大：確保在 #E8E4DF 背景對比度 ≥ 4.5:1 */}
             <h3
-              className="text-xs font-medium uppercase tracking-[0.2em]"
-              style={{ color: COLOR.muted }}
+              className="text-sm font-semibold uppercase tracking-[0.2em]"
+              style={{ color: COLOR.ink }}
             >
               Explore
             </h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-5 space-y-3">
               {EXPLORE.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     className="link-underline inline-block text-base"
-                    style={{ color: COLOR.body }}
+                    style={{ color: COLOR.ink }}
                   >
                     {link.label}
                   </a>
@@ -74,18 +81,18 @@ export default function SiteFooter() {
           {/* Products */}
           <div className="md:col-span-3">
             <h3
-              className="text-xs font-medium uppercase tracking-[0.2em]"
-              style={{ color: COLOR.muted }}
+              className="text-sm font-semibold uppercase tracking-[0.2em]"
+              style={{ color: COLOR.ink }}
             >
               Products
             </h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-5 space-y-3">
               {PRODUCT_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     className="link-underline inline-block text-base"
-                    style={{ color: COLOR.body }}
+                    style={{ color: COLOR.ink }}
                   >
                     {link.label}
                   </a>
@@ -97,15 +104,15 @@ export default function SiteFooter() {
           {/* Contact */}
           <div className="md:col-span-3">
             <h3
-              className="text-xs font-medium uppercase tracking-[0.2em]"
-              style={{ color: COLOR.muted }}
+              className="text-sm font-semibold uppercase tracking-[0.2em]"
+              style={{ color: COLOR.ink }}
             >
               Contact
             </h3>
-            <ul className="mt-4 space-y-3 text-base" style={{ color: COLOR.body }}>
+            <ul className="mt-5 space-y-3 text-base" style={{ color: COLOR.ink }}>
                <li>525 W Wrightwood Avenue, Elmhurst, IL</li>
               <li>
-                 <a href="tel:+16303595931" className="hover:opacity-70">
+                 <a href="tel:+163****5931" className="hover:opacity-70">
                    +1 (630) 359-5931
                 </a>
               </li>
@@ -147,9 +154,10 @@ export default function SiteFooter() {
           </div>
         )}
 
+        {/* Copyright — body (#4A4A4A) 取代 muted (#6B655C)，對比度更佳 */}
         <div
           className="mt-10 border-t pt-8 text-sm"
-          style={{ color: COLOR.muted, borderColor: "#DAD5CE" }}
+          style={{ color: COLOR.body, borderColor: "#DAD5CE" }}
         >
           © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.
         </div>

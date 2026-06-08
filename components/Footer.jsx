@@ -3,6 +3,15 @@
 import Image from "next/image";
 import { MailIcon, PhoneIcon } from "./ui/icons";
 
+/**
+ * Deep-dark footer variant (bg-ink-900). Used on standalone pages that carry
+ * the dark hero treatment.
+ *
+ * DC-019: 文字可讀性優化（深色版）
+ * - 內文透明度：text-white/55 → text-white/75（對比度提升）
+ * - Copyright 透明度：text-white/40 → text-white/60
+ */
+
 const NAV = [
   { label: "Technology", href: "#technology" },
   { label: "Products", href: "#products" },
@@ -34,7 +43,8 @@ export default function Footer() {
                 className="h-56 w-auto object-contain brightness-0 invert"
               />
             </div>
-            <p className="mt-4 max-w-xs text-base text-white/55">
+            {/* text-white/55 → text-white/75：深底白字對比提升 */}
+            <p className="mt-4 max-w-xs text-base text-white/75">
               LED Displays · Digital Signs · Endless Possibilities. Premium
               transparent &amp; flexible LED solutions, distributed across North
               America.
@@ -52,7 +62,7 @@ export default function Footer() {
                   <a
                     href={l.href}
                     onClick={handleNav(l.href)}
-                    className="text-base text-white/55 transition-colors hover:text-electric-cyan"
+                    className="text-base text-white/75 transition-colors hover:text-electric-cyan"
                   >
                     {l.label}
                   </a>
@@ -70,7 +80,7 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:Andrewxu@vertexdistributor.com"
-                  className="inline-flex items-center gap-2 text-white/55 transition-colors hover:text-electric-cyan"
+                  className="inline-flex items-center gap-2 text-white/75 transition-colors hover:text-electric-cyan"
                 >
                   <span className="h-4 w-4">
                     <MailIcon />
@@ -80,8 +90,8 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:+16303595931"
-                  className="inline-flex items-center gap-2 text-white/55 transition-colors hover:text-electric-cyan"
+                  href="tel:+163****5931"
+                  className="inline-flex items-center gap-2 text-white/75 transition-colors hover:text-electric-cyan"
                 >
                   <span className="h-4 w-4">
                     <PhoneIcon />
@@ -89,16 +99,17 @@ export default function Footer() {
                   +1 (630) 359-5931
                 </a>
               </li>
-              <li className="text-white/55">525 W Wrightwood Avenue, Elmhurst, IL</li>
+              <li className="text-white/75">525 W Wrightwood Avenue, Elmhurst, IL</li>
             </ul>
           </div>
         </div>
 
+        {/* Copyright — text-white/40 → text-white/60：提高對比度 */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-white/60">
             © 2025 K1trends Global Inc. All rights reserved.
           </p>
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-white/60">
             Elmhurst, IL · Serving North America
           </p>
         </div>

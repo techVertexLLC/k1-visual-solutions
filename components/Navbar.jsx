@@ -89,19 +89,21 @@ export default function Navbar() {
         borderColor: COLOR.gray,
       }}
     >
+      {/* DC-019: nav h-32 → h-20，logo h-52/sm:h-64 → h-20/sm:h-24（上限 96px）
+           左右 padding 加大讓 logo 有呼吸空間 */}
       <nav
-        className="mx-auto flex h-32 max-w-6xl items-center justify-between px-6 lg:px-10"
+        className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 lg:px-10"
         aria-label="Primary"
       >
-        {/* Logo + wordmark — substantial, not tiny. */}
-        <a href="/k1/" className="flex items-center gap-3.5">
+        {/* Logo — h-20 / sm:h-24，比例協調不壓迫 */}
+        <a href="/k1/" className="flex items-center px-1 py-2">
           <Image
             src="/k1/assets/images/k1-logo-transparent.png"
             alt="K1 Visual Solutions logo"
             width={56}
             height={56}
             priority
-            className="h-52 w-auto object-contain sm:h-64"
+            className="h-20 w-auto object-contain sm:h-24"
           />
         </a>
 
