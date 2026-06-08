@@ -92,7 +92,7 @@ export default function Navbar() {
       {/* DC-019: nav h-32 → h-20，logo h-52/sm:h-64 → h-20/sm:h-24（上限 96px）
            左右 padding 加大讓 logo 有呼吸空間 */}
       <nav
-        className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 lg:px-10"
+        className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6 lg:px-10"
         aria-label="Primary"
       >
         {/* Logo — h-20 / sm:h-24，比例協調不壓迫 */}
@@ -103,7 +103,7 @@ export default function Navbar() {
             width={56}
             height={56}
             priority
-            className="h-20 w-auto object-contain sm:h-24"
+            className="h-36 w-auto object-contain sm:h-44"
           />
         </a>
 
