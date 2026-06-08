@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { COLOR, FONT } from "./home/tokens";
 import { SOCIAL_LINKS } from "./ui/social";
+import BrandLogo from "./ui/BrandLogo";
 
 /**
  * Shared site footer for every page. Warm-gray surface, multi-page navigation,
@@ -48,17 +49,11 @@ export default function SiteFooter() {
           {/* Brand */}
           <div className="md:col-span-4">
             <a href="/k1/" className="inline-block">
-              <Image
-                src="/k1/assets/images/k1-logo-transparent.png"
-                alt="K1 Visual Solutions logo"
-                width={200}
-                height={80}
-                loading="lazy"
-                className="h-56 w-auto object-contain"
-              />
+              {/* DC-021: 換 BrandLogo 統一管理，h-48 */}
+              <BrandLogo variant="footer" />
             </a>
-            {/* DC-020: leading-relaxed → leading-loose，文字密度降低更易讀 */}
-            <p className="mt-5 max-w-xs text-base leading-loose" style={{ color: COLOR.body }}>
+            {/* DC-021: text-base → text-lg */}
+            <p className="mt-5 max-w-xs text-lg leading-loose" style={{ color: COLOR.body }}>
               Premium transparent, flexible &amp; holographic LED display
               solutions, distributed across North America.
             </p>
@@ -66,21 +61,20 @@ export default function SiteFooter() {
 
           {/* Explore */}
           <div className="md:col-span-2">
-            {/* 標題加深 + 放大：確保在 #E8E4DF 背景對比度 ≥ 4.5:1 */}
+            {/* DC-021: text-sm → text-base 區塊標題 */}
             <h3
-              className="text-sm font-semibold uppercase tracking-[0.2em]"
+              className="text-base font-semibold uppercase tracking-[0.2em]"
               style={{ color: COLOR.ink }}
             >
               Explore
             </h3>
-            {/* DC-020: mt-5 → mt-6，space-y-3 → space-y-4 */}
             <ul className="mt-6 space-y-4">
               {EXPLORE.map((link) => (
                 <li key={link.href}>
-                  {/* DC-020: py-1 增加觸控面積（44px 目標） */}
+                  {/* DC-021: text-base → text-lg */}
                   <a
                     href={link.href}
-                    className="link-underline inline-block py-1 text-base"
+                    className="link-underline inline-block py-1 text-lg"
                     style={{ color: COLOR.ink }}
                   >
                     {link.label}
@@ -92,20 +86,20 @@ export default function SiteFooter() {
 
           {/* Products */}
           <div className="md:col-span-3">
+            {/* DC-021: text-sm → text-base 區塊標題 */}
             <h3
-              className="text-sm font-semibold uppercase tracking-[0.2em]"
+              className="text-base font-semibold uppercase tracking-[0.2em]"
               style={{ color: COLOR.ink }}
             >
               Products
             </h3>
-            {/* DC-020: mt-5 → mt-6，space-y-3 → space-y-4 */}
             <ul className="mt-6 space-y-4">
               {PRODUCT_LINKS.map((link) => (
                 <li key={link.href}>
-                  {/* DC-020: py-1 增加觸控面積 */}
+                  {/* DC-021: text-base → text-lg */}
                   <a
                     href={link.href}
-                    className="link-underline inline-block py-1 text-base"
+                    className="link-underline inline-block py-1 text-lg"
                     style={{ color: COLOR.ink }}
                   >
                     {link.label}
@@ -117,14 +111,15 @@ export default function SiteFooter() {
 
           {/* Contact */}
           <div className="md:col-span-3">
+            {/* DC-021: text-sm → text-base 區塊標題 */}
             <h3
-              className="text-sm font-semibold uppercase tracking-[0.2em]"
+              className="text-base font-semibold uppercase tracking-[0.2em]"
               style={{ color: COLOR.ink }}
             >
               Contact
             </h3>
-            {/* DC-020: mt-5 → mt-6，space-y-3 → space-y-4 */}
-            <ul className="mt-6 space-y-4 text-base" style={{ color: COLOR.ink }}>
+            {/* DC-021: text-base → text-lg */}
+            <ul className="mt-6 space-y-4 text-lg" style={{ color: COLOR.ink }}>
               {/* DC-020: py-1 統一 contact 項目觸控區域 */}
               <li className="py-1">525 W Wrightwood Avenue, Elmhurst, IL</li>
               <li>
@@ -170,10 +165,9 @@ export default function SiteFooter() {
           </div>
         )}
 
-        {/* DC-020: mt-10 → mt-14，Copyright 呼吸感提升 */}
-        {/* Copyright — body (#4A4A4A) 取代 muted (#6B655C)，對比度更佳 */}
+        {/* DC-021: text-sm → text-base copyright */}
         <div
-          className="mt-14 border-t pt-8 text-sm"
+          className="mt-14 border-t pt-8 text-base"
           style={{ color: COLOR.body, borderColor: "#DAD5CE" }}
         >
           © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.

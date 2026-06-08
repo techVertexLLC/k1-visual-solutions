@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { COLOR, FONT } from "./tokens";
+import BrandLogo from "../ui/BrandLogo";
 
 /**
  * Home page footer. Warm-gray surface, brand navigation + contact.
@@ -37,16 +38,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-sm">
             <div>
-              <Image
-                src="/k1/assets/images/k1-logo-transparent.png"
-                alt="K1 Visual Solutions logo"
-                width={200}
-                height={80}
-                className="h-56 w-auto object-contain"
-              />
+              {/* DC-021: 換 BrandLogo 統一管理，h-48 */}
+              <BrandLogo variant="footer" />
             </div>
-            {/* DC-020: leading-relaxed → leading-loose */}
-            <p className="mt-4 text-base leading-loose" style={{ color: COLOR.body }}>
+            {/* DC-021: text-base → text-lg */}
+            <p className="mt-4 text-lg leading-loose" style={{ color: COLOR.body }}>
               Premium transparent &amp; flexible LED display solutions, distributed
               across North America.
             </p>
@@ -56,8 +52,9 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-y-14 gap-x-12 sm:gap-x-20">
             <div>
               {/* 標題加深 + 放大：確保在 #E8E4DF 背景對比度 ≥ 4.5:1 */}
+              {/* DC-021: text-sm → text-base */}
               <h3
-                className="text-sm font-semibold uppercase tracking-[0.2em]"
+                className="text-base font-semibold uppercase tracking-[0.2em]"
                 style={{ color: COLOR.ink }}
               >
                 Explore
@@ -66,10 +63,10 @@ export default function Footer() {
               <ul className="mt-6 space-y-4">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
-                    {/* DC-020: py-1 增加觸控面積 */}
+                    {/* DC-021: text-base → text-lg */}
                     <a
                       href={link.href}
-                      className="inline-block py-1 text-base transition-colors hover:opacity-70"
+                      className="inline-block py-1 text-lg transition-colors hover:opacity-70"
                       style={{ color: COLOR.ink }}
                     >
                       {link.label}
@@ -80,14 +77,15 @@ export default function Footer() {
             </div>
 
             <div>
+              {/* DC-021: text-sm → text-base */}
               <h3
-                className="text-sm font-semibold uppercase tracking-[0.2em]"
+                className="text-base font-semibold uppercase tracking-[0.2em]"
                 style={{ color: COLOR.ink }}
               >
                 Contact
               </h3>
-              {/* DC-020: mt-5 → mt-6，space-y-3 → space-y-4 */}
-              <ul className="mt-6 space-y-4 text-base" style={{ color: COLOR.ink }}>
+              {/* DC-021: text-base → text-lg */}
+              <ul className="mt-6 space-y-4 text-lg" style={{ color: COLOR.ink }}>
                 <li className="py-1">525 W Wrightwood Avenue, Elmhurst, IL</li>
                 <li>
                   <a href="mailto:Andrewxu@vertexdistributor.com" className="inline-block py-1 hover:opacity-70">
@@ -104,10 +102,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright — body (#4A4A4A) 取代 muted (#6B655C)，對比度更佳 */}
+        {/* Copyright — DC-021: text-sm → text-base */}
         {/* DC-020: mt-14 保持原有呼吸感 */}
         <div
-          className="mt-14 border-t pt-8 text-sm"
+          className="mt-14 border-t pt-8 text-base"
           style={{ borderColor: "#DAD5CE", color: COLOR.body }}
         >
           © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.

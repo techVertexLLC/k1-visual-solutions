@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { MailIcon, PhoneIcon } from "./ui/icons";
+import BrandLogo from "./ui/BrandLogo";
 
 /**
  * Deep-dark footer variant (bg-ink-900). Used on standalone pages that carry
@@ -35,16 +36,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div>
-              <Image
-                src="/k1/assets/images/k1-logo-transparent.png"
-                alt="K1 Visual Solutions logo"
-                width={200}
-                height={80}
-                className="h-56 w-auto object-contain brightness-0 invert"
-              />
+              {/* DC-021: 換 BrandLogo variant="dark"（h-48 + brightness-0 invert） */}
+              <BrandLogo variant="dark" />
             </div>
-            {/* text-white/55 → text-white/75：深底白字對比提升 */}
-            <p className="mt-4 max-w-xs text-base text-white/75">
+            {/* DC-021: text-base → text-lg */}
+            <p className="mt-4 max-w-xs text-lg text-white/75">
               LED Displays · Digital Signs · Endless Possibilities. Premium
               transparent &amp; flexible LED solutions, distributed across North
               America.
@@ -53,16 +49,18 @@ export default function Footer() {
 
           {/* Nav */}
           <nav aria-label="Footer">
+            {/* DC-021: text-sm → text-base 區塊標題 */}
             <h3 className="text-base font-semibold uppercase tracking-wider text-white/80">
               Explore
             </h3>
             <ul className="mt-4 grid grid-cols-2 gap-2">
               {NAV.map((l) => (
                 <li key={l.href}>
+                  {/* DC-021: text-base → text-lg */}
                   <a
                     href={l.href}
                     onClick={handleNav(l.href)}
-                    className="text-base text-white/75 transition-colors hover:text-electric-cyan"
+                    className="text-lg text-white/75 transition-colors hover:text-electric-cyan"
                   >
                     {l.label}
                   </a>
@@ -73,10 +71,12 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
+            {/* DC-021: text-sm → text-base 區塊標題 */}
             <h3 className="text-base font-semibold uppercase tracking-wider text-white/80">
               Contact
             </h3>
-            <ul className="mt-4 space-y-3 text-base">
+            {/* DC-021: text-base → text-lg */}
+            <ul className="mt-4 space-y-3 text-lg">
               <li>
                 <a
                   href="mailto:Andrewxu@vertexdistributor.com"
@@ -104,12 +104,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright — text-white/40 → text-white/60：提高對比度 */}
+        {/* Copyright — DC-021: text-sm → text-base */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
-          <p className="text-sm text-white/60">
+          <p className="text-base text-white/60">
             © 2025 K1trends Global Inc. All rights reserved.
           </p>
-          <p className="text-sm text-white/60">
+          <p className="text-base text-white/60">
             Elmhurst, IL · Serving North America
           </p>
         </div>

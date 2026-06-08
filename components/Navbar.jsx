@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { COLOR, FONT } from "./home/tokens";
 import { SOCIAL_LINKS } from "./ui/social";
+import BrandLogo from "./ui/BrandLogo";
 
 /* usePathname() returns the route WITHOUT the "/k1" basePath, so we strip the
    prefix off each nav href before comparing to decide the active link. */
@@ -89,22 +90,14 @@ export default function Navbar() {
         borderColor: COLOR.gray,
       }}
     >
-      {/* DC-019: nav h-32 → h-20，logo h-52/sm:h-64 → h-20/sm:h-24（上限 96px）
-           左右 padding 加大讓 logo 有呼吸空間 */}
+      {/* DC-021: nav h-24 → h-28（配合更大 logo），logo 換 BrandLogo variant="navbar"（h-40/sm:h-48） */}
       <nav
-        className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6 lg:px-10"
+        className="mx-auto flex h-28 max-w-6xl items-center justify-between px-6 lg:px-10"
         aria-label="Primary"
       >
-        {/* Logo — h-20 / sm:h-24，比例協調不壓迫 */}
+        {/* Logo — BrandLogo variant="navbar" → h-40 / sm:h-48 */}
         <a href="/k1/" className="flex items-center px-1 py-2">
-          <Image
-            src="/k1/assets/images/k1-logo-transparent.png"
-            alt="K1 Visual Solutions logo"
-            width={56}
-            height={56}
-            priority
-            className="h-36 w-auto object-contain sm:h-44"
-          />
+          <BrandLogo variant="navbar" />
         </a>
 
         {/* Desktop links */}
@@ -238,11 +231,12 @@ export default function Navbar() {
             <ul className="space-y-1 px-6 py-4">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
+                  {/* DC-021: min-h-[48px] Apple HIG 觸控標準 */}
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
                     aria-current={isActivePath(link.href, pathname) ? "page" : undefined}
-                    className="block rounded-lg px-3 py-3 text-base font-medium"
+                    className="flex min-h-[48px] items-center rounded-lg px-3 text-base font-medium"
                     style={{
                       color: COLOR.ink,
                       background: isActivePath(link.href, pathname)
@@ -256,10 +250,11 @@ export default function Navbar() {
                     <ul className="mb-1 ml-3 space-y-1 border-l pl-3" style={{ borderColor: COLOR.gray }}>
                       {link.sublinks.map((sub) => (
                         <li key={sub.href}>
+                          {/* DC-021: sublink 也保持 min-h-[48px] */}
                           <a
                             href={sub.href}
                             onClick={() => setOpen(false)}
-                            className="block rounded-lg px-3 py-2 text-sm"
+                            className="flex min-h-[48px] items-center rounded-lg px-3 text-sm"
                             style={{ color: COLOR.body }}
                           >
                             {sub.label}

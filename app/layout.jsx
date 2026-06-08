@@ -2,6 +2,7 @@ import { Inter, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/ui/BackToTop";
+import PageTransition from "@/components/ui/PageTransition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -84,7 +85,9 @@ export default function RootLayout({ children }) {
           Skip to content
         </a>
         <Navbar />
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
         <BackToTop />
       </body>
     </html>

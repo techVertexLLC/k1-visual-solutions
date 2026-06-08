@@ -22,6 +22,22 @@ export const FONT = {
   sans: "var(--font-inter), system-ui, sans-serif",
 };
 
+/**
+ * Spacing tokens — keep all section/block rhythm here, import wherever needed.
+ *
+ *   SPACE.section  large page sections   py-20 lg:py-28
+ *   SPACE.block    sub-blocks / cards    py-12 lg:py-16
+ *   TAP.target     Apple HIG touch area  min-h-[48px]
+ */
+export const SPACE = {
+  section: "py-20 lg:py-28",
+  block:   "py-12 lg:py-16",
+};
+
+export const TAP = {
+  target: "min-h-[48px]",
+};
+
 // A 20×12 warm-gray SVG, base64-encoded, used as the blur placeholder for the
 // large product photographs while the optimized WebP/AVIF streams in.
 export const BLUR =
