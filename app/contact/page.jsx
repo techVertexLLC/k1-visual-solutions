@@ -129,38 +129,7 @@ export default function ContactPage() {
               </div>
             )}
 
-            {/* Map placeholder */}
-            <div
-              className="relative mt-8 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl"
-              style={{ background: COLOR.gray, border: `1px solid #D4CFC8` }}
-            >
-              {/* faint grid + pin — a calm stand-in for an embedded map */}
-              <div
-                className="absolute inset-0 opacity-40"
-                style={{
-                  backgroundImage: `linear-gradient(${COLOR.bg} 1px, transparent 1px), linear-gradient(90deg, ${COLOR.bg} 1px, transparent 1px)`,
-                  backgroundSize: "32px 32px",
-                }}
-                aria-hidden
-              />
-              <div className="relative flex flex-col items-center px-6 text-center">
-                <span
-                  className="flex h-11 w-11 items-center justify-center rounded-full p-2.5"
-                  style={{ background: "#fff", color: COLOR.accent, border: `1px solid #D4CFC8` }}
-                >
-                  <PinIcon />
-                </span>
-                <span
-                  className="mt-3 text-sm font-medium"
-                  style={{ color: COLOR.ink }}
-                >
-                   525 W Wrightwood Ave, Elmhurst, IL
-                </span>
-                <span className="mt-1 text-xs" style={{ color: COLOR.muted }}>
-                  Our facility — book a demo visit
-                </span>
-              </div>
-            </div>
+
           </Reveal>
         </div>
       </section>
