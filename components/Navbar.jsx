@@ -90,7 +90,7 @@ export default function Navbar() {
       }}
     >
       <nav
-        className="mx-auto flex h-28 max-w-6xl items-center justify-between px-6 lg:px-10"
+        className="mx-auto flex h-32 max-w-6xl items-center justify-between px-6 lg:px-10"
         aria-label="Primary"
       >
         {/* Logo + wordmark — substantial, not tiny. */}
@@ -101,7 +101,7 @@ export default function Navbar() {
             width={56}
             height={56}
             priority
-            className="h-44 w-auto object-contain sm:h-52"
+            className="h-52 w-auto object-contain sm:h-64"
           />
         </a>
 
