@@ -18,20 +18,14 @@ export default function Footer() {
         <div className="flex flex-col justify-between gap-12 md:flex-row">
           {/* Brand */}
           <div className="max-w-sm">
-            <div className="flex items-center gap-3">
+            <div>
               <Image
                 src="/k1/assets/images/k1-logo-transparent.png"
                 alt="K1 Visual Solutions logo"
-                width={40}
-                height={40}
-                className="h-9 w-9 object-contain"
+                width={200}
+                height={80}
+                className="h-20 w-auto object-contain"
               />
-              <span
-                className="text-base font-semibold tracking-tight"
-                style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-              >
-                K1 Visual Solutions
-              </span>
             </div>
             <p className="mt-4 text-sm leading-relaxed" style={{ color: COLOR.body }}>
               Premium transparent &amp; flexible LED display solutions, distributed

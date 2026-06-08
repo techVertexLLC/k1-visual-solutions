@@ -25,20 +25,15 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3">
-              <span className="relative h-10 w-10 overflow-hidden rounded-lg ring-1 ring-white/15 shadow-glow">
-                <Image
-                  src="/assets/images/k1-logo.jpg"
-                  alt="K1 Visual Solutions logo"
-                  fill
-                  sizes="40px"
-                  className="object-cover"
-                />
-              </span>
-              <div className="leading-tight">
-                <p className="font-bold text-white">K1 Visual Solutions</p>
-                <p className="text-xs text-white/45">K1trends Global Inc.</p>
-              </div>
+            <div>
+              <Image
+                src="/k1/assets/images/k1-logo-transparent.png"
+                alt="K1 Visual Solutions logo"
+                width={200}
+                height={80}
+                className="h-20 w-auto object-contain brightness-0 invert"
+              />
+              <p className="mt-1 text-xs text-white/45">K1trends Global Inc.</p>
             </div>
             <p className="mt-4 max-w-xs text-sm text-white/55">
               LED Displays · Digital Signs · Endless Possibilities. Premium

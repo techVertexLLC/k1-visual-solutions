@@ -32,21 +32,15 @@ export default function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-4">
-            <a href="/k1/" className="flex items-center gap-3">
+            <a href="/k1/" className="inline-block">
               <Image
                 src="/k1/assets/images/k1-logo-transparent.png"
                 alt="K1 Visual Solutions logo"
-                width={56}
-                height={56}
+                width={200}
+                height={80}
                 loading="lazy"
-                className="h-12 w-12 object-contain"
+                className="h-24 w-auto object-contain"
               />
-              <span
-                className="text-lg font-semibold tracking-tight"
-                style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-              >
-                K1 Visual Solutions
-              </span>
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed" style={{ color: COLOR.body }}>
               Premium transparent, flexible &amp; holographic LED display
