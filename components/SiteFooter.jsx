@@ -39,7 +39,7 @@ export default function SiteFooter() {
                 width={200}
                 height={80}
                 loading="lazy"
-                className="h-24 w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed" style={{ color: COLOR.body }}>

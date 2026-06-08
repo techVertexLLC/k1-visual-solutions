@@ -24,7 +24,7 @@ export default function Footer() {
                 alt="K1 Visual Solutions logo"
                 width={200}
                 height={80}
-                className="h-20 w-auto object-contain"
+                className="h-28 w-auto object-contain"
               />
             </div>
             <p className="mt-4 text-sm leading-relaxed" style={{ color: COLOR.body }}>
