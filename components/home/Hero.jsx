@@ -37,9 +37,24 @@ const item = {
 };
 
 /* Hero 背景媒體層：
-   - reduceMotion=false → 播放影片（西安賽格廣場 720p，8s loop，無聲）
+   - reduceMotion=false → 播放影片（西安賽格廣場，upscale 到 1080p，8s loop，無聲）
    - reduceMotion=true  → 靜態 poster 圖（無動態，accessibility compliant）
-   設計考量：poster 與 Image 共用同一張照片，確保影片載入前無 FOUC。 */
+   設計考量：poster 與 Image 共用同一張照片，確保影片載入前無 FOUC。
+
+   畫質優化策略（CSS-only，不動影片檔）：
+   - contrast(1.05)：微提對比，收緊 upscale 後的「鬆散感」
+   - saturate(1.08)：輕微提飽和，讓燈光色彩更立體
+   - blur(0.4px)：把 upscale 放大後的像素鋸齒柔化（不是讓畫面變糊，是讓鋸齒不突兀）
+   - scale(1.02)：額外放大 2% 遮住邊緣的 blur 暈染
+   所有媒體元素（video + poster Image）套相同 filter，保持切換一致性。 */
+
+/* 統一 filter style，抽成常數方便維護 */
+const MEDIA_FILTER = {
+  filter: "contrast(1.05) saturate(1.08) blur(0.4px)",
+  transform: "scale(1.02)",
+  transformOrigin: "center center",
+};
+
 function HeroBackground({ reduceMotion }) {
   if (reduceMotion) {
     return (
@@ -53,7 +68,7 @@ function HeroBackground({ reduceMotion }) {
         placeholder="blur"
         blurDataURL={BLUR}
         className="object-cover"
-        style={{ objectPosition: "center 40%" }}
+        style={{ objectPosition: "center 40%", ...MEDIA_FILTER }}
       />
     );
   }
@@ -68,9 +83,10 @@ function HeroBackground({ reduceMotion }) {
         quality={85}
         sizes="100vw"
         className="object-cover"
-        style={{ objectPosition: "center 40%" }}
+        style={{ objectPosition: "center 40%", ...MEDIA_FILTER }}
         aria-hidden
       />
+      {/* filter + scale 套在 video 上；scale(1.02) 補上 blur 邊緣暈染的 headroom */}
       <video
         autoPlay
         muted
@@ -78,7 +94,7 @@ function HeroBackground({ reduceMotion }) {
         playsInline
         poster="/k1/assets/images/hero-poster.jpg"
         className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center 40%" }}
+        style={{ objectPosition: "center 40%", ...MEDIA_FILTER }}
         aria-hidden
       >
         <source src="/k1/assets/videos/hero-bg.mp4" type="video/mp4" />
@@ -315,14 +331,28 @@ export default function Hero() {
       {/* Layer 2 — Warm-white wash overlay.
           Keeps type effortless to read without darkening the image or introducing
           a cold/sci-fi cast. Strongest on the left, under the headline.
-          GSAP ScrollTrigger transitions opacity for depth cue on scroll. */}
+          GSAP ScrollTrigger transitions opacity for depth cue on scroll.
+
+          暗角設計：四邊額外一層 radial vignette，遮住 upscale 邊緣的畫質損失，
+          讓視覺注意力自然集中在中央內容區。中央 transparent，不影響主視覺。 */}
       <div
         ref={overlayRef}
         className="absolute inset-0"
         aria-hidden
         style={{
-          background: `linear-gradient(100deg, ${COLOR.bg}f2 0%, ${COLOR.bg}d9 38%, ${COLOR.bg}80 64%, ${COLOR.bg}40 100%)`,
+          background: `linear-gradient(100deg, ${COLOR.bg}f5 0%, ${COLOR.bg}e0 38%, ${COLOR.bg}88 64%, ${COLOR.bg}50 100%)`,
           willChange: "opacity",
+        }}
+      />
+      {/* Vignette layer — radial dark edge to hide upscale artefacts at borders
+          and draw eye to centre. Opacity intentionally low (0.38) so it aids
+          without noticeably darkening the overall scene. */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 85% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.38) 100%)",
         }}
       />
 
