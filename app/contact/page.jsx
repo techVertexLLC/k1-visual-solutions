@@ -11,15 +11,15 @@ export const metadata = pageMetadata({
   title: "Contact — Request a Quote",
   ogTitle: "Contact K1 Visual Solutions — Request a Quote",
   description:
-    "Tell us about your space and the effect you're after. K1 Visual Solutions will come back with the right product, a spec, and an indicative price. Based in Markham, Ontario.",
+    "Tell us about your space and the effect you're after. K1 Visual Solutions will come back with the right product, a spec, and an indicative price. Based in Elmhurst, IL.",
   path: "/k1/contact",
   image: "/k1/assets/images/applications/app-storefront.jpg",
   imageAlt: "Storefront window with a transparent LED display",
 });
 
 const INFO = [
-  { Icon: PinIcon, label: "Office", value: "Markham, Ontario, Canada" },
-  { Icon: MailIcon, label: "Email", value: "info@k1visualsolutions.com", href: "mailto:info@k1visualsolutions.com" },
+  { Icon: PinIcon, label: "Office", value: "525 W Wrightwood Avenue, Elmhurst, IL" },
+  { Icon: MailIcon, label: "Email", value: "Andrewxu@vertexdistributor.com", href: "mailto:Andrewxu@vertexdistributor.com" },
 ];
 
 export default function ContactPage() {
@@ -154,7 +154,7 @@ export default function ContactPage() {
                   className="mt-3 text-sm font-medium"
                   style={{ color: COLOR.ink }}
                 >
-                  Markham, Ontario, Canada
+                   525 W Wrightwood Ave, Elmhurst, IL
                 </span>
                 <span className="mt-1 text-xs" style={{ color: COLOR.muted }}>
                   Our facility — book a demo visit

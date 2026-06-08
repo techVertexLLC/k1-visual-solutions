@@ -109,15 +109,15 @@ export default function SiteFooter() {
               Contact
             </h3>
             <ul className="mt-4 space-y-3 text-sm" style={{ color: COLOR.body }}>
-              <li>Markham, Ontario, Canada</li>
+               <li>525 W Wrightwood Avenue, Elmhurst, IL</li>
               <li>
-                <a href="tel:+19050000000" className="hover:opacity-70">
-                  +1 (905) 000-0000
+                 <a href="tel:+16303595931" className="hover:opacity-70">
+                   +1 (630) 359-5931
                 </a>
               </li>
               <li>
-                <a href="mailto:info@k1visualsolutions.com" className="hover:opacity-70">
-                  info@k1visualsolutions.com
+                 <a href="mailto:Andrewxu@vertexdistributor.com" className="hover:opacity-70">
+                   Andrewxu@vertexdistributor.com
                 </a>
               </li>
             </ul>

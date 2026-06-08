@@ -103,12 +103,6 @@ export default function Navbar() {
             priority
             className="h-12 w-12 object-contain sm:h-14 sm:w-14"
           />
-          <span
-            className="text-lg font-semibold tracking-tight sm:text-xl"
-            style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-          >
-            K1 Visual Solutions
-          </span>
         </a>
 
         {/* Desktop links */}

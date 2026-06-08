@@ -13,9 +13,9 @@ const SCENARIOS = [
 ];
 
 const CONTACT_INFO = [
-  { icon: MailIcon, label: "Email", value: "sales@k1trends.com", href: "mailto:sales@k1trends.com" },
-  { icon: PhoneIcon, label: "Phone", value: "+1 (905) 000-0000", href: "tel:+19050000000" },
-  { icon: PinIcon, label: "Headquarters", value: "Markham, Ontario, Canada", href: null },
+  { icon: MailIcon, label: "Email", value: "Andrewxu@vertexdistributor.com", href: "mailto:Andrewxu@vertexdistributor.com" },
+  { icon: PhoneIcon, label: "Phone", value: "+1 (630) 359-5931", href: "tel:+16303595931" },
+  { icon: PinIcon, label: "Office", value: "525 W Wrightwood Avenue, Elmhurst, IL", href: null },
 ];
 
 const fieldClass =
