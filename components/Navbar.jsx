@@ -101,7 +101,7 @@ export default function Navbar() {
             width={56}
             height={56}
             priority
-            className="h-12 w-12 object-contain sm:h-14 sm:w-14"
+            className="h-20 w-auto object-contain sm:h-24"
           />
         </a>
 
