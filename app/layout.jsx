@@ -31,7 +31,7 @@ export const metadata = {
     template: "%s | K1 Visual Solutions",
   },
   description:
-    "K1trends Global Inc. — premium distributor of next-gen transparent, flexible, and self-adhesive LED display solutions. Serving architects, retail brands, and system integrators across North America from Markham, Ontario.",
+    "K1trends Global Inc. — premium distributor of next-gen transparent, flexible, and self-adhesive LED display solutions. Serving architects, retail brands, and system integrators across North America from Elmhurst, IL.",
   keywords: [
     "transparent LED display",
     "flexible LED film",

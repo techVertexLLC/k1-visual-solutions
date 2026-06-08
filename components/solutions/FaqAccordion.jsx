@@ -30,7 +30,7 @@ const FAQS = [
   },
   {
     q: "Can I see a demo unit?",
-    a: "Yes. We keep demo units at our Markham facility. Contact us to schedule a visit.",
+    a: "Yes. We keep demo units at our Elmhurst showroom. Contact us to schedule a visit.",
   },
   {
     q: "What content formats are supported?",

@@ -28,7 +28,7 @@ const VALUES = [
   {
     Icon: PinIcon,
     title: "North American distribution",
-    body: "Based in Markham, Ontario, we serve architects, retail brands, and system integrators across North America with local accountability.",
+    body: "Based in Elmhurst, IL, we serve architects, retail brands, and system integrators across North America with local accountability.",
   },
 ];
 

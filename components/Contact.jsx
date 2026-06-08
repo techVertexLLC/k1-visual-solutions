@@ -229,7 +229,7 @@ export default function Contact() {
                       <PinIcon />
                     </span>
                     <span className="mt-3 text-sm font-semibold text-white">
-                      Markham, Ontario
+                      525 W Wrightwood Avenue, Elmhurst, IL
                     </span>
                     <span className="text-xs text-white/45">
                       Interactive map placeholder

@@ -4,7 +4,7 @@ import Reveal from "./ui/Reveal";
 import GradientPlaceholder from "./ui/GradientPlaceholder";
 
 const STATS = [
-  { v: "Markham, ON", k: "Canadian HQ" },
+  { v: "Elmhurst, IL", k: "US HQ" },
   { v: "North America", k: "Service footprint" },
   { v: "STEM-led", k: "Engineering team" },
   { v: "Global", k: "Supply chain" },
@@ -26,7 +26,7 @@ export default function About() {
               A Canadian partner for the world&apos;s most ambitious displays
             </h2>
             <p className="mt-5 text-base leading-relaxed text-white/65">
-              K1trends Global Inc. is a Markham, Ontario–based distributor of
+              K1trends Global Inc. is a Elmhurst, IL–based distributor of
               advanced LED hardware, serving architects, high-end retail brands,
               and system integrators across North America. Backed by a STEM
               engineering background and a global supply chain, we bridge

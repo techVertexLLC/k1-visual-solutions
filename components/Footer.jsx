@@ -75,27 +75,27 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <a
-                  href="mailto:sales@k1trends.com"
+                  href="mailto:Andrewxu@vertexdistributor.com"
                   className="inline-flex items-center gap-2 text-white/55 transition-colors hover:text-electric-cyan"
                 >
                   <span className="h-4 w-4">
                     <MailIcon />
                   </span>
-                  sales@k1trends.com
+                  Andrewxu@vertexdistributor.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+19050000000"
+                  href="tel:+16303595931"
                   className="inline-flex items-center gap-2 text-white/55 transition-colors hover:text-electric-cyan"
                 >
                   <span className="h-4 w-4">
                     <PhoneIcon />
                   </span>
-                  +1 (905) 000-0000
+                  +1 (630) 359-5931
                 </a>
               </li>
-              <li className="text-white/55">Markham, Ontario, Canada</li>
+              <li className="text-white/55">525 W Wrightwood Avenue, Elmhurst, IL</li>
             </ul>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function Footer() {
             © 2025 K1trends Global Inc. All rights reserved.
           </p>
           <p className="text-xs text-white/40">
-            Markham, Ontario, Canada · Serving North America
+            Elmhurst, IL · Serving North America
           </p>
         </div>
       </div>

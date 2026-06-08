@@ -422,14 +422,14 @@ function About() {
             A Canadian partner for the world&apos;s most <span className="text-gradient-cyan">ambitious</span> displays.
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/55">
-            Markham, Ontario–based. STEM-engineered. Backed by a global supply chain and local North American service — from spec and sourcing to delivery and support.
+            Elmhurst, IL–based. STEM-engineered. Backed by a global supply chain and local North American service — from spec and sourcing to delivery and support.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.15} className="mt-16">
           <div className="mx-auto grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-3xl glass sm:grid-cols-4">
             {[
-              ["Markham, ON", "HQ"],
+              ["Elmhurst, IL", "HQ"],
               ["North America", "Service"],
               ["STEM-led", "Engineering"],
               ["Global", "Supply"],
@@ -503,14 +503,14 @@ function Contact() {
         </FadeIn>
 
         <FadeIn delay={0.15} className="mt-10 flex flex-wrap justify-center gap-8 text-sm text-white/55">
-          <a href="mailto:sales@k1trends.com" className="inline-flex items-center gap-2 hover:text-electric-cyan">
-            <span className="h-4 w-4"><MailIcon /></span> sales@k1trends.com
+          <a href="mailto:Andrewxu@vertexdistributor.com" className="inline-flex items-center gap-2 hover:text-electric-cyan">
+            <span className="h-4 w-4"><MailIcon /></span> Andrewxu@vertexdistributor.com
           </a>
-          <a href="tel:+19050000000" className="inline-flex items-center gap-2 hover:text-electric-cyan">
-            <span className="h-4 w-4"><PhoneIcon /></span> +1 (905) 000-0000
+          <a href="tel:+16303595931" className="inline-flex items-center gap-2 hover:text-electric-cyan">
+            <span className="h-4 w-4"><PhoneIcon /></span> +1 (630) 359-5931
           </a>
           <span className="inline-flex items-center gap-2">
-            <span className="h-4 w-4"><PinIcon /></span> Markham, ON
+            <span className="h-4 w-4"><PinIcon /></span> Elmhurst, IL
           </span>
         </FadeIn>
       </div>
@@ -538,7 +538,7 @@ function FooterA() {
             </a>
           ))}
         </div>
-        <p className="mt-4 text-xs text-white/30">© 2025 K1trends Global Inc. · Markham, Ontario, Canada</p>
+        <p className="mt-4 text-xs text-white/30">© 2025 K1trends Global Inc. · Elmhurst, IL</p>
       </div>
     </footer>
   );

@@ -102,7 +102,7 @@ const FAQ = [
   ["Do you publish pricing?", "We quote per project. Transparent LED pricing depends on pitch, area, brightness, and install conditions — request a quote and we'll return a tailored figure within one business day."],
   ["How is the film installed?", "Series F is self-adhesive: it peels and sticks directly to clean glass at ~4 mm thickness, with a minimum bend radius of 6 cm. No brackets or scaffolding required."],
   ["What about outdoor use?", "Outdoor configurations reach IP65 weatherproofing and up to 6,000 nits for daylight visibility. Tell us the environment and we'll spec accordingly."],
-  ["Do you serve North America locally?", "Yes. K1trends Global is based in Markham, Ontario and provides North American service — from spec and sourcing through delivery and support."],
+  ["Do you serve North America locally?", "Yes. K1trends Global is based in Elmhurst, IL and provides North American service — from spec and sourcing through delivery and support."],
   ["What is dual-drive continuation?", "Breakpoint-continuation circuitry means a single point of failure won't take the display down — content keeps running, eliminating full blackouts."],
 ];
 
@@ -492,10 +492,10 @@ function About() {
             <span className="text-sm font-semibold uppercase tracking-[0.25em] text-electric-cyan">About K1trends Global</span>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">A Canadian partner for ambitious displays</h2>
             <p className="mt-5 text-base leading-relaxed text-white/65">
-              K1trends Global Inc. is a Markham, Ontario–based distributor of advanced LED hardware, serving architects, high-end retail brands, and system integrators across North America. Backed by a STEM engineering background and a global supply chain.
+              K1trends Global Inc. is a Elmhurst, IL–based distributor of advanced LED hardware, serving architects, high-end retail brands, and system integrators across North America. Backed by a STEM engineering background and a global supply chain.
             </p>
             <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {[["Markham, ON", "HQ"], ["North America", "Service"], ["STEM-led", "Engineering"], ["Global", "Supply"]].map(([v, k]) => (
+              {[["Elmhurst, IL", "HQ"], ["North America", "Service"], ["STEM-led", "Engineering"], ["Global", "Supply"]].map(([v, k]) => (
                 <div key={k} className="rounded-xl border border-white/10 bg-ink-700/40 p-4">
                   <dd className="text-sm font-bold text-gradient-cyan">{v}</dd>
                   <span className="mt-1 block text-[11px] uppercase tracking-wider text-white/45">{k}</span>
@@ -587,9 +587,9 @@ function Contact() {
             <p className="mt-4 text-base text-white/60">Tell us your project specs and we&apos;ll respond within one business day with pricing and lead times.</p>
             <ul className="mt-8 space-y-4">
               {[
-                [MailIcon, "Email", "sales@k1trends.com", "mailto:sales@k1trends.com"],
-                [PhoneIcon, "Phone", "+1 (905) 000-0000", "tel:+19050000000"],
-                [PinIcon, "Headquarters", "Markham, Ontario, Canada", null],
+                [MailIcon, "Email", "Andrewxu@vertexdistributor.com", "mailto:Andrewxu@vertexdistributor.com"],
+                [PhoneIcon, "Phone", "+1 (630) 359-5931", "tel:+16303595931"],
+                [PinIcon, "Headquarters", "525 W Wrightwood Avenue, Elmhurst, IL", null],
               ].map(([Icon, label, value, href]) => {
                 const inner = (
                   <>
@@ -685,15 +685,15 @@ function FooterB() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white/80">Contact</h3>
             <ul className="mt-4 space-y-3 text-sm">
-              <li><a href="mailto:sales@k1trends.com" className="inline-flex items-center gap-2 text-white/55 hover:text-electric-cyan"><span className="h-4 w-4"><MailIcon /></span> sales@k1trends.com</a></li>
-              <li><a href="tel:+19050000000" className="inline-flex items-center gap-2 text-white/55 hover:text-electric-cyan"><span className="h-4 w-4"><PhoneIcon /></span> +1 (905) 000-0000</a></li>
-              <li className="text-white/55">Markham, Ontario, Canada</li>
+              <li><a href="mailto:Andrewxu@vertexdistributor.com" className="inline-flex items-center gap-2 text-white/55 hover:text-electric-cyan"><span className="h-4 w-4"><MailIcon /></span> Andrewxu@vertexdistributor.com</a></li>
+              <li><a href="tel:+16303595931" className="inline-flex items-center gap-2 text-white/55 hover:text-electric-cyan"><span className="h-4 w-4"><PhoneIcon /></span> +1 (630) 359-5931</a></li>
+              <li className="text-white/55">525 W Wrightwood Avenue, Elmhurst, IL</li>
             </ul>
           </div>
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-xs text-white/40">© 2025 K1trends Global Inc. All rights reserved.</p>
-          <p className="text-xs text-white/40">Markham, Ontario, Canada · Serving North America</p>
+          <p className="text-xs text-white/40">Elmhurst, IL · Serving North America</p>
         </div>
       </div>
     </footer>
