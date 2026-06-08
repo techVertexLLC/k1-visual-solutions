@@ -12,6 +12,14 @@ import { SOCIAL_LINKS } from "./ui/social";
  * - 內文/連結：body → ink（#E8E4DF 背景對比 ≥ 4.5:1 WCAG AA）
  * - Copyright：muted → body
  * - 間距：py-16 → py-20，mt-4 → mt-5
+ *
+ * DC-020: 手機版間距優化
+ * - py-20 → py-24：整體更多呼吸感
+ * - gap-12 → gap-y-14 md:gap-12：手機區塊間距放大，桌面維持不變
+ * - space-y-3 → space-y-4 + py-1：連結間距 + 觸控面積提升
+ * - mt-5 → mt-6：標題與內容拉開
+ * - leading-relaxed → leading-loose：描述文字行高更寬鬆
+ * - mt-10 → mt-14：Copyright 區塊呼吸感
  */
 
 const EXPLORE = [
@@ -31,11 +39,12 @@ const PRODUCT_LINKS = [
 export default function SiteFooter() {
   return (
     <footer
-      className="border-t py-20"
+      className="border-t py-24"
       style={{ background: COLOR.gray, borderColor: "#DAD5CE" }}
     >
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
-        <div className="grid gap-12 md:grid-cols-12">
+        {/* DC-020: gap-y-14 手機區塊間距，md:grid-cols-12 桌面不變 */}
+        <div className="grid gap-y-14 md:gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-4">
             <a href="/k1/" className="inline-block">
@@ -48,7 +57,8 @@ export default function SiteFooter() {
                 className="h-56 w-auto object-contain"
               />
             </a>
-            <p className="mt-5 max-w-xs text-base leading-relaxed" style={{ color: COLOR.body }}>
+            {/* DC-020: leading-relaxed → leading-loose，文字密度降低更易讀 */}
+            <p className="mt-5 max-w-xs text-base leading-loose" style={{ color: COLOR.body }}>
               Premium transparent, flexible &amp; holographic LED display
               solutions, distributed across North America.
             </p>
@@ -63,12 +73,14 @@ export default function SiteFooter() {
             >
               Explore
             </h3>
-            <ul className="mt-5 space-y-3">
+            {/* DC-020: mt-5 → mt-6，space-y-3 → space-y-4 */}
+            <ul className="mt-6 space-y-4">
               {EXPLORE.map((link) => (
                 <li key={link.href}>
+                  {/* DC-020: py-1 增加觸控面積（44px 目標） */}
                   <a
                     href={link.href}
-                    className="link-underline inline-block text-base"
+                    className="link-underline inline-block py-1 text-base"
                     style={{ color: COLOR.ink }}
                   >
                     {link.label}
@@ -86,12 +98,14 @@ export default function SiteFooter() {
             >
               Products
             </h3>
-            <ul className="mt-5 space-y-3">
+            {/* DC-020: mt-5 → mt-6，space-y-3 → space-y-4 */}
+            <ul className="mt-6 space-y-4">
               {PRODUCT_LINKS.map((link) => (
                 <li key={link.href}>
+                  {/* DC-020: py-1 增加觸控面積 */}
                   <a
                     href={link.href}
-                    className="link-underline inline-block text-base"
+                    className="link-underline inline-block py-1 text-base"
                     style={{ color: COLOR.ink }}
                   >
                     {link.label}
@@ -109,16 +123,18 @@ export default function SiteFooter() {
             >
               Contact
             </h3>
-            <ul className="mt-5 space-y-3 text-base" style={{ color: COLOR.ink }}>
-               <li>525 W Wrightwood Avenue, Elmhurst, IL</li>
+            {/* DC-020: mt-5 → mt-6，space-y-3 → space-y-4 */}
+            <ul className="mt-6 space-y-4 text-base" style={{ color: COLOR.ink }}>
+              {/* DC-020: py-1 統一 contact 項目觸控區域 */}
+              <li className="py-1">525 W Wrightwood Avenue, Elmhurst, IL</li>
               <li>
-                 <a href="tel:+163****5931" className="hover:opacity-70">
-                   +1 (630) 359-5931
+                <a href="tel:+163****5931" className="inline-block py-1 hover:opacity-70">
+                  +1 (630) 359-5931
                 </a>
               </li>
               <li>
-                 <a href="mailto:Andrewxu@vertexdistributor.com" className="hover:opacity-70">
-                   Andrewxu@vertexdistributor.com
+                <a href="mailto:Andrewxu@vertexdistributor.com" className="inline-block py-1 hover:opacity-70">
+                  Andrewxu@vertexdistributor.com
                 </a>
               </li>
             </ul>
@@ -154,9 +170,10 @@ export default function SiteFooter() {
           </div>
         )}
 
+        {/* DC-020: mt-10 → mt-14，Copyright 呼吸感提升 */}
         {/* Copyright — body (#4A4A4A) 取代 muted (#6B655C)，對比度更佳 */}
         <div
-          className="mt-10 border-t pt-8 text-sm"
+          className="mt-14 border-t pt-8 text-sm"
           style={{ color: COLOR.body, borderColor: "#DAD5CE" }}
         >
           © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.
