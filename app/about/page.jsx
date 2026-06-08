@@ -5,19 +5,17 @@ import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
 import { CheckIcon, PinIcon, DualDriveIcon } from "@/components/ui/icons";
 import { COLOR, FONT, BLUR } from "@/components/home/tokens";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "About — K1trends Global Inc.",
+export const metadata = pageMetadata({
+  title: "About — LED Display Distributor for North America",
+  ogTitle: "About K1trends Global Inc. — Our Mission & Story",
   description:
     "K1 Visual Solutions is an Elmhurst, IL distributor of premium transparent, flexible and holographic LED display systems, serving architects, retail brands and integrators across North America.",
-  openGraph: {
-    title: "About K1trends Global Inc. — Our Mission & Story",
-    description:
-      "K1 Visual Solutions is an Elmhurst, IL distributor of premium transparent, flexible and holographic LED display systems, serving architects, retail brands and integrators across North America.",
-    url: "https://k1visualsolutions.com/about",
-    type: "website",
-  },
-};
+  path: "/about",
+  image: "/assets/images/k1-office-render.jpg",
+  imageAlt: "K1trends Global Inc. office",
+});
 
 const FACTS = [
   { label: "Based in", value: "Elmhurst, IL" },
@@ -78,7 +76,7 @@ export default function AboutPage() {
       />
 
       {/* Story */}
-      <section className="py-20 lg:py-28" style={{ background: COLOR.bg }}>
+      <section aria-label="Who we are" className="py-16 md:py-24" style={{ background: COLOR.bg }}>
         <div className="mx-auto grid max-w-6xl gap-14 px-6 md:grid-cols-2 md:gap-20 lg:px-10">
           <Reveal>
             <div
@@ -88,10 +86,10 @@ export default function AboutPage() {
               <span style={{ color: COLOR.accent }}>Who we are</span>
             </div>
             <h2
-              className="mt-6 text-3xl leading-tight sm:text-4xl"
+              className="mt-6 text-2xl leading-tight md:text-4xl"
               style={{ fontFamily: FONT.serif, color: COLOR.ink }}
             >
-              A distributor built for architects and integrators
+              An LED display distributor built for architects and integrators
             </h2>
             <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl"
               style={{ background: COLOR.gray, border: `1px solid ${COLOR.gray}` }}
@@ -142,11 +140,11 @@ export default function AboutPage() {
       </section>
 
       {/* Principles */}
-      <section className="py-20 lg:py-28" style={{ background: COLOR.gray }}>
+      <section aria-label="How we work" className="py-16 md:py-24" style={{ background: COLOR.gray }}>
         <div className="mx-auto max-w-6xl px-6 lg:px-10">
           <Reveal className="max-w-2xl">
             <h2
-              className="text-3xl leading-tight sm:text-4xl"
+              className="text-2xl leading-tight md:text-4xl"
               style={{ fontFamily: FONT.serif, color: COLOR.ink }}
             >
               How we work
@@ -186,7 +184,7 @@ export default function AboutPage() {
       </section>
 
       {/* Why K1 — values */}
-      <section className="py-20 lg:py-28" style={{ background: COLOR.bg }}>
+      <section aria-label="Why K1" className="py-16 md:py-24" style={{ background: COLOR.bg }}>
         <div className="mx-auto max-w-6xl px-6 lg:px-10">
           <Reveal className="max-w-2xl">
             <div
@@ -196,7 +194,7 @@ export default function AboutPage() {
               <span style={{ color: COLOR.accent }}>Why K1</span>
             </div>
             <h2
-              className="mt-6 text-3xl leading-tight sm:text-4xl"
+              className="mt-6 text-2xl leading-tight md:text-4xl"
               style={{ fontFamily: FONT.serif, color: COLOR.ink }}
             >
               What you can count on
@@ -237,7 +235,7 @@ export default function AboutPage() {
       </section>
 
       {/* Installation expertise */}
-      <section className="py-20 lg:py-28" style={{ background: COLOR.gray }}>
+      <section aria-label="Installation expertise" className="py-16 md:py-24" style={{ background: COLOR.gray }}>
         <Reveal className="mx-auto max-w-6xl px-6 lg:px-10">
           <div
             className="grid items-stretch gap-px overflow-hidden rounded-2xl md:grid-cols-2"

@@ -20,6 +20,7 @@ export default function PageBanner({
 }) {
   return (
     <section
+      aria-label={typeof title === "string" ? title : "Page introduction"}
       className="relative flex min-h-[44vh] items-center overflow-hidden border-b"
       style={{ background: COLOR.bg, borderColor: COLOR.gray }}
     >
@@ -54,12 +55,13 @@ export default function PageBanner({
           className="max-w-2xl"
         >
           {breadcrumb && (
-            <div
+            <nav
+              aria-label="Breadcrumb"
               className="mb-5 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em]"
               style={{ color: COLOR.muted }}
             >
               {breadcrumb}
-            </div>
+            </nav>
           )}
           {eyebrow && (
             <p
@@ -70,7 +72,7 @@ export default function PageBanner({
             </p>
           )}
           <h1
-            className="mt-5 text-4xl leading-[1.1] sm:text-5xl"
+            className="mt-5 text-3xl leading-[1.1] md:text-5xl"
             style={{ fontFamily: FONT.serif, color: COLOR.ink }}
           >
             {title}

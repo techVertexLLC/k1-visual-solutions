@@ -69,6 +69,7 @@ export default function CatalogLayout() {
 
   return (
     <section
+      aria-label="Product catalog"
       className="mx-auto w-full max-w-7xl px-6 py-12 lg:px-10 lg:py-16"
       style={{ background: COLOR.bg }}
     >

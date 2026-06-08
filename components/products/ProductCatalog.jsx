@@ -106,7 +106,7 @@ export default function ProductCatalog() {
   const countLabel = `Showing ${productCount} ${productCount === 1 ? "product" : "products"}`;
 
   return (
-    <section style={{ background: COLOR.bg }}>
+    <section aria-label="Product range" style={{ background: COLOR.bg }}>
       {/* Inject responsive grid CSS */}
       <style dangerouslySetInnerHTML={{ __html: GRID_STYLES }} />
 

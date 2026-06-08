@@ -93,7 +93,8 @@ export default function CaseStudiesPreview() {
   return (
     <section
       id="cases"
-      className="scroll-mt-24 py-24 lg:py-32"
+      aria-label="Case studies"
+      className="scroll-mt-24 py-16 md:py-24"
       style={{ background: COLOR.bg }}
     >
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
@@ -107,7 +108,7 @@ export default function CaseStudiesPreview() {
             <span>Case Studies</span>
           </div>
           <h2
-            className="mt-6 text-3xl leading-tight sm:text-4xl"
+            className="mt-6 text-2xl leading-tight md:text-4xl"
             style={{ fontFamily: FONT.serif, color: COLOR.ink }}
           >
             Light, set into real places

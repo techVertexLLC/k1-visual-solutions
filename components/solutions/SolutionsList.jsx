@@ -180,7 +180,11 @@ function SolutionCard({ item, index }) {
 
 export default function SolutionsList() {
   return (
-    <section className="py-20 lg:py-28" style={{ background: COLOR.bg }}>
+    <section
+      aria-label="Solutions by industry"
+      className="py-16 md:py-24"
+      style={{ background: COLOR.bg }}
+    >
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <Reveal className="max-w-2xl">
           <span
@@ -190,10 +194,10 @@ export default function SolutionsList() {
             By industry
           </span>
           <h2
-            className="mt-4 text-3xl leading-tight sm:text-4xl"
+            className="mt-4 text-2xl leading-tight md:text-4xl"
             style={{ fontFamily: FONT.serif, color: COLOR.ink }}
           >
-            Find the display built for your space
+            Built for retail digital signage, architectural LED, and beyond
           </h2>
           <p
             className="mt-5 text-base leading-relaxed"

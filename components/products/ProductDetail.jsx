@@ -10,26 +10,12 @@ import { COLOR, FONT, BLUR } from "@/components/home/tokens";
 import { CATEGORY_LABEL } from "@/lib/products";
 
 /**
- * Product detail body — gallery, overview, spec table, feature list, the
- * application scenarios the product is built for, related products, and a quote
- * CTA. Server-safe data is passed in as props from the (static) route.
+ * Product detail body. Information hierarchy is deliberately value-first:
+ * the scene-based value proposition leads, then three key benefits, then the
+ * quote CTA, with the full specification table tucked into a collapsible block
+ * further down — so a visitor reads "why this fits my space" before any numbers.
+ * Server-safe data is passed in as props from the (static) route.
  */
-/**
- * Key specs shown in the at-a-glance comparison grid. We resolve each value
- * from the product's full spec sheet, accepting either "Cabinet size" or
- * "Panel size" (flexible film has neither), and silently drop any that a given
- * product doesn't carry so the grid never shows blanks.
- */
-function keySpecs(specs) {
-  return [
-    ["Pixel pitch", specs["Pixel pitch"]],
-    ["Brightness", specs.Brightness],
-    ["Transparency", specs.Transparency],
-    ["Weight", specs.Weight],
-    ["Cabinet size", specs["Cabinet size"] || specs["Panel size"]],
-  ].filter(([, value]) => Boolean(value));
-}
-
 export default function ProductDetail({ product, related }) {
   const [showSticky, setShowSticky] = useState(false);
 
@@ -39,13 +25,23 @@ export default function ProductDetail({ product, related }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Three lead benefits drawn from the full feature list — shown as an
+  // at-a-glance icon row beneath the value proposition.
+  const keyBenefits = product.features.slice(0, 3);
+
+  // The H1 carries the product name; for products whose name doesn't already
+  // say so, we append a quiet "Transparent LED Display" descriptor line — an
+  // accurate, keyword-bearing subtitle that reads naturally within the heading.
+  const showTypeSuffix = !/transparent/i.test(product.name);
+
   return (
     <div style={{ background: COLOR.bg }}>
-      {/* Overview: gallery + summary */}
-      <section className="py-16 lg:py-20">
+      {/* Overview: gallery + value-first summary */}
+      <section className="py-16 md:py-24" aria-label={`${product.name} overview`}>
         <div className="mx-auto max-w-6xl px-6 lg:px-10">
           {/* Breadcrumb */}
-          <div
+          <nav
+            aria-label="Breadcrumb"
             className="mb-8 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em]"
             style={{ color: COLOR.muted }}
           >
@@ -54,7 +50,7 @@ export default function ProductDetail({ product, related }) {
             <a href="/products" className="hover:opacity-70">Products</a>
             <span aria-hidden>/</span>
             <span style={{ color: COLOR.body }}>{product.name}</span>
-          </div>
+          </nav>
 
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <Reveal>
@@ -62,100 +58,146 @@ export default function ProductDetail({ product, related }) {
             </Reveal>
 
             <Reveal delay={0.1} className="flex flex-col justify-center">
-              <span
-                className="inline-block w-fit rounded-full px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em]"
-                style={{ background: COLOR.gray, color: COLOR.accent }}
-              >
-                {CATEGORY_LABEL[product.category]}
-              </span>
-              <h1
-                className="mt-5 text-3xl leading-tight sm:text-4xl"
-                style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-              >
-                {product.name}
-              </h1>
-              <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
-                {product.description}
-              </p>
-
-              {/* Key specs at a glance — clean 2-column comparison grid */}
-              <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl"
-                style={{ background: COLOR.gray, border: `1px solid ${COLOR.gray}` }}
-              >
-                {keySpecs(product.specs).map(([label, value]) => (
-                  <div key={label} className="p-4" style={{ background: "#fff" }}>
-                    <dt
-                      className="text-[10px] uppercase tracking-[0.16em]"
+              <article>
+                <span
+                  className="inline-block w-fit rounded-full px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em]"
+                  style={{ background: COLOR.gray, color: COLOR.accent }}
+                >
+                  {CATEGORY_LABEL[product.category]}
+                </span>
+                <h1
+                  className="mt-5 text-3xl leading-tight md:text-5xl"
+                  style={{ fontFamily: FONT.serif, color: COLOR.ink }}
+                >
+                  {product.name}
+                  {showTypeSuffix && (
+                    <span
+                      className="mt-2 block text-lg font-normal md:text-xl"
                       style={{ color: COLOR.muted }}
                     >
-                      {label}
-                    </dt>
-                    <dd className="mt-1 text-sm font-medium" style={{ color: COLOR.ink }}>
-                      {value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+                      Transparent LED Display
+                    </span>
+                  )}
+                </h1>
 
-              <div className="mt-9 flex flex-wrap gap-3">
-                <a
-                  href="/contact"
-                  className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
-                  style={{ background: COLOR.accent }}
+                {/* Value proposition — the first thing a visitor reads */}
+                <p
+                  className="mt-6 text-lg leading-relaxed"
+                  style={{ color: COLOR.body }}
                 >
-                  Request a Quote
-                </a>
-                <a
-                  href="/products"
-                  className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
-                  style={{ borderColor: COLOR.ink, color: COLOR.ink }}
-                >
-                  All products
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </a>
-              </div>
+                  {product.valueProposition || product.description}
+                </p>
+
+                {/* Key benefits — three at-a-glance highlights */}
+                <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+                  {keyBenefits.map((b) => (
+                    <li
+                      key={b}
+                      className="flex flex-col gap-2 rounded-xl p-4"
+                      style={{ background: "#fff", border: `1px solid ${COLOR.gray}` }}
+                    >
+                      <span
+                        className="flex h-7 w-7 items-center justify-center rounded-full p-1"
+                        style={{ background: COLOR.gray, color: COLOR.accent }}
+                        aria-hidden
+                      >
+                        <CheckIcon />
+                      </span>
+                      <span className="text-[13px] leading-snug" style={{ color: COLOR.body }}>
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <div className="mt-9 flex flex-wrap gap-3">
+                  <a
+                    href="/contact"
+                    className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
+                    style={{ background: COLOR.accent }}
+                  >
+                    Request a Quote
+                  </a>
+                  <a
+                    href="/products"
+                    className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
+                    style={{ borderColor: COLOR.ink, color: COLOR.ink }}
+                  >
+                    All products
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </a>
+                </div>
+              </article>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Specs + features */}
-      <section className="py-16 lg:py-20" style={{ background: COLOR.gray }}>
+      {/* Detail: description, collapsible specs + features */}
+      <section
+        className="py-16 md:py-24"
+        style={{ background: COLOR.gray }}
+        aria-label={`${product.name} specifications and features`}
+      >
         <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:gap-16 lg:px-10">
-          {/* Specs table */}
+          {/* Description + collapsible specs */}
           <Reveal>
-            <h2
-              className="text-2xl leading-snug"
-              style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-            >
-              Specifications
-            </h2>
-            <dl className="mt-6 overflow-hidden rounded-2xl"
-              style={{ border: `1px solid #D4CFC8`, background: "#fff" }}
-            >
-              {Object.entries(product.specs).map(([label, value], i) => (
-                <div
-                  key={label}
-                  className="flex items-baseline justify-between gap-4 px-5 py-3.5"
-                  style={{
-                    borderTop: i === 0 ? "none" : `1px solid ${COLOR.gray}`,
-                  }}
+            <article>
+              <h2
+                className="text-2xl leading-snug md:text-4xl"
+                style={{ fontFamily: FONT.serif, color: COLOR.ink }}
+              >
+                Overview
+              </h2>
+              <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
+                {product.description}
+              </p>
+            </article>
+
+            {/* Full specifications — collapsible so the numbers sit below the story */}
+            <details className="group mt-8" open>
+              <summary
+                className="flex cursor-pointer list-none items-center justify-between rounded-xl px-5 py-4 text-sm font-medium"
+                style={{ background: "#fff", border: `1px solid #D4CFC8`, color: COLOR.ink }}
+              >
+                Full specifications
+                <span
+                  className="transition-transform duration-300 group-open:rotate-180"
+                  aria-hidden
+                  style={{ color: COLOR.muted }}
                 >
-                  <dt className="text-sm" style={{ color: COLOR.muted }}>
-                    {label}
-                  </dt>
-                  <dd className="text-right text-sm font-medium" style={{ color: COLOR.ink }}>
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+                  ▾
+                </span>
+              </summary>
+              <dl
+                className="mt-3 overflow-hidden rounded-2xl"
+                style={{ border: `1px solid #D4CFC8`, background: "#fff" }}
+              >
+                {Object.entries(product.specs).map(([label, value], i) => (
+                  <div
+                    key={label}
+                    className="flex items-baseline justify-between gap-4 px-5 py-3.5"
+                    style={{
+                      borderTop: i === 0 ? "none" : `1px solid ${COLOR.gray}`,
+                    }}
+                  >
+                    <dt className="text-sm" style={{ color: COLOR.muted }}>
+                      {label}
+                    </dt>
+                    <dd className="text-right text-sm font-medium" style={{ color: COLOR.ink }}>
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </details>
           </Reveal>
 
           {/* Features */}
           <Reveal delay={0.1}>
             <h2
-              className="text-2xl leading-snug"
+              className="text-2xl leading-snug md:text-4xl"
               style={{ fontFamily: FONT.serif, color: COLOR.ink }}
             >
               Features &amp; advantages
@@ -181,17 +223,21 @@ export default function ProductDetail({ product, related }) {
 
       {/* Application scenarios */}
       {product.applications?.length > 0 && (
-        <section className="py-16 lg:py-24" style={{ background: COLOR.bg }}>
+        <section
+          className="py-16 md:py-24"
+          style={{ background: COLOR.bg }}
+          aria-label={`Where the ${product.name} works`}
+        >
           <div className="mx-auto max-w-6xl px-6 lg:px-10">
             <Reveal className="max-w-2xl">
               <h2
-                className="text-2xl leading-snug sm:text-3xl"
+                className="text-2xl leading-snug md:text-4xl"
                 style={{ fontFamily: FONT.serif, color: COLOR.ink }}
               >
                 Where it works
               </h2>
               <p className="mt-4 text-base leading-relaxed" style={{ color: COLOR.body }}>
-                Environments this display is built for.
+                Environments this transparent LED display is built for.
               </p>
             </Reveal>
 
@@ -204,7 +250,7 @@ export default function ProductDetail({ product, related }) {
                   >
                     <Image
                       src={app.src}
-                      alt={app.label}
+                      alt={`${product.name} — ${app.label}`}
                       fill
                       loading="lazy"
                       quality={74}
@@ -231,11 +277,15 @@ export default function ProductDetail({ product, related }) {
 
       {/* Related products */}
       {related?.length > 0 && (
-        <section className="py-16 lg:py-24" style={{ background: COLOR.gray }}>
+        <section
+          className="py-16 md:py-24"
+          style={{ background: COLOR.gray }}
+          aria-label="Related products"
+        >
           <div className="mx-auto max-w-6xl px-6 lg:px-10">
             <Reveal className="max-w-2xl">
               <h2
-                className="text-2xl leading-snug sm:text-3xl"
+                className="text-2xl leading-snug md:text-4xl"
                 style={{ fontFamily: FONT.serif, color: COLOR.ink }}
               >
                 Related products
@@ -253,7 +303,11 @@ export default function ProductDetail({ product, related }) {
       )}
 
       {/* CTA */}
-      <section className="px-6 py-20 lg:px-10 lg:py-24" style={{ background: COLOR.bg }}>
+      <section
+        className="px-6 py-16 md:py-24 lg:px-10"
+        style={{ background: COLOR.bg }}
+        aria-label="Request a quote"
+      >
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <div
@@ -261,7 +315,7 @@ export default function ProductDetail({ product, related }) {
               style={{ background: COLOR.gray }}
             >
               <h2
-                className="mx-auto max-w-2xl text-3xl leading-tight sm:text-4xl"
+                className="mx-auto max-w-2xl text-3xl leading-tight md:text-4xl"
                 style={{ fontFamily: FONT.serif, color: COLOR.ink }}
               >
                 Interested in the {product.name}?

@@ -311,6 +311,7 @@ export default function Hero() {
     <section
       ref={ref}
       id="hero"
+      aria-label="Introduction"
       className="relative flex min-h-[92vh] items-center overflow-hidden"
       style={{ background: COLOR.bg }}
     >
@@ -422,8 +423,9 @@ export default function Hero() {
             className="mx-auto mt-7 max-w-xl text-lg leading-relaxed md:mx-0"
             style={{ color: COLOR.body }}
           >
-            Premium transparent &amp; holographic LED solutions for architecture,
-            retail, and beyond.
+            Premium transparent LED display &amp; holographic solutions for
+            architecture, retail, and exhibitions — distributed across North
+            America.
           </motion.p>
 
           <motion.div

@@ -32,8 +32,8 @@ export default function CatalogPage() {
       {/* ── Top banner with photographic hero ──────────────────────────── */}
       <PageBanner
         eyebrow="Browse Range"
-        title="Product Catalog"
-        description="Explore the full K1 range of transparent, holographic and flexible LED display systems. Use the filters to find the right solution for your space."
+        title="Commercial LED Display Catalog"
+        description="Explore the full K1 LED screen catalog — transparent, holographic and flexible LED display systems. Use the filters to find the right commercial LED display for your space."
         image="/assets/images/products/smd-p625-new-01.jpg"
         imageAlt="K1 SMD holographic LED panel detail"
         breadcrumb={

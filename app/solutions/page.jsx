@@ -58,7 +58,11 @@ export default function SolutionsPage() {
       <SolutionsList />
 
       {/* Installation capability — the guides that ship with every system */}
-      <section className="py-20 lg:py-28" style={{ background: COLOR.gray }}>
+      <section
+        aria-label="Installation capability"
+        className="py-16 md:py-24"
+        style={{ background: COLOR.gray }}
+      >
         <div className="mx-auto max-w-6xl px-6 lg:px-10">
           <Reveal className="max-w-2xl">
             <span
@@ -68,7 +72,7 @@ export default function SolutionsPage() {
               Specified to install
             </span>
             <h2
-              className="mt-4 text-3xl leading-tight sm:text-4xl"
+              className="mt-4 text-2xl leading-tight md:text-4xl"
               style={{ fontFamily: FONT.serif, color: COLOR.ink }}
             >
               Mounting that's documented, not improvised

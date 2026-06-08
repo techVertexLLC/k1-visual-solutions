@@ -27,8 +27,8 @@ export default function ContactPage() {
     <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
       <PageBanner
         eyebrow="Contact"
-        title="Request a quote"
-        description="Tell us about the space and the effect you're after. We'll come back with the right product, a clear spec, and an indicative price."
+        title="Request an LED display quote"
+        description="Tell us about the space and the effect you're after. We'll come back with the right product, a clear spec, and an indicative price — start a commercial LED inquiry below."
         image="/assets/images/applications/app-storefront.jpg"
         imageAlt="Storefront window with a transparent LED display"
         breadcrumb={
@@ -40,7 +40,11 @@ export default function ContactPage() {
         }
       />
 
-      <section className="py-16 lg:py-24" style={{ background: COLOR.bg }}>
+      <section
+        aria-label="Contact form and details"
+        className="py-16 md:py-24"
+        style={{ background: COLOR.bg }}
+      >
         <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-5 lg:gap-16 lg:px-10">
           {/* Form */}
           <Reveal className="lg:col-span-3">

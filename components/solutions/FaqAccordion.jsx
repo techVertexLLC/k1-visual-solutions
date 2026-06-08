@@ -89,7 +89,11 @@ export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="py-20 lg:py-28" style={{ background: COLOR.gray }}>
+    <section
+      aria-label="Frequently asked questions"
+      className="py-16 md:py-24"
+      style={{ background: COLOR.gray }}
+    >
       <div className="mx-auto max-w-3xl px-6 lg:px-10">
         <Reveal>
           <span
@@ -99,7 +103,7 @@ export default function FaqAccordion() {
             FAQ
           </span>
           <h2
-            className="mt-4 text-3xl leading-tight sm:text-4xl"
+            className="mt-4 text-2xl leading-tight md:text-4xl"
             style={{ fontFamily: FONT.serif, color: COLOR.ink }}
           >
             Common questions

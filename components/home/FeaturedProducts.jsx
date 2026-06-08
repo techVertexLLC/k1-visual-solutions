@@ -23,7 +23,8 @@ export default function FeaturedProducts() {
   return (
     <section
       id="products"
-      className="scroll-mt-24 py-24 lg:py-32"
+      aria-label="Featured products"
+      className="scroll-mt-24 py-16 md:py-24"
       style={{ background: COLOR.gray }}
     >
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
@@ -38,10 +39,10 @@ export default function FeaturedProducts() {
               <span>Featured Products</span>
             </div>
             <h2
-              className="mt-6 text-3xl leading-tight sm:text-4xl"
+              className="mt-6 text-2xl leading-tight md:text-4xl"
               style={{ fontFamily: FONT.serif, color: COLOR.ink }}
             >
-              A display for every surface
+              A transparent LED display for every surface
             </h2>
             <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
               A look across the range — from a freestanding transparent poster to

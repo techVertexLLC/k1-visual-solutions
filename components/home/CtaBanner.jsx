@@ -92,7 +92,8 @@ export default function CtaBanner() {
   return (
     <section
       ref={sectionRef}
-      className="px-6 py-20 lg:px-10 lg:py-24"
+      aria-label="Request a quote"
+      className="px-6 py-16 md:py-24 lg:px-10"
       style={{ background: COLOR.bg }}
     >
       <div className="mx-auto max-w-6xl">
@@ -103,7 +104,7 @@ export default function CtaBanner() {
         >
           <h2
             ref={headingRef}
-            className="mx-auto max-w-2xl text-3xl leading-tight sm:text-4xl"
+            className="mx-auto max-w-2xl text-2xl leading-tight md:text-4xl"
             style={{
               fontFamily: FONT.serif,
               color: COLOR.ink,
