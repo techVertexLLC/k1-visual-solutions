@@ -23,10 +23,10 @@ export default function About() {
               About K1trends Global
             </span>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              A Canadian partner for the world&apos;s most ambitious displays
+              A North American partner for the world&apos;s most ambitious displays
             </h2>
             <p className="mt-5 text-base leading-relaxed text-white/65">
-              K1trends Global Inc. is a Elmhurst, IL–based distributor of
+              K1trends Global Inc. is an Elmhurst, IL–based distributor of
               advanced LED hardware, serving architects, high-end retail brands,
               and system integrators across North America. Backed by a STEM
               engineering background and a global supply chain, we bridge

@@ -490,9 +490,9 @@ function About() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <span className="text-sm font-semibold uppercase tracking-[0.25em] text-electric-cyan">About K1trends Global</span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">A Canadian partner for ambitious displays</h2>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">A North American partner for ambitious displays</h2>
             <p className="mt-5 text-base leading-relaxed text-white/65">
-              K1trends Global Inc. is a Elmhurst, IL–based distributor of advanced LED hardware, serving architects, high-end retail brands, and system integrators across North America. Backed by a STEM engineering background and a global supply chain.
+              K1trends Global Inc. is an Elmhurst, IL–based distributor of advanced LED hardware, serving architects, high-end retail brands, and system integrators across North America. Backed by a STEM engineering background and a global supply chain.
             </p>
             <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
               {[["Elmhurst, IL", "HQ"], ["North America", "Service"], ["STEM-led", "Engineering"], ["Global", "Supply"]].map(([v, k]) => (

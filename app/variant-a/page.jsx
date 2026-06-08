@@ -419,7 +419,7 @@ function About() {
         <FadeIn>
           <span className="text-xs font-semibold uppercase tracking-[0.35em] text-electric-cyan">K1trends Global</span>
           <h2 className="mt-6 text-3xl font-bold leading-snug tracking-tight sm:text-5xl">
-            A Canadian partner for the world&apos;s most <span className="text-gradient-cyan">ambitious</span> displays.
+            A North American partner for the world&apos;s most <span className="text-gradient-cyan">ambitious</span> displays.
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/55">
             Elmhurst, IL–based. STEM-engineered. Backed by a global supply chain and local North American service — from spec and sourcing to delivery and support.
