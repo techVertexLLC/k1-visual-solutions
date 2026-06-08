@@ -44,32 +44,46 @@ function HeroBackground({ reduceMotion }) {
   if (reduceMotion) {
     return (
       <Image
-        src="/k1/assets/images/products/smd-holo-content-floral.jpg"
-        alt="K1 transparent LED poster screen in a calm, light studio space"
+        src="/k1/assets/images/hero-poster.jpg"
+        alt="K1 transparent LED display illuminating a modern building interior"
         fill
         priority
-        quality={82}
+        quality={85}
         sizes="100vw"
         placeholder="blur"
         blurDataURL={BLUR}
         className="object-cover"
-        style={{ objectPosition: "center 60%" }}
+        style={{ objectPosition: "center 40%" }}
       />
     );
   }
   return (
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      poster="/k1/assets/images/products/smd-holo-content-floral.jpg"
-      className="absolute inset-0 h-full w-full object-cover"
-      style={{ objectPosition: "center 60%" }}
-      aria-hidden
-    >
-      <source src="/k1/assets/videos/hero-bg.mp4" type="video/mp4" />
-    </video>
+    <>
+      {/* Poster image shown while video loads — prevents flash of empty bg */}
+      <Image
+        src="/k1/assets/images/hero-poster.jpg"
+        alt=""
+        fill
+        priority
+        quality={85}
+        sizes="100vw"
+        className="object-cover"
+        style={{ objectPosition: "center 40%" }}
+        aria-hidden
+      />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/k1/assets/images/hero-poster.jpg"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center 40%" }}
+        aria-hidden
+      >
+        <source src="/k1/assets/videos/hero-bg.mp4" type="video/mp4" />
+      </video>
+    </>
   );
 }
 
