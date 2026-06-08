@@ -4,7 +4,7 @@
  * CatalogProductCard — catalog 頁產品卡片，相容 K1 自有產品與 MileStrong 代理產品。
  *
  * 設計決策：
- * - K1 產品（brand="k1"）：<a> 卡片可點擊，跳轉到 /k1/products/[slug]，badge 藍紫 #4F46B5。
+ * - K1 產品（brand="k1"）：<a> 卡片可點擊，跳轉到 /products/[slug]，badge 藍紫 #4F46B5。
  * - MileStrong 產品（brand="milestrong"）：<div> 卡片不跳轉，badge 深藍灰 #374151，CTA 顯示「Enquire Now」。
  * - 圖片 1:1 square crop，hover 輕微放大。
  * - 規格摘要：顯示最相關的 3 條（優先：Pixel Pitch → Brightness / Contrast → Transparency / Protection）。
@@ -72,11 +72,11 @@ export default function CatalogProductCard({ product }) {
       ? product.href
       : product.href === null
       ? null
-      : `/k1/products/${slug}`;
+      : `/products/${slug}`;
 
-  // K1 有詳情頁時，href 為 undefined → 自動組 /k1/products/slug
+  // K1 有詳情頁時，href 為 undefined → 自動組 /products/slug
   const resolvedHref = product.href === undefined
-    ? `/k1/products/${slug}`
+    ? `/products/${slug}`
     : product.href;
 
   const isMileStrong = brand === "milestrong";

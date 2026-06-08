@@ -50,7 +50,7 @@ export default function FeaturedProducts() {
           </div>
 
           <a
-            href="/k1/products"
+            href="/products"
             className="group inline-flex flex-none items-center gap-2 text-sm font-medium"
             style={{ color: COLOR.accent }}
           >

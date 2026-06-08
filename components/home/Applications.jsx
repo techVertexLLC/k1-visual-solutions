@@ -33,49 +33,49 @@ function FadeUp({ children, className = "", delay = 0 }) {
    label and one calm line of copy per scene. */
 const APPLICATIONS = [
   {
-    src: "/k1/assets/images/applications/app-cafe.jpg",
+    src: "/assets/images/applications/app-cafe.jpg",
     label: "Hospitality",
     description: "See-through screens that warm a café without crowding it.",
     alt: "Transparent LED display in a bright café interior",
   },
   {
-    src: "/k1/assets/images/applications/app-architecture.jpg",
+    src: "/assets/images/applications/app-architecture.jpg",
     label: "Architecture",
     description: "Media facades that let daylight and the building through.",
     alt: "Architectural glass facade with an integrated LED display",
   },
   {
-    src: "/k1/assets/images/applications/app-retail.jpg",
+    src: "/assets/images/applications/app-retail.jpg",
     label: "Retail",
     description: "Storewide motion that never walls off the merchandise.",
     alt: "Retail store interior with a transparent LED display",
   },
   {
-    src: "/k1/assets/images/applications/app-lobby.jpg",
+    src: "/assets/images/applications/app-lobby.jpg",
     label: "Corporate",
     description: "A composed welcome across a lobby's glazing.",
     alt: "Hotel and office lobby with a transparent LED display",
   },
   {
-    src: "/k1/assets/images/applications/app-shadow.jpg",
+    src: "/assets/images/applications/app-shadow.jpg",
     label: "Entertainment",
     description: "Silhouette and depth, played out through clear glass.",
     alt: "Silhouette effect seen through a transparent LED display",
   },
   {
-    src: "/k1/assets/images/applications/app-signage.jpg",
+    src: "/assets/images/applications/app-signage.jpg",
     label: "Digital Signage",
     description: "Wayfinding and messaging that read at a glance.",
     alt: "Digital signage application on a transparent LED display",
   },
   {
-    src: "/k1/assets/images/applications/app-storefront.jpg",
+    src: "/assets/images/applications/app-storefront.jpg",
     label: "Storefront",
     description: "Window content that pulls the street in, day or night.",
     alt: "Storefront window with a transparent LED display",
   },
   {
-    src: "/k1/assets/images/applications/app-product-display.jpg",
+    src: "/assets/images/applications/app-product-display.jpg",
     label: "Product Display",
     description: "Hero products framed in light, not hidden behind it.",
     alt: "Product showcase lit by a transparent LED display",

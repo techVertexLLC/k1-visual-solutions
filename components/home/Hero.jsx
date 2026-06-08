@@ -59,7 +59,7 @@ function HeroBackground({ reduceMotion }) {
   if (reduceMotion) {
     return (
       <Image
-        src="/k1/assets/images/hero-poster.jpg"
+        src="/assets/images/hero-poster.jpg"
         alt="K1 transparent LED display illuminating a modern building interior"
         fill
         priority
@@ -76,7 +76,7 @@ function HeroBackground({ reduceMotion }) {
     <>
       {/* Poster image shown while video loads — prevents flash of empty bg */}
       <Image
-        src="/k1/assets/images/hero-poster.jpg"
+        src="/assets/images/hero-poster.jpg"
         alt=""
         fill
         priority
@@ -92,12 +92,12 @@ function HeroBackground({ reduceMotion }) {
         muted
         loop
         playsInline
-        poster="/k1/assets/images/hero-poster.jpg"
+        poster="/assets/images/hero-poster.jpg"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center 40%", ...MEDIA_FILTER }}
         aria-hidden
       >
-        <source src="/k1/assets/videos/hero-bg.mp4" type="video/mp4" />
+        <source src="/assets/videos/hero-bg.mp4" type="video/mp4" />
       </video>
     </>
   );
@@ -432,7 +432,7 @@ export default function Hero() {
           >
             {/* Primary — the single accent-coloured action in view */}
             <a
-              href="/k1/contact"
+              href="/contact"
               className="cta-pulse rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
               style={{ background: COLOR.accent }}
             >
@@ -441,7 +441,7 @@ export default function Hero() {
 
             {/* Secondary — calm outline, no fill */}
             <a
-              href="/k1/products"
+              href="/products"
               className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
               style={{ borderColor: COLOR.accent, color: COLOR.accent }}
             >

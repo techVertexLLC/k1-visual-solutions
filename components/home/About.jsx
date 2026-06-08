@@ -103,7 +103,7 @@ export default function About() {
         >
           <div className="relative aspect-[3/2] md:aspect-auto">
             <Image
-              src="/k1/assets/images/applications/install-guide.jpg"
+              src="/assets/images/applications/install-guide.jpg"
               alt="Installation diagram for a K1 transparent LED display system"
               fill
               quality={80}

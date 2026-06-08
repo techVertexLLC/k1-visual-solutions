@@ -6,7 +6,7 @@ import BrandLogo from "./ui/BrandLogo";
 /**
  * Shared site footer for every page. Warm-gray surface, multi-page navigation,
  * contact details, and the full set of social links shown with labels. Plain
- * anchors with the explicit "/k1" basePath.
+ * anchors addressing routes at the site root.
  *
  * DC-019: 文字可讀性優化
  * - 區塊標題：muted → ink，text-xs → text-sm，font-medium → font-semibold
@@ -24,17 +24,17 @@ import BrandLogo from "./ui/BrandLogo";
  */
 
 const EXPLORE = [
-  { label: "Home", href: "/k1/" },
-  { label: "Products", href: "/k1/products" },
-  { label: "Solutions", href: "/k1/solutions" },
-  { label: "About", href: "/k1/about" },
-  { label: "Contact", href: "/k1/contact" },
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const PRODUCT_LINKS = [
-  { label: "Series T — Transparent Poster", href: "/k1/products?series=series-t" },
-  { label: "Series F — Flexible Film", href: "/k1/products?series=series-f" },
-  { label: "Holographic LED", href: "/k1/products?series=holographic" },
+  { label: "Series T — Transparent Poster", href: "/products?series=series-t" },
+  { label: "Series F — Flexible Film", href: "/products?series=series-f" },
+  { label: "Holographic LED", href: "/products?series=holographic" },
 ];
 
 export default function SiteFooter() {
@@ -48,7 +48,7 @@ export default function SiteFooter() {
         <div className="grid gap-y-14 md:gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-4">
-            <a href="/k1/" className="inline-block">
+            <a href="/" className="inline-block">
               {/* DC-021: 換 BrandLogo 統一管理，h-48 */}
               <BrandLogo variant="footer" />
             </a>

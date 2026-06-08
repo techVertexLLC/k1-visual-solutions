@@ -13,8 +13,8 @@ export const metadata = pageMetadata({
   ogTitle: "LED Display Solutions — Retail, Architecture, Hospitality",
   description:
     "Retail, architecture, hospitality, corporate, entertainment, signage and more — see how K1 transparent and holographic LED displays serve every environment.",
-  path: "/k1/solutions",
-  image: "/k1/assets/images/scenes/scene-architecture-facade.jpg",
+  path: "/solutions",
+  image: "/assets/images/scenes/scene-architecture-facade.jpg",
   imageAlt:
     "Architectural glass curtain-wall facade with integrated transparent LED content",
 });
@@ -23,12 +23,12 @@ export const metadata = pageMetadata({
    back-sticker mounting, shown to make the install path concrete. */
 const INSTALL_GUIDES = [
   {
-    src: "/k1/assets/images/scenes/scene-install-front-facing.jpg",
+    src: "/assets/images/scenes/scene-install-front-facing.jpg",
     alt: "Front-facing installation method guide for a transparent LED screen",
     label: "Front-facing mounting",
   },
   {
-    src: "/k1/assets/images/scenes/scene-install-back-sticker.jpg",
+    src: "/assets/images/scenes/scene-install-back-sticker.jpg",
     alt: "Back-sticker installation method guide for a transparent LED screen",
     label: "Back-sticker mounting",
   },
@@ -45,11 +45,11 @@ export default function SolutionsPage() {
         eyebrow="Solutions"
         title="Where vision meets space"
         description="The same transparent surface reads differently in every room it enters. From storefront windows to building facades, here is where K1 displays are made to work."
-        image="/k1/assets/images/scenes/scene-architecture-facade.jpg"
+        image="/assets/images/scenes/scene-architecture-facade.jpg"
         imageAlt="Architectural glass curtain-wall facade at dusk with integrated transparent LED content"
         breadcrumb={
           <>
-            <a href="/k1/" className="hover:opacity-70">Home</a>
+            <a href="/" className="hover:opacity-70">Home</a>
             <span aria-hidden>/</span>
             <span>Solutions</span>
           </>

@@ -12,8 +12,8 @@ export const metadata = pageMetadata({
   ogTitle: "Contact K1 Visual Solutions — Request a Quote",
   description:
     "Tell us about your space and the effect you're after. K1 Visual Solutions will come back with the right product, a spec, and an indicative price. Based in Elmhurst, IL.",
-  path: "/k1/contact",
-  image: "/k1/assets/images/applications/app-storefront.jpg",
+  path: "/contact",
+  image: "/assets/images/applications/app-storefront.jpg",
   imageAlt: "Storefront window with a transparent LED display",
 });
 
@@ -29,11 +29,11 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Request a quote"
         description="Tell us about the space and the effect you're after. We'll come back with the right product, a clear spec, and an indicative price."
-        image="/k1/assets/images/applications/app-storefront.jpg"
+        image="/assets/images/applications/app-storefront.jpg"
         imageAlt="Storefront window with a transparent LED display"
         breadcrumb={
           <>
-            <a href="/k1/" className="hover:opacity-70">Home</a>
+            <a href="/" className="hover:opacity-70">Home</a>
             <span aria-hidden>/</span>
             <span>Contact</span>
           </>

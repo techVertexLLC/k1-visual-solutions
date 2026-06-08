@@ -200,17 +200,17 @@ function FilmSilhouette() {
    Leads with two full product photographs, then the 800px angle thumbnails. */
 const GALLERY = [
   {
-    src: "/k1/assets/images/products/smd-p625-new-02.jpg",
+    src: "/assets/images/products/smd-p625-new-02.jpg",
     alt: "K1 P6.25 transparent LED poster screen, detail",
   },
   {
-    src: "/k1/assets/images/products/smd-p104-new-02.jpg",
+    src: "/assets/images/products/smd-p104-new-02.jpg",
     alt: "K1 P10.4 transparent LED poster screen, detail",
   },
   ...Array.from({ length: 8 }, (_, i) => {
     const n = String(i + 1).padStart(2, "0");
     return {
-      src: `/k1/assets/images/thumbs/product-${n}.jpg`,
+      src: `/assets/images/thumbs/product-${n}.jpg`,
       alt: `K1 transparent LED panel, angle ${i + 1}`,
     };
   }),
@@ -293,7 +293,7 @@ export default function ProductOverview() {
           <Card>
             <div className="relative aspect-[4/3] overflow-hidden">
               <Image
-                src="/k1/assets/images/products/smd-p391-new-01.jpg"
+                src="/assets/images/products/smd-p391-new-01.jpg"
                 alt="K1 Series T transparent poster screen, freestanding in a studio"
                 fill
                 quality={80}

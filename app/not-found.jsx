@@ -24,7 +24,7 @@ export default function NotFound() {
         The page you are looking for does not exist or has been moved.
       </p>
       <a
-        href="/k1/"
+        href="/"
         className="mt-8 rounded-full px-6 py-3 text-sm font-medium text-white transition-all hover:opacity-90"
         style={{ background: "#5B6EE8" }}
       >

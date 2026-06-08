@@ -49,9 +49,9 @@ export default function ProductDetail({ product, related }) {
             className="mb-8 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em]"
             style={{ color: COLOR.muted }}
           >
-            <a href="/k1/" className="hover:opacity-70">Home</a>
+            <a href="/" className="hover:opacity-70">Home</a>
             <span aria-hidden>/</span>
-            <a href="/k1/products" className="hover:opacity-70">Products</a>
+            <a href="/products" className="hover:opacity-70">Products</a>
             <span aria-hidden>/</span>
             <span style={{ color: COLOR.body }}>{product.name}</span>
           </div>
@@ -99,14 +99,14 @@ export default function ProductDetail({ product, related }) {
 
               <div className="mt-9 flex flex-wrap gap-3">
                 <a
-                  href="/k1/contact"
+                  href="/contact"
                   className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
                   style={{ background: COLOR.accent }}
                 >
                   Request a Quote
                 </a>
                 <a
-                  href="/k1/products"
+                  href="/products"
                   className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
                   style={{ borderColor: COLOR.ink, color: COLOR.ink }}
                 >
@@ -272,14 +272,14 @@ export default function ProductDetail({ product, related }) {
               </p>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="/k1/contact"
+                  href="/contact"
                   className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
                   style={{ background: COLOR.accent }}
                 >
                   Request a Quote
                 </a>
                 <a
-                  href="/k1/products"
+                  href="/products"
                   className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
                   style={{ borderColor: COLOR.ink, color: COLOR.ink }}
                 >
@@ -302,7 +302,7 @@ export default function ProductDetail({ product, related }) {
             {product.name}
           </span>
           <a
-            href="/k1/contact"
+            href="/contact"
             className="flex-none rounded-full px-5 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90"
             style={{ background: COLOR.accent }}
           >

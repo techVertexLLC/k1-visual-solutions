@@ -126,14 +126,14 @@ export default function CtaBanner() {
             style={{ willChange: "transform, opacity" }}
           >
             <a
-              href="/k1/contact"
+              href="/contact"
               className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
               style={{ background: COLOR.accent }}
             >
               Request a Quote
             </a>
             <a
-              href="/k1/products"
+              href="/products"
               className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-opacity-10"
               style={{ borderColor: COLOR.accent, color: COLOR.accent }}
             >

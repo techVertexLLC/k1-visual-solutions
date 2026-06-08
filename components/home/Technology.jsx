@@ -21,7 +21,7 @@ const TECHS = [
     title: "See-through screens that keep the view",
     body: "A grid of fine LEDs mounted on slim conductors leaves most of the surface clear, so daylight and sightlines pass straight through. Powered off, the panel reads as glass; powered on, it carries full-motion content without walling off the space behind it. Ideal for storefront windows, atriums, and curtain walls.",
     points: ["Up to 90% transparency", "4,500–6,500 nits brightness", "Front & rear maintenance"],
-    image: "/k1/assets/images/products/smd-holo-content-flame.jpg",
+    image: "/assets/images/products/smd-holo-content-flame.jpg",
     alt: "Transparent LED poster screen in a calm, light studio space",
   },
   {
@@ -31,7 +31,7 @@ const TECHS = [
     title: "Depth and motion, floating on clear glass",
     body: "Holographic panels pair a transparent LED surface with high-contrast, depth-rich content to give the impression of an image suspended in mid-air. Three pixel pitches — P3.91, P6.25 and P10.4 — let you tune the balance between close-range sharpness and large-format transparency for the viewing distance of the room.",
     points: ["P3.91 · P6.25 · P10.4", "High-contrast depth effect", "160° wide viewing angle"],
-    image: "/k1/assets/images/products/smd-p625-new-01.jpg",
+    image: "/assets/images/products/smd-p625-new-01.jpg",
     alt: "SMD holographic LED panel rendering depth on clear glass",
   },
   {

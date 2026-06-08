@@ -21,7 +21,7 @@ export const metadata = pageMetadata({
   ogTitle: "K1 Visual Solutions — Redefining Spaces with Invisible Displays",
   description:
     "Premium transparent, flexible & holographic LED display solutions for architecture, retail, and exhibitions — distributed across North America by K1trends Global Inc.",
-  path: "/k1/",
+  path: "/",
 });
 
 /**
@@ -29,7 +29,7 @@ export const metadata = pageMetadata({
  *
  * Content-rich and technology-led, built to the G1 moodboard direction: warm
  * white canvas, warm-gray structure, brand blue-purple as a whisper. Product
- * detail now lives on /k1/products; the home page tells the story and previews
+ * detail now lives on /products; the home page tells the story and previews
  * the range.
  *
  * Flow: Hero → Featured Products → Case Studies preview → CTA banner → Footer.

@@ -24,7 +24,7 @@ export default function BrandLogo({ variant = "footer", className = "" }) {
 
   return (
     <Image
-      src="/k1/assets/images/k1-logo-transparent.png"
+      src="/assets/images/k1-logo-transparent.png"
       alt="K1 Visual Solutions logo"
       width={200}
       height={80}

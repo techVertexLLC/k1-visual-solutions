@@ -26,7 +26,7 @@ const CATEGORIES = [
     key: "retail",
     title: "Retail & Storefront",
     Icon: RetailIcon,
-    image: "/k1/assets/images/applications/app-storefront.jpg",
+    image: "/assets/images/applications/app-storefront.jpg",
     imageAlt:
       "Transparent LED storefront window running a promotion, street visible through the glass",
     copy: "Transform window displays into dynamic, see-through media walls. Transparent LED lets natural light in while running promotions, product launches, and seasonal campaigns — visible from the street, day or night.",
@@ -37,7 +37,7 @@ const CATEGORIES = [
     key: "architecture",
     title: "Architecture & Facades",
     Icon: FacadeIcon,
-    image: "/k1/assets/images/scenes/scene-architecture-facade.jpg",
+    image: "/assets/images/scenes/scene-architecture-facade.jpg",
     imageAlt:
       "Glass curtain-wall facade at dusk with holographic LED content integrated flush with the glazing",
     copy: "Turn building glass into a media canvas without sacrificing transparency. Holographic LED panels integrate flush with curtain walls and atriums, adding motion and brand presence while preserving the architect's sightlines.",
@@ -48,7 +48,7 @@ const CATEGORIES = [
     key: "hospitality",
     title: "Hospitality & F&B",
     Icon: HospitalityIcon,
-    image: "/k1/assets/images/scenes/scene-restaurant-hospitality.jpg",
+    image: "/assets/images/scenes/scene-restaurant-hospitality.jpg",
     imageAlt:
       "Transparent LED display in a restaurant window, warm lit interior visible behind",
     copy: "Set the mood with ambient visuals that don't crowd the space. Transparent screens behind bars, in café windows, or across hotel lobbies deliver content without walls — keeping the interior open and inviting.",
@@ -59,7 +59,7 @@ const CATEGORIES = [
     key: "corporate",
     title: "Corporate & Lobbies",
     Icon: CorporateIcon,
-    image: "/k1/assets/images/applications/app-lobby.jpg",
+    image: "/assets/images/applications/app-lobby.jpg",
     imageAlt:
       "Corporate lobby glazing carrying composed transparent LED branding above the reception area",
     copy: "Welcome visitors with a composed digital presence across lobby glazing. Display company messaging, wayfinding, or branded content on transparent panels that maintain the reception area's clean, open feel.",
@@ -70,7 +70,7 @@ const CATEGORIES = [
     key: "events",
     title: "Events & Exhibitions",
     Icon: ExhibitionIcon,
-    image: "/k1/assets/images/applications/app-event.jpg",
+    image: "/assets/images/applications/app-event.jpg",
     imageAlt:
       "Exhibition booth wrapped in flexible LED film curving around columns and displays",
     copy: "Create immersive booth experiences with flexible LED film that wraps columns, curves around displays, and transforms any surface into a screen — then rolls up when the show is over.",
@@ -81,7 +81,7 @@ const CATEGORIES = [
     key: "signage",
     title: "Digital Signage & Wayfinding",
     Icon: SignageIcon,
-    image: "/k1/assets/images/applications/app-signage.jpg",
+    image: "/assets/images/applications/app-signage.jpg",
     imageAlt:
       "Transparent LED signage panel showing real-time messaging with the space behind still visible",
     copy: "Replace static signs with transparent LED panels that deliver real-time messaging — transit schedules, directory maps, promotions — readable at a glance without blocking the view behind.",
@@ -104,7 +104,7 @@ function SolutionCard({ item, index }) {
       >
         {/* Image — 16:9, links straight to the filtered catalog */}
         <a
-          href={`/k1/products?series=${item.series}`}
+          href={`/products?series=${item.series}`}
           className="relative block aspect-[16/9] overflow-hidden"
           aria-label={`See ${item.title} products`}
         >
@@ -155,7 +155,7 @@ function SolutionCard({ item, index }) {
           {/* Routes onward */}
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
-              href={`/k1/products?series=${item.series}`}
+              href={`/products?series=${item.series}`}
               className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 hover:opacity-90"
               style={{ background: COLOR.accent, color: "#fff" }}
             >
@@ -165,7 +165,7 @@ function SolutionCard({ item, index }) {
               </span>
             </a>
             <a
-              href="/k1/contact"
+              href="/contact"
               className="inline-flex items-center rounded-full border px-5 py-2 text-sm font-medium transition-colors duration-300"
               style={{ borderColor: COLOR.gray, color: COLOR.ink }}
             >

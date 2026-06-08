@@ -26,7 +26,7 @@ const OVERLAY_EXIT  = { duration: 0.25, ease: "easeIn" };
 const CARD_LIFT     = { duration: 0.3,  ease: EASE_SPRING };
 
 export default function ProductCard({ product, variant = "regular" }) {
-  const href = `/k1/products/${product.slug}`;
+  const href = `/products/${product.slug}`;
   const [hovered, setHovered] = useState(false);
   const shouldReduce = useReducedMotion();
   const isFeatured = variant === "featured";

@@ -17,7 +17,7 @@ export function generateMetadata({ params }) {
     openGraph: {
       title: `${product.name} — K1 Visual Solutions`,
       description: product.shortDescription || product.description?.slice(0, 150),
-      url: `https://k1visualsolutions.com/k1/products/${params.slug}`,
+      url: `https://k1visualsolutions.com/products/${params.slug}`,
       type: "website",
     },
   };

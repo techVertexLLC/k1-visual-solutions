@@ -15,7 +15,7 @@ const TOP = APPLICATIONS.slice(0, 4);
 function ApplicationCard({ item }) {
   return (
     <a
-      href="/k1/solutions"
+      href="/solutions"
       className="group relative block aspect-[4/5] overflow-hidden rounded-2xl"
       style={{ border: `1px solid ${COLOR.gray}`, background: "#fff" }}
     >
@@ -89,7 +89,7 @@ export default function ApplicationsPreview() {
           </div>
 
           <a
-            href="/k1/solutions"
+            href="/solutions"
             className="group inline-flex flex-none items-center gap-2 text-sm font-medium"
             style={{ color: COLOR.accent }}
           >

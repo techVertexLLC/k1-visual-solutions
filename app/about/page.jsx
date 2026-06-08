@@ -14,7 +14,7 @@ export const metadata = {
     title: "About K1trends Global Inc. — Our Mission & Story",
     description:
       "K1 Visual Solutions is an Elmhurst, IL distributor of premium transparent, flexible and holographic LED display systems, serving architects, retail brands and integrators across North America.",
-    url: "https://k1visualsolutions.com/k1/about",
+    url: "https://k1visualsolutions.com/about",
     type: "website",
   },
 };
@@ -66,11 +66,11 @@ export default function AboutPage() {
         eyebrow="About"
         title="A quieter way to put light into a space"
         description="K1 Visual Solutions brings high-clarity digital surfaces into glass, curves, and facades — without the bulk, glare, or visual noise of conventional signage."
-        image="/k1/assets/images/applications/app-lobby.jpg"
+        image="/assets/images/applications/app-lobby.jpg"
         imageAlt="Corporate lobby with a transparent LED display"
         breadcrumb={
           <>
-            <a href="/k1/" className="hover:opacity-70">Home</a>
+            <a href="/" className="hover:opacity-70">Home</a>
             <span aria-hidden>/</span>
             <span>About</span>
           </>
@@ -115,7 +115,7 @@ export default function AboutPage() {
               style={{ border: `1px solid ${COLOR.gray}` }}
             >
               <Image
-                src="/k1/assets/images/k1-office-render.jpg"
+                src="/assets/images/k1-office-render.jpg"
                 alt="K1 Visual Solutions office — interior render"
                 fill
                 loading="lazy"
@@ -245,7 +245,7 @@ export default function AboutPage() {
           >
             <div className="relative aspect-[3/2] md:aspect-auto">
               <Image
-                src="/k1/assets/images/applications/install-guide.jpg"
+                src="/assets/images/applications/install-guide.jpg"
                 alt="Installation diagram for a K1 transparent LED display system"
                 fill
                 loading="lazy"

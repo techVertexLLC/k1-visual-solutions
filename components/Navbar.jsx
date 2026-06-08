@@ -8,10 +8,9 @@ import { COLOR, FONT } from "./home/tokens";
 import { SOCIAL_LINKS } from "./ui/social";
 import BrandLogo from "./ui/BrandLogo";
 
-/* usePathname() returns the route WITHOUT the "/k1" basePath, so we strip the
-   prefix off each nav href before comparing to decide the active link. */
+/* Compare each nav href against the current pathname to decide the active link. */
 function isActivePath(href, pathname) {
-  const linkPath = href.replace(/^\/k1/, "") || "/";
+  const linkPath = href || "/";
   return linkPath === "/"
     ? pathname === "/"
     : pathname === linkPath || pathname.startsWith(`${linkPath}/`);
@@ -23,22 +22,22 @@ function isActivePath(href, pathname) {
  * Warm white surface, warm-gray hairline border, brand blue-purple held back to
  * the single CTA. Sticky on scroll; no glow, no gradient, no dark chrome.
  *
- * Internal links carry the explicit "/k1" basePath and are plain anchors (the
- * whole site addresses routes and assets as "/k1/...").
+ * Internal links are plain anchors addressing routes and assets at the site root
+ * (the whole site addresses routes and assets as "/...").
  */
 
 const PRODUCT_SUBLINKS = [
-  { label: "Series T — Transparent Poster", href: "/k1/products?series=series-t" },
-  { label: "Series F — Flexible Film", href: "/k1/products?series=series-f" },
-  { label: "Holographic LED", href: "/k1/products?series=holographic" },
+  { label: "Series T — Transparent Poster", href: "/products?series=series-t" },
+  { label: "Series F — Flexible Film", href: "/products?series=series-f" },
+  { label: "Holographic LED", href: "/products?series=holographic" },
 ];
 
 const NAV_LINKS = [
-  { label: "Home", href: "/k1/" },
-  { label: "Products", href: "/k1/products", sublinks: PRODUCT_SUBLINKS },
-  { label: "Solutions", href: "/k1/solutions" },
-  { label: "About", href: "/k1/about" },
-  { label: "Contact", href: "/k1/contact" },
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products", sublinks: PRODUCT_SUBLINKS },
+  { label: "Solutions", href: "/solutions" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /* Compact social icon strip — icons only, used on the right of the desktop bar.
@@ -96,7 +95,7 @@ export default function Navbar() {
         aria-label="Primary"
       >
         {/* Logo — BrandLogo variant="navbar" → h-40 / sm:h-48 */}
-        <a href="/k1/" className="flex items-center px-1 py-2">
+        <a href="/" className="flex items-center px-1 py-2">
           <BrandLogo variant="navbar" />
         </a>
 
@@ -184,7 +183,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <NavSocial />
           <a
-            href="/k1/contact"
+            href="/contact"
             className="hidden rounded-full px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 sm:inline-block"
             style={{ background: COLOR.accent }}
           >
@@ -268,7 +267,7 @@ export default function Navbar() {
 
               <li className="pt-2">
                 <a
-                  href="/k1/contact"
+                  href="/contact"
                   onClick={() => setOpen(false)}
                   className="block rounded-full px-4 py-3 text-center text-sm font-medium text-white"
                   style={{ background: COLOR.accent }}
