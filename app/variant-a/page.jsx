@@ -135,9 +135,6 @@ function Nav() {
           <span className="relative h-9 w-9 overflow-hidden rounded-lg ring-1 ring-white/15 shadow-glow">
             <Image src="/assets/images/k1-logo.jpg" alt="K1 Visual Solutions logo" fill sizes="36px" className="object-cover" priority />
           </span>
-          <span className="text-sm font-semibold tracking-[0.2em] text-white/90">
-            K1 <span className="text-gradient-cyan">VISUAL</span>
-          </span>
         </a>
 
         <ul className="hidden items-center gap-10 md:flex">
@@ -527,9 +524,6 @@ function FooterA() {
         <span className="relative h-12 w-12 overflow-hidden rounded-xl ring-1 ring-white/15 shadow-glow">
           <Image src="/assets/images/k1-logo.jpg" alt="K1 Visual Solutions logo" fill sizes="48px" className="object-cover" />
         </span>
-        <p className="text-lg font-semibold tracking-[0.15em] text-white/90">
-          K1 <span className="text-gradient-cyan">VISUAL</span> SOLUTIONS
-        </p>
         <p className="max-w-md text-sm text-white/45">LED Displays · Digital Signs · Endless Possibilities</p>
         <div className="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-[0.15em] text-white/45">
           {NAV_LINKS.map((l) => (

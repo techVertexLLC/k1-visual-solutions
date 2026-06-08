@@ -151,12 +151,6 @@ function Nav() {
           <span className="relative h-9 w-9 overflow-hidden rounded-lg ring-1 ring-white/15 shadow-glow">
             <Image src="/assets/images/k1-logo.jpg" alt="K1 Visual Solutions logo" fill sizes="36px" className="object-cover" priority />
           </span>
-          <span className="flex flex-col leading-none">
-            <span className="text-sm font-bold tracking-wide text-white">
-              K1 <span className="text-gradient-cyan">Visual</span>
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.25em] text-white/40">Solutions</span>
-          </span>
         </a>
 
         <ul className="hidden items-center gap-6 lg:flex">
@@ -665,10 +659,6 @@ function FooterB() {
               <span className="relative h-10 w-10 overflow-hidden rounded-lg ring-1 ring-white/15 shadow-glow">
                 <Image src="/assets/images/k1-logo.jpg" alt="K1 Visual Solutions logo" fill sizes="40px" className="object-cover" />
               </span>
-              <div className="leading-tight">
-                <p className="font-bold text-white">K1 Visual Solutions</p>
-                <p className="text-xs text-white/45">K1trends Global Inc.</p>
-              </div>
             </div>
             <p className="mt-4 max-w-xs text-sm text-white/55">LED Displays · Digital Signs · Endless Possibilities. Transparent &amp; flexible LED, distributed across North America.</p>
           </div>

@@ -33,7 +33,6 @@ export default function Footer() {
                 height={80}
                 className="h-28 w-auto object-contain brightness-0 invert"
               />
-              <p className="mt-1 text-xs text-white/45">K1trends Global Inc.</p>
             </div>
             <p className="mt-4 max-w-xs text-sm text-white/55">
               LED Displays · Digital Signs · Endless Possibilities. Premium
