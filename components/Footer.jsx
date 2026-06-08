@@ -31,7 +31,7 @@ export default function Footer() {
                 alt="K1 Visual Solutions logo"
                 width={200}
                 height={80}
-                className="h-40 w-auto object-contain brightness-0 invert"
+                className="h-48 w-auto object-contain brightness-0 invert"
               />
             </div>
             <p className="mt-4 max-w-xs text-base text-white/55">
