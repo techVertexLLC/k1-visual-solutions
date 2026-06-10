@@ -2,6 +2,7 @@ import Image from "next/image";
 import { COLOR, FONT } from "./home/tokens";
 import { SOCIAL_LINKS } from "./ui/social";
 import BrandLogo from "./ui/BrandLogo";
+import { CONTACT } from "../lib/demo";
 
 /**
  * Shared site footer for every page. Warm-gray surface, multi-page navigation,
@@ -121,15 +122,15 @@ export default function SiteFooter() {
             {/* DC-021: text-base → text-lg */}
             <ul className="mt-6 space-y-4 text-lg" style={{ color: COLOR.ink }}>
               {/* DC-020: py-1 統一 contact 項目觸控區域 */}
-              <li className="py-1">525 W Wrightwood Avenue, Elmhurst, IL</li>
+              <li className="py-1">{CONTACT.address}</li>
               <li>
-                <a href="tel:+163****5931" className="inline-block py-1 hover:opacity-70">
-                  +1 (630) 359-5931
+                <a href={CONTACT.phoneHref} className="inline-block py-1 hover:opacity-70">
+                  {CONTACT.phone}
                 </a>
               </li>
               <li>
-                <a href="mailto:Andrewxu@vertexdistributor.com" className="inline-block py-1 hover:opacity-70">
-                  Andrewxu@vertexdistributor.com
+                <a href={CONTACT.emailHref} className="inline-block py-1 hover:opacity-70">
+                  {CONTACT.email}
                 </a>
               </li>
             </ul>
@@ -170,7 +171,7 @@ export default function SiteFooter() {
           className="mt-14 border-t pt-8 text-base"
           style={{ color: COLOR.body, borderColor: "#DAD5CE" }}
         >
-          © {new Date().getFullYear()} K1trends Global Inc. · K1 Visual Solutions. All rights reserved.
+          © {new Date().getFullYear()} {CONTACT.companyLegal} · K1 Visual Solutions. All rights reserved.
         </div>
       </div>
     </footer>

@@ -2,9 +2,10 @@
 
 import Reveal from "./ui/Reveal";
 import GradientPlaceholder from "./ui/GradientPlaceholder";
+import { CONTACT } from "../lib/demo";
 
 const STATS = [
-  { v: "Elmhurst, IL", k: "US HQ" },
+  { v: CONTACT.cityState, k: "US HQ" },
   { v: "North America", k: "Service footprint" },
   { v: "STEM-led", k: "Engineering team" },
   { v: "Global", k: "Supply chain" },
@@ -20,13 +21,13 @@ export default function About() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <span className="text-sm font-semibold uppercase tracking-[0.25em] text-electric-cyan">
-              About K1trends Global
+              About {CONTACT.companyShort}
             </span>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               A North American partner for the world&apos;s most ambitious displays
             </h2>
             <p className="mt-5 text-base leading-relaxed text-white/65">
-              K1trends Global Inc. is an Elmhurst, IL–based distributor of
+              {CONTACT.companyLegal} is an {CONTACT.cityState}–based distributor of
               advanced LED hardware, serving architects, high-end retail brands,
               and system integrators across North America. Backed by a STEM
               engineering background and a global supply chain, we bridge

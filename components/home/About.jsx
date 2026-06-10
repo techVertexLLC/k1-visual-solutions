@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { COLOR, FONT, BLUR } from "./tokens";
+import { CONTACT } from "@/lib/demo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -29,7 +30,7 @@ function FadeUp({ children, className = "", delay = 0 }) {
 }
 
 const FACTS = [
-  { label: "Based in", value: "Elmhurst, IL" },
+  { label: "Based in", value: CONTACT.cityState },
   { label: "Serving", value: "North America" },
   { label: "Focus", value: "Transparent & flexible LED" },
 ];
@@ -61,7 +62,7 @@ export default function About() {
 
         <FadeUp delay={0.1} className="flex flex-col justify-center">
           <p className="text-lg leading-relaxed" style={{ color: COLOR.body }}>
-            K1 Visual Solutions is an Elmhurst, IL–based distributor of premium
+            K1 Visual Solutions is an {CONTACT.cityState}–based distributor of premium
             transparent, flexible, and self-adhesive LED display systems. We work
             with architects, retail brands, and system integrators across North
             America to bring high-clarity digital surfaces into glass, curves, and

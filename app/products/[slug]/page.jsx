@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import ProductDetail from "@/components/products/ProductDetail";
 import SiteFooter from "@/components/SiteFooter";
 import { getAllProducts, getProduct, getRelatedProducts } from "@/lib/products";
+import { CONTACT } from "@/lib/demo";
 
 /** Pre-build every product page at build time. */
 export function generateStaticParams() {
@@ -45,13 +46,13 @@ export default function ProductPage({ params }) {
     description: product.shortDescription || product.description?.slice(0, 200),
     image: `https://k1visual.com${product.cardImage}`,
     brand: { "@type": "Brand", name: "K1 Visual Solutions" },
-    manufacturer: { "@type": "Organization", name: "K1trends Global Inc." },
+    manufacturer: { "@type": "Organization", name: CONTACT.companyLegal },
     category: "LED Display",
     offers: {
       "@type": "Offer",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
-      seller: { "@type": "Organization", name: "K1trends Global Inc." },
+      seller: { "@type": "Organization", name: CONTACT.companyLegal },
     },
   };
 

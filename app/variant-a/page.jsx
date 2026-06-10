@@ -10,6 +10,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { CONTACT } from "@/lib/demo";
 import {
   TransparencyIcon,
   FlexIcon,
@@ -414,19 +415,19 @@ function About() {
       <div className="absolute right-0 top-1/4 h-80 w-80 rounded-full bg-brand-purple/15 blur-[140px]" aria-hidden />
       <div className="relative mx-auto max-w-4xl px-6 text-center">
         <FadeIn>
-          <span className="text-xs font-semibold uppercase tracking-[0.35em] text-electric-cyan">K1trends Global</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.35em] text-electric-cyan">{CONTACT.companyShort}</span>
           <h2 className="mt-6 text-3xl font-bold leading-snug tracking-tight sm:text-5xl">
             A North American partner for the world&apos;s most <span className="text-gradient-cyan">ambitious</span> displays.
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/55">
-            Elmhurst, IL–based. STEM-engineered. Backed by a global supply chain and local North American service — from spec and sourcing to delivery and support.
+            {CONTACT.cityState}–based. STEM-engineered. Backed by a global supply chain and local North American service — from spec and sourcing to delivery and support.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.15} className="mt-16">
           <div className="mx-auto grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-3xl glass sm:grid-cols-4">
             {[
-              ["Elmhurst, IL", "HQ"],
+              [CONTACT.cityState, "HQ"],
               ["North America", "Service"],
               ["STEM-led", "Engineering"],
               ["Global", "Supply"],
@@ -500,14 +501,14 @@ function Contact() {
         </FadeIn>
 
         <FadeIn delay={0.15} className="mt-10 flex flex-wrap justify-center gap-8 text-sm text-white/55">
-          <a href="mailto:Andrewxu@vertexdistributor.com" className="inline-flex items-center gap-2 hover:text-electric-cyan">
-            <span className="h-4 w-4"><MailIcon /></span> Andrewxu@vertexdistributor.com
+          <a href={CONTACT.emailHref} className="inline-flex items-center gap-2 hover:text-electric-cyan">
+            <span className="h-4 w-4"><MailIcon /></span> {CONTACT.email}
           </a>
-          <a href="tel:+16303595931" className="inline-flex items-center gap-2 hover:text-electric-cyan">
-            <span className="h-4 w-4"><PhoneIcon /></span> +1 (630) 359-5931
+          <a href={CONTACT.phoneHref} className="inline-flex items-center gap-2 hover:text-electric-cyan">
+            <span className="h-4 w-4"><PhoneIcon /></span> {CONTACT.phone}
           </a>
           <span className="inline-flex items-center gap-2">
-            <span className="h-4 w-4"><PinIcon /></span> Elmhurst, IL
+            <span className="h-4 w-4"><PinIcon /></span> {CONTACT.cityState}
           </span>
         </FadeIn>
       </div>
@@ -532,7 +533,7 @@ function FooterA() {
             </a>
           ))}
         </div>
-        <p className="mt-4 text-xs text-white/30">© 2025 K1trends Global Inc. · Elmhurst, IL</p>
+        <p className="mt-4 text-xs text-white/30">{`© 2025 ${CONTACT.companyLegal} · ${CONTACT.cityState}`}</p>
       </div>
     </footer>
   );

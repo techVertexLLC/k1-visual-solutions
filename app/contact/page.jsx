@@ -6,20 +6,20 @@ import { MailIcon, PinIcon } from "@/components/ui/icons";
 import { SOCIAL_LINKS } from "@/components/ui/social";
 import { COLOR, FONT } from "@/components/home/tokens";
 import { pageMetadata } from "@/lib/seo";
+import { CONTACT } from "@/lib/demo";
 
 export const metadata = pageMetadata({
   title: "Contact — Request a Quote",
   ogTitle: "Contact K1 Visual Solutions — Request a Quote",
-  description:
-    "Tell us about your space and the effect you're after. K1 Visual Solutions will come back with the right product, a spec, and an indicative price. Based in Elmhurst, IL.",
+  description: `Tell us about your space and the effect you're after. K1 Visual Solutions will come back with the right product, a spec, and an indicative price. Based in ${CONTACT.cityState}.`,
   path: "/contact",
   image: "/assets/images/applications/app-storefront.jpg",
   imageAlt: "Storefront window with a transparent LED display",
 });
 
 const INFO = [
-  { Icon: PinIcon, label: "Office", value: "525 W Wrightwood Avenue, Elmhurst, IL" },
-  { Icon: MailIcon, label: "Email", value: "Andrewxu@vertexdistributor.com", href: "mailto:Andrewxu@vertexdistributor.com" },
+  { Icon: PinIcon, label: "Office", value: CONTACT.address },
+  { Icon: MailIcon, label: "Email", value: CONTACT.email, href: CONTACT.emailHref },
 ];
 
 export default function ContactPage() {

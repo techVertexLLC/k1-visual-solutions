@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Reveal from "./ui/Reveal";
 import { MailIcon, PhoneIcon, PinIcon, CheckIcon } from "./ui/icons";
+import { CONTACT } from "../lib/demo";
 
 const SCENARIOS = [
   "Retail Windows",
@@ -13,9 +14,9 @@ const SCENARIOS = [
 ];
 
 const CONTACT_INFO = [
-  { icon: MailIcon, label: "Email", value: "Andrewxu@vertexdistributor.com", href: "mailto:Andrewxu@vertexdistributor.com" },
-  { icon: PhoneIcon, label: "Phone", value: "+1 (630) 359-5931", href: "tel:+16303595931" },
-  { icon: PinIcon, label: "Office", value: "525 W Wrightwood Avenue, Elmhurst, IL", href: null },
+  { icon: MailIcon, label: "Email", value: CONTACT.email, href: CONTACT.emailHref },
+  { icon: PhoneIcon, label: "Phone", value: CONTACT.phone, href: CONTACT.phoneHref },
+  { icon: PinIcon, label: "Office", value: CONTACT.address, href: null },
 ];
 
 const fieldClass =
@@ -229,7 +230,7 @@ export default function Contact() {
                       <PinIcon />
                     </span>
                     <span className="mt-3 text-sm font-semibold text-white">
-                      525 W Wrightwood Avenue, Elmhurst, IL
+                      {CONTACT.address}
                     </span>
                     <span className="text-xs text-white/45">
                       Interactive map placeholder

@@ -3,6 +3,7 @@
 import Reveal from "@/components/ui/Reveal";
 import { CheckIcon, TransparencyIcon, AdhesiveIcon, PinIcon } from "@/components/ui/icons";
 import { COLOR, FONT } from "./tokens";
+import { CONTACT } from "@/lib/demo";
 
 /**
  * "Why K1" — the value proposition. Four quiet points, each with a line-drawn
@@ -28,7 +29,7 @@ const VALUES = [
   {
     Icon: PinIcon,
     title: "North American distribution",
-    body: "Based in Elmhurst, IL, we serve architects, retail brands, and system integrators across North America with local accountability.",
+    body: `Based in ${CONTACT.cityState}, we serve architects, retail brands, and system integrators across North America with local accountability.`,
   },
 ];
 

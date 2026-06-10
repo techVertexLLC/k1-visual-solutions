@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/ui/BackToTop";
 import PageTransition from "@/components/ui/PageTransition";
+import { CONTACT } from "@/lib/demo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,23 +28,21 @@ const SITE_URL = "https://k1visual.com";
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      "K1 Visual Solutions — Transparent & Flexible LED Displays | K1trends Global Inc.",
+    default: `K1 Visual Solutions — Transparent & Flexible LED Displays | ${CONTACT.companyLegal}`,
     template: "%s | K1 Visual Solutions",
   },
-  description:
-    "K1trends Global Inc. — premium distributor of next-gen transparent, flexible, and self-adhesive LED display solutions. Serving architects, retail brands, and system integrators across North America from Elmhurst, IL.",
+  description: `${CONTACT.companyLegal} — premium distributor of next-gen transparent, flexible, and self-adhesive LED display solutions. Serving architects, retail brands, and system integrators across North America from ${CONTACT.cityState}.`,
   keywords: [
     "transparent LED display",
     "flexible LED film",
     "LED digital signage",
     "retail window LED",
     "architectural LED facade",
-    "K1trends Global",
+    CONTACT.companyShort,
     "K1 Visual Solutions",
     "B2B LED distributor Canada",
   ],
-  authors: [{ name: "K1trends Global Inc." }],
+  authors: [{ name: CONTACT.companyLegal }],
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -67,17 +66,17 @@ const ORGANIZATION_JSON_LD = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness"],
   name: "K1 Visual Solutions",
-  legalName: "K1trends Global Inc.",
+  legalName: CONTACT.companyLegal,
   url: SITE_URL,
   logo: `${SITE_URL}/assets/images/k1-logo.png`,
   description:
     "Premium distributor of transparent, flexible, and holographic LED display solutions across North America.",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "525 W Wrightwood Avenue",
-    addressLocality: "Elmhurst",
-    addressRegion: "IL",
-    postalCode: "60126",
+    streetAddress: CONTACT.street,
+    addressLocality: CONTACT.city,
+    addressRegion: CONTACT.region,
+    postalCode: CONTACT.postalCode,
     addressCountry: "US",
   },
   areaServed: [
@@ -86,9 +85,9 @@ const ORGANIZATION_JSON_LD = {
   ],
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+1-630-359-5931",
+    telephone: CONTACT.phoneIntl,
     contactType: "sales",
-    email: "Andrewxu@vertexdistributor.com",
+    email: CONTACT.email,
   },
   sameAs: [],
 };

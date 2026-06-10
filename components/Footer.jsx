@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MailIcon, PhoneIcon } from "./ui/icons";
 import BrandLogo from "./ui/BrandLogo";
+import { CONTACT } from "../lib/demo";
 
 /**
  * Deep-dark footer variant (bg-ink-900). Used on standalone pages that carry
@@ -79,27 +80,27 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-lg">
               <li>
                 <a
-                  href="mailto:Andrewxu@vertexdistributor.com"
+                  href={CONTACT.emailHref}
                   className="inline-flex items-center gap-2 text-white/75 transition-colors hover:text-electric-cyan"
                 >
                   <span className="h-4 w-4">
                     <MailIcon />
                   </span>
-                  Andrewxu@vertexdistributor.com
+                  {CONTACT.email}
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+163****5931"
+                  href={CONTACT.phoneHref}
                   className="inline-flex items-center gap-2 text-white/75 transition-colors hover:text-electric-cyan"
                 >
                   <span className="h-4 w-4">
                     <PhoneIcon />
                   </span>
-                  +1 (630) 359-5931
+                  {CONTACT.phone}
                 </a>
               </li>
-              <li className="text-white/75">525 W Wrightwood Avenue, Elmhurst, IL</li>
+              <li className="text-white/75">{CONTACT.address}</li>
             </ul>
           </div>
         </div>
@@ -107,10 +108,10 @@ export default function Footer() {
         {/* Copyright — DC-021: text-sm → text-base */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-base text-white/60">
-            © 2025 K1trends Global Inc. All rights reserved.
+            © 2025 {CONTACT.companyLegal} All rights reserved.
           </p>
           <p className="text-base text-white/60">
-            Elmhurst, IL · Serving North America
+            {CONTACT.cityState} · Serving North America
           </p>
         </div>
       </div>

@@ -1,7 +1,8 @@
+import { CONTACT } from "@/lib/demo";
+
 export const metadata = {
   title: "K1 Visual Solutions — Transparent LED Specs & Comparison | Variant B",
-  description:
-    "Information-dense, spec-driven B2B overview of K1trends' transparent LED product lines — comparison tables, certifications, and FAQs.",
+  description: `Information-dense, spec-driven B2B overview of ${CONTACT.brand}' transparent LED product lines — comparison tables, certifications, and FAQs.`,
 };
 
 /**

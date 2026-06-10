@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
 import { COLOR, FONT } from "@/components/home/tokens";
+import { CONTACT } from "@/lib/demo";
 
 /**
  * FAQ accordion for the Solutions page. Quiet, single-column list of common
@@ -30,7 +31,7 @@ const FAQS = [
   },
   {
     q: "Can I see a demo unit?",
-    a: "Yes. We keep demo units at our Elmhurst showroom. Contact us to schedule a visit.",
+    a: `Yes. We keep demo units at our ${CONTACT.city} showroom. Contact us to schedule a visit.`,
   },
   {
     q: "What content formats are supported?",

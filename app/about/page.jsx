@@ -6,22 +6,22 @@ import SiteFooter from "@/components/SiteFooter";
 import { CheckIcon, PinIcon, DualDriveIcon } from "@/components/ui/icons";
 import { COLOR, FONT, BLUR } from "@/components/home/tokens";
 import { pageMetadata } from "@/lib/seo";
+import { CONTACT } from "@/lib/demo";
 
 export const metadata = pageMetadata({
   title: "About — LED Display Distributor for North America",
-  ogTitle: "About K1trends Global Inc. — Our Mission & Story",
-  description:
-    "K1 Visual Solutions is an Elmhurst, IL distributor of premium transparent, flexible and holographic LED display systems, serving architects, retail brands and integrators across North America.",
+  ogTitle: `About ${CONTACT.companyLegal} — Our Mission & Story`,
+  description: `K1 Visual Solutions is an ${CONTACT.cityState} distributor of premium transparent, flexible and holographic LED display systems, serving architects, retail brands and integrators across North America.`,
   path: "/about",
   image: "/assets/images/k1-office-render.jpg",
-  imageAlt: "K1trends Global Inc. office",
+  imageAlt: `${CONTACT.companyLegal} office`,
 });
 
 const FACTS = [
-  { label: "Based in", value: "Elmhurst, IL" },
+  { label: "Based in", value: CONTACT.cityState },
   { label: "Serving", value: "North America" },
   { label: "Focus", value: "Transparent & flexible LED" },
-  { label: "Parent", value: "K1trends Global Inc." },
+  { label: "Parent", value: CONTACT.companyLegal },
 ];
 
 const VALUES = [
@@ -33,7 +33,7 @@ const VALUES = [
   {
     Icon: PinIcon,
     title: "North American Support",
-    body: "Same-timezone response, local accountability, and an Elmhurst showroom you can visit.",
+    body: `Same-timezone response, local accountability, and an ${CONTACT.city} showroom you can visit.`,
   },
   {
     Icon: DualDriveIcon,
@@ -125,7 +125,7 @@ export default function AboutPage() {
               />
             </div>
             <p className="text-lg leading-relaxed" style={{ color: COLOR.body }}>
-              K1 Visual Solutions is an Elmhurst, IL–based distributor of
+              K1 Visual Solutions is an {CONTACT.cityState}–based distributor of
               premium transparent, flexible, and self-adhesive LED display
               systems. We work with architects, retail brands, and system
               integrators across North America to bring high-clarity digital
