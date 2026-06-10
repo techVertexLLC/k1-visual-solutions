@@ -2,10 +2,12 @@ import PageBanner from "@/components/ui/PageBanner";
 import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/contact/ContactForm";
 import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/ui/JsonLd";
 import { MailIcon, PinIcon } from "@/components/ui/icons";
 import { SOCIAL_LINKS } from "@/components/ui/social";
 import { COLOR, FONT } from "@/components/home/tokens";
 import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 import { CONTACT } from "@/lib/demo";
 
 export const metadata = pageMetadata({
@@ -25,6 +27,12 @@ const INFO = [
 export default function ContactPage() {
   return (
     <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Contact" },
+        ])}
+      />
       <PageBanner
         eyebrow="Contact"
         title="Request an LED display quote"

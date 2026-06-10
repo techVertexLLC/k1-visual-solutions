@@ -435,17 +435,15 @@ export default function Hero() {
             {/* Primary — the single accent-coloured action in view */}
             <a
               href="/contact"
-              className="cta-pulse rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
-              style={{ background: COLOR.accent }}
+              className="cta-pulse btn-lift btn-glow btn-shimmer rounded-full bg-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-white hover:bg-[#5A50C7]"
             >
               Request a Quote
             </a>
 
-            {/* Secondary — calm outline, no fill */}
+            {/* Secondary — calm outline; gains a whisper of accent fill on hover */}
             <a
               href="/products"
-              className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
-              style={{ borderColor: COLOR.accent, color: COLOR.accent }}
+              className="group btn-lift inline-flex items-center gap-2 rounded-full border border-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-[#4F46B5] hover:bg-[#4F46B5]/[0.06]"
             >
               Explore Products
               <span className="transition-transform duration-300 group-hover:translate-x-1">

@@ -3,6 +3,8 @@ import { CONTACT } from "@/lib/demo";
 export const metadata = {
   title: "K1 Visual Solutions — Cinematic Transparent LED | Variant A",
   description: `A cinematic, product-photography-centric showcase of ${CONTACT.brand}' transparent and flexible LED displays. Minimal, dark, and immersive.`,
+  // Internal design variant — kept out of the index (also blocked in robots.txt).
+  robots: { index: false, follow: false },
 };
 
 /**

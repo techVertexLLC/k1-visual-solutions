@@ -95,11 +95,10 @@ function SolutionCard({ item, index }) {
   return (
     <Reveal delay={(index % 2) * 0.08} className="h-full">
       <article
-        className="group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1.5"
+        className="group flex h-full flex-col overflow-hidden rounded-2xl shadow-card transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-1 hover:shadow-card-hover"
         style={{
           background: "#fff",
           border: `1px solid ${COLOR.gray}`,
-          boxShadow: "0 1px 2px rgba(26,26,26,0.04)",
         }}
       >
         {/* Image — 16:9, links straight to the filtered catalog */}
@@ -117,7 +116,7 @@ function SolutionCard({ item, index }) {
             sizes="(max-width: 768px) 100vw, 50vw"
             placeholder="blur"
             blurDataURL={BLUR}
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="object-cover transition-transform duration-500 ease-premium group-hover:scale-105"
           />
         </a>
 
@@ -156,8 +155,7 @@ function SolutionCard({ item, index }) {
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
               href={`/products?series=${item.series}`}
-              className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 hover:opacity-90"
-              style={{ background: COLOR.accent, color: "#fff" }}
+              className="btn-lift btn-glow inline-flex items-center gap-2 rounded-full bg-[#4F46B5] px-5 py-2 text-sm font-medium text-white hover:bg-[#5A50C7]"
             >
               See Products
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -166,8 +164,7 @@ function SolutionCard({ item, index }) {
             </a>
             <a
               href="/contact"
-              className="inline-flex items-center rounded-full border px-5 py-2 text-sm font-medium transition-colors duration-300"
-              style={{ borderColor: COLOR.gray, color: COLOR.ink }}
+              className="btn-lift inline-flex items-center rounded-full border border-[#E8E4DF] px-5 py-2 text-sm font-medium text-[#1A1A1A] hover:border-[#4F46B5] hover:bg-[#4F46B5]/[0.05] hover:text-[#4F46B5]"
             >
               Get a Quote
             </a>

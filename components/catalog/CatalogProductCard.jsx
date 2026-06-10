@@ -95,7 +95,7 @@ export default function CatalogProductCard({ product }) {
           alt={name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="object-cover transition-transform duration-500 ease-premium group-hover:scale-105"
           loading="lazy"
         />
         {/* Category badge — top-left overlay */}
@@ -164,7 +164,7 @@ export default function CatalogProductCard({ product }) {
     return (
       <a
         href={resolvedHref}
-        className="group block rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46B5] focus-visible:ring-offset-2 overflow-hidden"
+        className="group block rounded-xl border bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-1 hover:shadow-card-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46B5] focus-visible:ring-offset-2 overflow-hidden"
         style={{ borderColor: COLOR.gray }}
         aria-label={`View details for ${name}`}
       >
@@ -176,7 +176,7 @@ export default function CatalogProductCard({ product }) {
   // MileStrong 產品 → <div> 卡片（不可跳轉，hover 效果保留視覺回饋）
   return (
     <div
-      className="group block rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden"
+      className="group block rounded-xl border bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-1 hover:shadow-card-hover overflow-hidden"
       style={{ borderColor: COLOR.gray }}
       aria-label={name}
     >

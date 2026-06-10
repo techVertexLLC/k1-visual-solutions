@@ -17,7 +17,7 @@ function CaseCard({ item }) {
   const [primary, ...secondary] = item.images;
   return (
     <article
-      className="group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl shadow-card transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-1 hover:shadow-card-hover"
       style={{ border: `1px solid ${COLOR.gray}`, background: "#fff" }}
     >
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -30,7 +30,7 @@ function CaseCard({ item }) {
           sizes="(max-width: 768px) 100vw, 50vw"
           placeholder="blur"
           blurDataURL={BLUR}
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          className="object-cover transition-transform duration-700 ease-premium group-hover:scale-105"
         />
       </div>
       <div className="flex flex-1 flex-col p-7">
@@ -141,8 +141,7 @@ export default function CaseStudiesPreview() {
           <div className="mt-12 text-center">
             <button
               onClick={() => setExpanded((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5"
-              style={{ borderColor: COLOR.ink, color: COLOR.ink }}
+              className="btn-lift inline-flex items-center gap-2 rounded-full border border-[#1A1A1A] px-6 py-3 text-sm font-medium text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
             >
               {expanded ? "Show fewer projects" : "View more projects"}
               <span

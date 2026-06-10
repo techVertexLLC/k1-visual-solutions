@@ -45,6 +45,8 @@ export const metadata = {
   title: "Design Moodboard — K1 Visual Solutions Redesign",
   description:
     "Color, typography, whitespace, and component direction for the K1 Visual Solutions redesign. Clean, refined, effortless — inspired by Aesop, Apple, and Dieter Rams.",
+  // Internal design reference — kept out of the index (also blocked in robots.txt).
+  robots: { index: false, follow: false },
 };
 
 const fontVars = [

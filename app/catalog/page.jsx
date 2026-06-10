@@ -2,7 +2,9 @@ import { Suspense } from "react";
 import PageBanner from "@/components/ui/PageBanner";
 import CatalogLayout from "@/components/catalog/CatalogLayout";
 import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/ui/JsonLd";
 import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 /**
  * /catalog — MileStrong-style product catalog page.
@@ -29,6 +31,13 @@ export default function CatalogPage() {
       className="page-enter min-h-screen"
       style={{ background: "#FAF8F5" }}
     >
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Catalog" },
+        ])}
+      />
+
       {/* ── Top banner with photographic hero ──────────────────────────── */}
       <PageBanner
         eyebrow="Browse Range"

@@ -2,7 +2,9 @@ import { Suspense } from "react";
 import PageBanner from "@/components/ui/PageBanner";
 import ProductCatalog from "@/components/products/ProductCatalog";
 import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/ui/JsonLd";
 import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata = pageMetadata({
   title: "Products — Transparent, Holographic & Flexible LED",
@@ -22,6 +24,12 @@ export const metadata = pageMetadata({
 export default function ProductsPage() {
   return (
     <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Products" },
+        ])}
+      />
       <PageBanner
         eyebrow="The Range"
         title="Transparent, holographic & flexible LED displays"

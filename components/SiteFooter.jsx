@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { COLOR, FONT } from "./home/tokens";
 import { SOCIAL_LINKS } from "./ui/social";
 import BrandLogo from "./ui/BrandLogo";
@@ -49,7 +48,10 @@ export default function SiteFooter() {
         <div className="grid gap-y-14 md:gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-4">
-            <a href="/" className="inline-block">
+            {/* The logo PNG is a square canvas with big transparent margins —
+                clip the anchor to the visible mark's height so the column's
+                whitespace stays even and the link area matches what you see. */}
+            <a href="/" className="flex h-16 w-fit items-center overflow-hidden">
               {/* DC-021: 換 BrandLogo 統一管理，h-48 */}
               <BrandLogo variant="footer" />
             </a>

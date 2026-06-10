@@ -8,7 +8,8 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  /* Sticky navbar is 7rem tall — keep anchored headings clear of it. */
+  scroll-padding-top: 8rem;
   /* Belt-and-suspenders against horizontal scroll on mobile: some browsers
      still let the page pan sideways when only <body> clips. */
   overflow-x: hidden;
@@ -83,6 +84,188 @@ img {
 }
 .cta-pulse {
   animation: ctaPulse 2.8s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Interaction polish layer — selection, keyboard focus, and the shared
+   micro-interaction vocabulary (lift, glow, shimmer, grain, skeleton).
+   All CSS-only; every moving piece is neutralised by the reduced-motion
+   block at the foot of this file.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Text selection in the brand blue-purple, kept light so ink stays readable. */
+::selection {
+  background: rgba(79, 70, 181, 0.16);
+  color: #1a1a1a;
+}
+
+/* Keyboard focus ring — brand accent, offset so it never crowds the control.
+   :focus-visible only: mouse and touch users never see it. */
+:focus-visible {
+  outline: 2px solid rgba(79, 70, 181, 0.7);
+  outline-offset: 3px;
+}
+/* Form fields draw their own focus treatment (accent border + soft ring). */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+/* ── Buttons ──
+   .btn-lift   shared motion: rises 2px on hover, presses back down on click.
+   .btn-glow   adds a soft brand-coloured shadow while hovered (primary CTAs).
+   .btn-shimmer a single light sweep across the surface on hover — the LED
+               nod. No transition on the base state, so on mouse-leave the
+               highlight snaps home invisibly instead of sweeping backwards. */
+.btn-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+.btn-lift:hover {
+  transform: translateY(-2px);
+}
+.btn-lift:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.12s;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 10px 28px -10px rgba(79, 70, 181, 0.5);
+}
+.btn-glow:active {
+  box-shadow: 0 4px 14px -10px rgba(79, 70, 181, 0.45);
+}
+
+/* Disabled buttons sit still — no lift, no glow (declared after the hover
+   rules so it wins the tie on specificity). */
+.btn-lift:disabled {
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 68%
+  );
+  transform: translateX(-101%);
+  pointer-events: none;
+}
+.btn-shimmer:hover::after {
+  transform: translateX(101%);
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Cards ── lift + soft ink shadow for simple hover surfaces. Cards that
+   gate movement behind useReducedMotion compose the same values from the
+   Tailwind tokens (shadow-card-hover / ease-premium) instead. */
+.hover-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 40px -16px rgba(26, 26, 26, 0.18),
+    0 4px 12px -6px rgba(26, 26, 26, 0.06);
+}
+
+/* ── Desktop nav links — hairline that grows from the centre on hover and
+   stays full-width on the active page (via aria-current). */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 999px;
+  background: #4f46b5;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* ── Film-grain overlay — a whisper of analogue noise on large flat panels
+   (CTA cards) so they read as material, not vector. Inline SVG turbulence,
+   ~4% opacity; z-index -1 inside an isolated context keeps it above the
+   panel's background but beneath its content. */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.045;
+  pointer-events: none;
+}
+
+/* ── Section divider — a hairline that fades out at both ends, for adjacent
+   sections that share the same surface colour. */
+.divider-fade {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #dad5ce 20%,
+    #dad5ce 80%,
+    transparent
+  );
+}
+
+/* ── Skeleton shimmer — Suspense fallbacks while the catalog hydrates. */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #efebe5;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: skeletonSweep 1.8s ease-in-out infinite;
+}
+@keyframes skeletonSweep {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Animation fallback (modern browsers): when scripting is disabled, framer-
@@ -183,16 +366,31 @@ img {
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar — warm palette to match the light canvas (the old dark
+   neon styling was a leftover from the previous theme). */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #06060f;
+  background: #f1ede8;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#3b82f6, #7c3aed);
+  background: #d4cfc8;
   border-radius: 999px;
+  border: 2px solid #f1ede8;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b8b2a9;
+}
+
+/* Mobile nav sheet — cap the panel height so every item stays reachable while
+   body scroll is locked. vh first as a fallback, dvh where supported (tracks
+   the real visible viewport under iOS Safari's collapsing toolbars). */
+.mobile-menu-scroll {
+  max-height: calc(100vh - 7rem);
+  max-height: calc(100dvh - 7rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -201,6 +399,31 @@ img {
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Print — drop the chrome (nav, floating controls, motion decoration), keep
+   the content readable in black on white. */
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+  header,
+  video,
+  .no-print {
+    display: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+  }
+  a {
+    text-decoration: underline;
   }
 }

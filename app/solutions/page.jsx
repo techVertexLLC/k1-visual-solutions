@@ -5,8 +5,11 @@ import FaqAccordion from "@/components/solutions/FaqAccordion";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
 import Reveal from "@/components/ui/Reveal";
+import JsonLd from "@/components/ui/JsonLd";
 import { COLOR, FONT, BLUR } from "@/components/home/tokens";
 import { pageMetadata } from "@/lib/seo";
+import { FAQS } from "@/lib/faqs";
+import { faqJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata = pageMetadata({
   title: "Solutions — Applications for Transparent LED",
@@ -41,6 +44,17 @@ const INSTALL_GUIDES = [
 export default function SolutionsPage() {
   return (
     <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
+      {/* FAQPage schema (shares lib/faqs.js with the visible accordion below) +
+          BreadcrumbList mirroring the Home / Solutions trail in the banner. */}
+      <JsonLd
+        data={[
+          faqJsonLd(FAQS),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Solutions" },
+          ]),
+        ]}
+      />
       <PageBanner
         eyebrow="Solutions"
         title="Where vision meets space"

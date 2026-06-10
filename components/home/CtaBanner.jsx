@@ -99,7 +99,7 @@ export default function CtaBanner() {
       <div className="mx-auto max-w-6xl">
         <div
           ref={cardRef}
-          className="overflow-hidden rounded-3xl px-8 py-14 text-center sm:px-12 sm:py-16"
+          className="grain overflow-hidden rounded-3xl px-8 py-14 text-center sm:px-12 sm:py-16"
           style={{ background: COLOR.gray, willChange: "transform, opacity" }}
         >
           <h2
@@ -128,15 +128,13 @@ export default function CtaBanner() {
           >
             <a
               href="/contact"
-              className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
-              style={{ background: COLOR.accent }}
+              className="btn-lift btn-glow btn-shimmer rounded-full bg-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-white hover:bg-[#5A50C7]"
             >
               Request a Quote
             </a>
             <a
               href="/products"
-              className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-opacity-10"
-              style={{ borderColor: COLOR.accent, color: COLOR.accent }}
+              className="group btn-lift inline-flex items-center gap-2 rounded-full border border-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-[#4F46B5] hover:bg-[#4F46B5]/[0.06]"
             >
               Browse Products
               <span className="transition-transform duration-300 group-hover:translate-x-1">

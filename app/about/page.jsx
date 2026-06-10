@@ -3,9 +3,11 @@ import PageBanner from "@/components/ui/PageBanner";
 import Reveal from "@/components/ui/Reveal";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/ui/JsonLd";
 import { CheckIcon, PinIcon, DualDriveIcon } from "@/components/ui/icons";
 import { COLOR, FONT, BLUR } from "@/components/home/tokens";
 import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 import { CONTACT } from "@/lib/demo";
 
 export const metadata = pageMetadata({
@@ -60,6 +62,12 @@ const PRINCIPLES = [
 export default function AboutPage() {
   return (
     <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About" },
+        ])}
+      />
       <PageBanner
         eyebrow="About"
         title="A quieter way to put light into a space"

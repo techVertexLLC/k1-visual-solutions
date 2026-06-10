@@ -26,8 +26,8 @@ export default function BackToTop() {
       type="button"
       onClick={toTop}
       aria-label="Back to top"
-      className={`fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border shadow-md transition-all duration-300 hover:-translate-y-0.5 ${
-        show ? "opacity-100" : "pointer-events-none opacity-0"
+      className={`no-print fixed bottom-6 right-6 z-30 flex h-11 w-11 items-center justify-center rounded-full border shadow-md transition-all duration-300 ease-premium hover:-translate-y-1 hover:shadow-card-hover active:translate-y-0 active:scale-90 ${
+        show ? "scale-100 opacity-100" : "pointer-events-none scale-90 opacity-0"
       }`}
       style={{
         background: COLOR.gray,

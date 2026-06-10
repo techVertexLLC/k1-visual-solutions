@@ -44,12 +44,12 @@ export default function ProductCard({ product, variant = "regular" }) {
   return (
     <article
       className={[
-        "group flex h-full flex-col overflow-hidden rounded-2xl",
+        "group flex h-full flex-col overflow-hidden rounded-2xl shadow-card",
         // Card lift on hover — disabled when reduced motion prefers no movement
         shouldReduce
           ? "transition-shadow duration-300"
-          : "transition-all duration-300 hover:-translate-y-1",
-        "hover:shadow-[0_14px_36px_-14px_rgba(26,26,26,0.22)]",
+          : "transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-1",
+        "hover:shadow-card-hover",
       ].join(" ")}
       style={{ border: `1px solid ${COLOR.gray}`, background: "#fff" }}
       onMouseEnter={() => setHovered(true)}
@@ -87,9 +87,11 @@ export default function ProductCard({ product, variant = "regular" }) {
             blurDataURL={BLUR}
             className={[
               "object-cover",
+              // Image zoom runs a beat slower than the card lift — the
+              // two speeds layered together is what reads as depth.
               shouldReduce
                 ? "transition-opacity duration-300"
-                : "transition-transform duration-300 ease-out group-hover:scale-[1.03]",
+                : "transition-transform duration-500 ease-premium group-hover:scale-105",
             ].join(" ")}
           />
         ) : (

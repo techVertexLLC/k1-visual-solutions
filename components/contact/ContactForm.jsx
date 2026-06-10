@@ -15,7 +15,7 @@ import { COLOR, FONT } from "@/components/home/tokens";
  */
 
 const inputBase =
-  "w-full rounded-lg border bg-white px-4 py-3 text-sm outline-none transition-colors";
+  "w-full rounded-lg border bg-white px-4 py-3 text-sm outline-none transition-[border-color,box-shadow] duration-200";
 
 const ERROR_RED = "#B91C1C";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -68,15 +68,19 @@ function Field({ id, label, type = "text", as = "input", options, error, ...rest
       >
         {label}
       </label>
+      {/* Border colour lives in classes, not inline style — an inline
+          borderColor would override the focus: classes and the accent focus
+          state would never show. */}
       <Tag
         id={id}
         name={id}
         type={Tag === "input" ? type : undefined}
-        className={`${inputBase} ${invalid ? "" : "focus:border-[color:var(--accent)]"}`}
-        style={{
-          borderColor: invalid ? ERROR_RED : COLOR.gray,
-          color: COLOR.ink,
-        }}
+        className={`${inputBase} ${
+          invalid
+            ? "border-[#B91C1C] focus:ring-[3px] focus:ring-[#B91C1C]/10"
+            : "border-[#E8E4DF] focus:border-[#4F46B5] focus:ring-[3px] focus:ring-[#4F46B5]/10"
+        }`}
+        style={{ color: COLOR.ink }}
         aria-invalid={invalid || undefined}
         aria-describedby={invalid ? `${id}-error` : undefined}
         {...rest}
@@ -255,8 +259,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-8 w-full rounded-full px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-        style={{ background: COLOR.accent }}
+        className="btn-lift btn-glow btn-shimmer mt-8 w-full rounded-full bg-[#4F46B5] px-6 py-3 text-sm font-medium text-white hover:bg-[#5A50C7] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {submitting ? "Sending…" : "Request a Quote"}
       </button>

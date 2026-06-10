@@ -3,6 +3,8 @@ import { CONTACT } from "@/lib/demo";
 export const metadata = {
   title: "K1 Visual Solutions — Transparent LED Specs & Comparison | Variant B",
   description: `Information-dense, spec-driven B2B overview of ${CONTACT.brand}' transparent LED product lines — comparison tables, certifications, and FAQs.`,
+  // Internal design variant — kept out of the index (also blocked in robots.txt).
+  robots: { index: false, follow: false },
 };
 
 /**

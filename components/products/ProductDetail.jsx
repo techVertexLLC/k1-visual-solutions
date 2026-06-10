@@ -114,15 +114,13 @@ export default function ProductDetail({ product, related }) {
                 <div className="mt-9 flex flex-wrap gap-3">
                   <a
                     href="/contact"
-                    className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
-                    style={{ background: COLOR.accent }}
+                    className="btn-lift btn-glow btn-shimmer rounded-full bg-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-white hover:bg-[#5A50C7]"
                   >
                     Request a Quote
                   </a>
                   <a
                     href="/products"
-                    className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
-                    style={{ borderColor: COLOR.ink, color: COLOR.ink }}
+                    className="group btn-lift inline-flex items-center gap-2 rounded-full border border-[#1A1A1A] px-7 py-3 text-sm font-medium tracking-wide text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
                   >
                     All products
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -257,7 +255,7 @@ export default function ProductDetail({ product, related }) {
                       sizes="(max-width: 640px) 100vw, 33vw"
                       placeholder="blur"
                       blurDataURL={BLUR}
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                      className="object-cover transition-transform duration-700 ease-premium group-hover:scale-105"
                     />
                     <div className="absolute inset-x-0 bottom-0 p-4">
                       <span
@@ -311,7 +309,7 @@ export default function ProductDetail({ product, related }) {
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <div
-              className="overflow-hidden rounded-3xl px-8 py-14 text-center sm:px-12"
+              className="grain overflow-hidden rounded-3xl px-8 py-14 text-center sm:px-12"
               style={{ background: COLOR.gray }}
             >
               <h2
@@ -327,15 +325,13 @@ export default function ProductDetail({ product, related }) {
               <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                 <a
                   href="/contact"
-                  className="rounded-full px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
-                  style={{ background: COLOR.accent }}
+                  className="btn-lift btn-glow btn-shimmer rounded-full bg-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-white hover:bg-[#5A50C7]"
                 >
                   Request a Quote
                 </a>
                 <a
                   href="/products"
-                  className="group inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5"
-                  style={{ borderColor: COLOR.ink, color: COLOR.ink }}
+                  className="group btn-lift inline-flex items-center gap-2 rounded-full border border-[#1A1A1A] px-7 py-3 text-sm font-medium tracking-wide text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
                 >
                   Explore More Products
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -349,7 +345,7 @@ export default function ProductDetail({ product, related }) {
       {/* Sticky mobile CTA — appears after scrolling past hero */}
       {showSticky && (
         <div
-          className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-4 px-5 py-4 shadow-2xl md:hidden"
+          className="no-print fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-4 px-5 py-4 shadow-2xl md:hidden"
           style={{ background: "#fff", borderTop: "1px solid " + COLOR.gray }}
         >
           <span className="truncate text-sm font-medium" style={{ color: COLOR.ink }}>
@@ -357,8 +353,7 @@ export default function ProductDetail({ product, related }) {
           </span>
           <a
             href="/contact"
-            className="flex-none rounded-full px-5 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90"
-            style={{ background: COLOR.accent }}
+            className="btn-lift btn-glow flex-none rounded-full bg-[#4F46B5] px-5 py-2.5 text-sm font-medium text-white"
           >
             Request a Quote
           </a>

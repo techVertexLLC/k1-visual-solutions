@@ -200,9 +200,11 @@ export default function CategorySidebar({ active, onSelect }) {
                             onClick={() => toggleGroup(item.key)}
                             className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded text-xs transition-colors hover:bg-[#E8E4DF]"
                             style={{ color: COLOR.muted }}
-                            aria-label={isOpen ? "Collapse" : "Expand"}
+                            aria-expanded={isOpen}
+                            aria-controls={`catalog-group-${item.key}`}
+                            aria-label={`${isOpen ? "Collapse" : "Expand"} ${item.label}`}
                           >
-                            {isOpen ? "▾" : "▸"}
+                            <span aria-hidden="true">{isOpen ? "▾" : "▸"}</span>
                           </button>
 
                           {/* Category name — selects this category */}
@@ -223,7 +225,10 @@ export default function CategorySidebar({ active, onSelect }) {
 
                         {/* Sub-items (display only; clicking selects parent) */}
                         {isOpen && (
-                          <ul className="ml-7 mt-1 space-y-0.5">
+                          <ul
+                            id={`catalog-group-${item.key}`}
+                            className="ml-7 mt-1 space-y-0.5"
+                          >
                             {item.children.map((child) => (
                               <li key={child}>
                                 <button

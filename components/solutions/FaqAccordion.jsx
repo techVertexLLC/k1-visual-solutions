@@ -4,40 +4,16 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
 import { COLOR, FONT } from "@/components/home/tokens";
-import { CONTACT } from "@/lib/demo";
+import { FAQS } from "@/lib/faqs";
 
 /**
  * FAQ accordion for the Solutions page. Quiet, single-column list of common
  * B2B LED-display questions with a + / − toggle and a smooth expand/collapse.
  * One panel open at a time. Styled to the warm, minimal site aesthetic.
+ *
+ * Questions/answers live in lib/faqs.js so the same content also feeds the
+ * FAQPage structured data emitted on /solutions.
  */
-
-const FAQS = [
-  {
-    q: "What is the minimum order quantity?",
-    a: "We work on a per-project basis. No fixed MOQ — tell us your wall size and we'll spec the right system.",
-  },
-  {
-    q: "How long does shipping take?",
-    a: "Typical lead time is 3–5 weeks from order confirmation. Rush orders can be arranged.",
-  },
-  {
-    q: "Do you offer installation support?",
-    a: "We provide detailed mounting documentation and can connect you with certified integrators in your region.",
-  },
-  {
-    q: "What warranty do you offer?",
-    a: "Standard 3-year warranty on all LED panels. Extended warranty options available.",
-  },
-  {
-    q: "Can I see a demo unit?",
-    a: `Yes. We keep demo units at our ${CONTACT.city} showroom. Contact us to schedule a visit.`,
-  },
-  {
-    q: "What content formats are supported?",
-    a: "Our displays accept HDMI, USB, and network input. We support MP4, JPG, PNG, and most standard media formats.",
-  },
-];
 
 function FaqItem({ item, isOpen, onToggle }) {
   return (
@@ -55,12 +31,26 @@ function FaqItem({ item, isOpen, onToggle }) {
           >
             {item.q}
           </span>
+          {/* A plus that rotates 45° into an × — one glyph, one smooth motion,
+              instead of swapping characters mid-air. */}
           <span
-            className="flex h-6 w-6 flex-none items-center justify-center text-xl leading-none"
+            className={`flex h-6 w-6 flex-none items-center justify-center transition-transform duration-300 ease-premium ${
+              isOpen ? "rotate-45" : ""
+            }`}
             style={{ color: COLOR.accent }}
             aria-hidden
           >
-            {isOpen ? "−" : "+"}
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            >
+              <path d="M7 1v12M1 7h12" />
+            </svg>
           </span>
         </button>
       </h3>

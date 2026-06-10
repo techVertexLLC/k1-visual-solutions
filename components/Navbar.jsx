@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { COLOR, FONT } from "./home/tokens";
 import { SOCIAL_LINKS } from "./ui/social";
 import BrandLogo from "./ui/BrandLogo";
@@ -53,10 +53,7 @@ function NavSocial() {
           target={href.startsWith("http") ? "_blank" : undefined}
           rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
           aria-label={label}
-          className="flex h-8 w-8 items-center justify-center rounded-full p-1.5 transition-colors"
-          style={{ color: COLOR.muted }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.accent)}
-          onMouseLeave={(e) => (e.currentTarget.style.color = COLOR.muted)}
+          className="flex h-8 w-8 items-center justify-center rounded-full p-1.5 text-[#6B655C] transition-colors duration-200 hover:bg-[#4F46B5]/[0.06] hover:text-[#4F46B5]"
         >
           <Icon />
         </a>
@@ -69,6 +66,24 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
+
+  // Mobile sheet items cascade in after the panel opens; collapses to a
+  // plain fade (no x drift, no stagger) under prefers-reduced-motion.
+  const sheetList = {
+    hidden: {},
+    show: reduceMotion
+      ? {}
+      : { transition: { staggerChildren: 0.045, delayChildren: 0.05 } },
+  };
+  const sheetItem = {
+    hidden: reduceMotion ? { opacity: 1 } : { opacity: 0, x: -10 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   // Lock body scroll while the mobile sheet is open.
   useEffect(() => {
@@ -94,8 +109,11 @@ export default function Navbar() {
         className="mx-auto flex h-28 max-w-6xl items-center justify-between px-6 lg:px-10"
         aria-label="Primary"
       >
-        {/* Logo — BrandLogo variant="navbar" → h-40 / sm:h-48 */}
-        <a href="/" className="flex items-center px-1 py-2">
+        {/* Logo — BrandLogo variant="navbar" → h-40 / sm:h-48. The PNG is a
+            square canvas with large transparent margins, so the anchor clips
+            to the bar height: the visible mark is untouched, but the dead
+            clickable area above/below the bar is removed. */}
+        <a href="/" className="flex h-full items-center overflow-hidden px-1">
           <BrandLogo variant="navbar" />
         </a>
 
@@ -109,16 +127,20 @@ export default function Navbar() {
                 className="relative"
                 onMouseEnter={() => setProductsOpen(true)}
                 onMouseLeave={() => setProductsOpen(false)}
+                onFocus={() => setProductsOpen(true)}
+                onBlur={(e) => {
+                  // Close only when focus leaves the trigger and the dropdown
+                  if (!e.currentTarget.contains(e.relatedTarget)) {
+                    setProductsOpen(false);
+                  }
+                }}
               >
                 <a
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className="flex items-center gap-1 text-sm font-medium transition-colors"
-                  style={{ color: active ? COLOR.ink : COLOR.body }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = active ? COLOR.ink : COLOR.body)
-                  }
+                  className={`nav-link flex items-center gap-1 py-2 text-sm font-medium transition-colors duration-200 ${
+                    active ? "text-[#1A1A1A]" : "text-[#4A4A4A] hover:text-[#1A1A1A]"
+                  }`}
                 >
                   {link.label}
                   <svg
@@ -138,19 +160,21 @@ export default function Navbar() {
                 <AnimatePresence>
                   {productsOpen && (
                     <motion.ul
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.18 }}
-                      className="absolute left-1/2 top-full w-64 -translate-x-1/2 overflow-hidden rounded-xl border pt-2 shadow-lg"
+                      // Centering lives in framer's x — a Tailwind -translate-x-1/2
+                      // would be overwritten the moment framer writes its own
+                      // inline transform for the y animation.
+                      initial={{ opacity: 0, y: 6, x: "-50%" }}
+                      animate={{ opacity: 1, y: 0, x: "-50%" }}
+                      exit={{ opacity: 0, y: 6, x: "-50%" }}
+                      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute left-1/2 top-full w-64 overflow-hidden rounded-xl border pt-2 shadow-[0_18px_40px_-16px_rgba(26,26,26,0.18)]"
                       style={{ background: "#fff", borderColor: COLOR.gray }}
                     >
                       {link.sublinks.map((sub) => (
                         <li key={sub.href}>
                           <a
                             href={sub.href}
-                            className="block px-5 py-3 text-sm transition-colors hover:bg-[#FAF8F5]"
-                            style={{ color: COLOR.body }}
+                            className="block px-5 py-3 text-sm text-[#4A4A4A] transition-[background-color,padding-left,color] duration-200 ease-premium hover:bg-[#FAF8F5] hover:pl-6 hover:text-[#1A1A1A]"
                           >
                             {sub.label}
                           </a>
@@ -165,12 +189,9 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className="text-sm font-medium transition-colors"
-                  style={{ color: active ? COLOR.ink : COLOR.body }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = COLOR.ink)}
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = active ? COLOR.ink : COLOR.body)
-                  }
+                  className={`nav-link inline-block py-2 text-sm font-medium transition-colors duration-200 ${
+                    active ? "text-[#1A1A1A]" : "text-[#4A4A4A] hover:text-[#1A1A1A]"
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -184,8 +205,7 @@ export default function Navbar() {
           <NavSocial />
           <a
             href="/contact"
-            className="hidden rounded-full px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 sm:inline-block"
-            style={{ background: COLOR.accent }}
+            className="btn-lift btn-glow btn-shimmer hidden rounded-full bg-[#4F46B5] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#5A50C7] sm:inline-block"
           >
             Request a Quote
           </a>
@@ -193,7 +213,7 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-11 w-11 items-center justify-center rounded-lg border md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-lg border transition-transform duration-200 active:scale-90 md:hidden"
             style={{ borderColor: COLOR.gray, color: COLOR.ink }}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -223,25 +243,35 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{
+              duration: reduceMotion ? 0 : 0.3,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="overflow-hidden border-t md:hidden"
             style={{ borderColor: COLOR.gray, backgroundColor: COLOR.bg }}
           >
-            <ul className="space-y-1 px-6 py-4">
+            {/* mobile-menu-scroll: caps the sheet to the visible viewport so the
+                CTA and social row stay reachable on short screens while body
+                scroll is locked. */}
+            <motion.ul
+              variants={sheetList}
+              initial="hidden"
+              animate="show"
+              className="mobile-menu-scroll space-y-1 px-6 py-4"
+            >
               {NAV_LINKS.map((link) => (
-                <li key={link.href}>
+                <motion.li variants={sheetItem} key={link.href}>
                   {/* DC-021: min-h-[48px] Apple HIG 觸控標準 */}
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
                     aria-current={isActivePath(link.href, pathname) ? "page" : undefined}
-                    className="flex min-h-[48px] items-center rounded-lg px-3 text-base font-medium"
-                    style={{
-                      color: COLOR.ink,
-                      background: isActivePath(link.href, pathname)
-                        ? "#fff"
-                        : "transparent",
-                    }}
+                    className={`flex min-h-[48px] items-center rounded-lg px-3 text-base font-medium transition-colors duration-200 active:bg-white ${
+                      isActivePath(link.href, pathname)
+                        ? "border-l-2 border-[#4F46B5] bg-white"
+                        : ""
+                    }`}
+                    style={{ color: COLOR.ink }}
                   >
                     {link.label}
                   </a>
@@ -253,7 +283,7 @@ export default function Navbar() {
                           <a
                             href={sub.href}
                             onClick={() => setOpen(false)}
-                            className="flex min-h-[48px] items-center rounded-lg px-3 text-sm"
+                            className="flex min-h-[48px] items-center rounded-lg px-3 text-sm transition-colors duration-200 active:bg-white"
                             style={{ color: COLOR.body }}
                           >
                             {sub.label}
@@ -262,23 +292,26 @@ export default function Navbar() {
                       ))}
                     </ul>
                   )}
-                </li>
+                </motion.li>
               ))}
 
-              <li className="pt-2">
+              <motion.li variants={sheetItem} className="pt-2">
                 <a
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="block rounded-full px-4 py-3 text-center text-sm font-medium text-white"
-                  style={{ background: COLOR.accent }}
+                  className="btn-lift btn-glow block rounded-full bg-[#4F46B5] px-4 py-3 text-center text-sm font-medium text-white"
                 >
                   Request a Quote
                 </a>
-              </li>
+              </motion.li>
 
-              {/* Social row — only when there are real links to show */}
+              {/* Social row — only when there are real links to show.
+                  h-11/w-11 keeps each icon at the 44px touch minimum. */}
               {SOCIAL_LINKS.length > 0 && (
-                <li className="flex items-center justify-center gap-3 pt-4">
+                <motion.li
+                  variants={sheetItem}
+                  className="flex items-center justify-center gap-3 pt-4"
+                >
                   {SOCIAL_LINKS.map(({ label, href, Icon }) => (
                     <a
                       key={label}
@@ -286,15 +319,15 @@ export default function Navbar() {
                       target={href.startsWith("http") ? "_blank" : undefined}
                       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                       aria-label={label}
-                      className="flex h-9 w-9 items-center justify-center rounded-full border p-2"
+                      className="flex h-11 w-11 items-center justify-center rounded-full border p-2.5 transition-transform duration-200 active:scale-90"
                       style={{ borderColor: COLOR.gray, color: COLOR.muted }}
                     >
                       <Icon />
                     </a>
                   ))}
-                </li>
+                </motion.li>
               )}
-            </ul>
+            </motion.ul>
           </motion.div>
         )}
       </AnimatePresence>

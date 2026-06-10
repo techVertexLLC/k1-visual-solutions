@@ -39,6 +39,16 @@ module.exports = {
         glow: "0 0 20px rgba(34,211,238,0.45), 0 0 40px rgba(124,58,237,0.25)",
         "glow-lg":
           "0 0 30px rgba(34,211,238,0.55), 0 0 70px rgba(124,58,237,0.35)",
+        // Warm-canvas card shadows — ink-tinted, never gray-blue.
+        card: "0 1px 2px rgba(26,26,26,0.04)",
+        "card-hover":
+          "0 18px 40px -16px rgba(26,26,26,0.18), 0 4px 12px -6px rgba(26,26,26,0.06)",
+        // Soft brand glow under primary CTAs on hover.
+        cta: "0 10px 28px -10px rgba(79,70,181,0.5)",
+      },
+      transitionTimingFunction: {
+        // Shared premium curve for hover lifts / zooms (Material standard ease).
+        premium: "cubic-bezier(0.4, 0, 0.2, 1)",
       },
       keyframes: {
         "led-pulse": {

@@ -3,7 +3,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/ui/BackToTop";
 import PageTransition from "@/components/ui/PageTransition";
+import JsonLd from "@/components/ui/JsonLd";
 import { CONTACT } from "@/lib/demo";
+import { SITE_URL, siteJsonLd } from "@/lib/structured-data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,8 +21,6 @@ const dmSerif = DM_Serif_Display({
   variable: "--font-dmserif",
   display: "swap",
 });
-
-const SITE_URL = "https://k1visual.com";
 
 // Root metadata owns the site-wide defaults only: metadataBase, the title
 // template, keywords, icons, and the global robots directive. Each page
@@ -58,38 +58,8 @@ export const viewport = {
   themeColor: "#FAF8F5",
   width: "device-width",
   initialScale: 1,
-};
-
-// Site-wide Organization + LocalBusiness structured data — feeds rich results
-// (knowledge panel, business info) in search. Rendered once in the document head.
-const ORGANIZATION_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": ["Organization", "LocalBusiness"],
-  name: "K1 Visual Solutions",
-  legalName: CONTACT.companyLegal,
-  url: SITE_URL,
-  logo: `${SITE_URL}/assets/images/k1-logo.png`,
-  description:
-    "Premium distributor of transparent, flexible, and holographic LED display solutions across North America.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: CONTACT.street,
-    addressLocality: CONTACT.city,
-    addressRegion: CONTACT.region,
-    postalCode: CONTACT.postalCode,
-    addressCountry: "US",
-  },
-  areaServed: [
-    { "@type": "Country", name: "United States" },
-    { "@type": "Country", name: "Canada" },
-  ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: CONTACT.phoneIntl,
-    contactType: "sales",
-    email: CONTACT.email,
-  },
-  sameAs: [],
+  // Lets fixed bars pad themselves with env(safe-area-inset-*) on notched phones.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }) {
@@ -106,10 +76,10 @@ export default function RootLayout({ children }) {
         <noscript>
           <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important;}`}</style>
         </noscript>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
-        />
+        {/* Site-wide Organization/LocalBusiness + WebSite graph — feeds rich
+            results (knowledge panel, business info) and lets per-page Product /
+            Breadcrumb schema reference the Organization by @id. */}
+        <JsonLd data={siteJsonLd()} />
       </head>
       <body className="bg-[#FAF8F5] font-sans antialiased overflow-x-hidden">
         {/* Skip link — visible only on keyboard focus, jumps past the nav. */}

@@ -145,7 +145,7 @@ export default function ProductCatalog() {
                     onClick={() => setActive(cat.key)}
                     onMouseEnter={() => setHoveredPill(cat.key)}
                     onMouseLeave={() => setHoveredPill(null)}
-                    className="flex-none whitespace-nowrap rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-200"
+                    className="flex-none whitespace-nowrap rounded-full border px-4 py-1.5 text-sm font-medium transition-[color,background-color,border-color,transform] duration-200 active:scale-95"
                     style={{
                       borderColor:
                         isActive || isHovered ? COLOR.accent : COLOR.gray,
@@ -169,14 +169,8 @@ export default function ProductCatalog() {
                 aria-label="Sort products"
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="rounded-lg border px-3 py-1.5 text-sm"
-                style={{
-                  borderColor: COLOR.gray,
-                  color: COLOR.body,
-                  background: "#fff",
-                  cursor: "pointer",
-                  outline: "none",
-                }}
+                className="cursor-pointer rounded-lg border border-[#E8E4DF] bg-white px-3 py-1.5 text-sm transition-[border-color,box-shadow] duration-200 focus:border-[#4F46B5] focus:ring-[3px] focus:ring-[#4F46B5]/10"
+                style={{ color: COLOR.body }}
               >
                 <option value="default">Sort by</option>
                 <option value="pitch-asc">Pixel pitch: fine → coarse</option>
