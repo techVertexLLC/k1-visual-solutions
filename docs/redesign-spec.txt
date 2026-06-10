@@ -1,0 +1,377 @@
+K1visual.com 網站改版方案 — 三款產品獨立產品頁
+K1 Visual Solutions 網站改版方案
+目標網站：https://k1visual.com　|　核心任務：為三款產品各建立獨立產品詳情頁，把現有「卡片牆」式的 Products 頁升級為「列表頁 → 詳情頁」結構，讓客戶一眼看懂：這是什麼 → 用在哪裡 → 有哪些型號規格 → 怎麼安裝 → 實際案例效果。
+本文件是完整的執行規格書：每一個版塊用什麼圖、什麼視頻、什麼文案、什麼數據，全部寫明，照此執行即可。
+產品一：晶膜LED貼膜屏（Crystal Film LED Screen）
+產品二：SMD全息LED貼膜屏（Holographic Invisible Screen）
+產品三：軟性LED字幕屏 Soft LED Display（PIXELLAB HRP 系列）
+方案日期：2026-06-10
+目錄
+0. 給執行者的總指令
+1. 現狀診斷
+2. 新資訊架構與路由
+3. 素材資產總表（重命名對照）
+4. 產品詳情頁通用模板
+5. 產品頁①：晶膜LED貼膜屏
+6. 產品頁②：SMD全息LED貼膜屏
+7. 產品頁③：軟性LED字幕屏
+8. Products 列表頁改版
+9. 首頁 / Solutions 頁聯動修改
+10. SEO 與技術要求
+11. 數據矛盾與缺料清單
+12. 驗收清單
+0給執行者的總指令
+本方案的素材全部位於本機文件夾 LED promotion（與本 HTML 同一目錄）。文中所有 素材路徑 都是相對於該文件夾的路徑，方案內已直接內嵌預覽圖/預覽視頻，可直接核對是哪張圖。
+所有素材在上傳到網站前，必須按第 3 節的對照表重命名為英文小寫檔名（中文檔名、空格、括號會造成 URL 編碼問題與 SEO 損失）。
+網站是英文站。本方案文案以中文撰寫，請翻譯為自然、地道的 B2B 行銷英文後上站；規格表中的數字、單位一律照抄不得改動。
+視覺基調沿用現有網站：暖白底 #FAF8F5、深色文字、大圖留白、襯線標題。產品頁要做出「視覺享受」：大尺寸實拍圖 + 自動播放的無聲循環視頻 + 滾動漸顯動畫，但信息層次必須清晰，不允許為了炫而犧牲可讀性。
+三款產品的詳情頁使用同一個模板（第 4 節），保證瀏覽體驗一致；內容按第 5、6、7 節填充。
+規格數據來源：晶膜屏來自供應商 reefilm-led.com 各型號頁；全息屏來自《LED全息隱形屏說明書》PDF 與產品手冊 docx，以 PDF 為準。第 11 節列出已知的數據矛盾及處理方式，請照做。
+供應商網站 reefilm-led.com 與 milestrongled.com 的產品圖允許下載使用（用戶已確認），具體哪張用在哪裡，第 5、6 節有明確 URL。下載後同樣重命名並本地化託管，不要熱鏈接。
+1現狀診斷（為什麼要改）
+基於 2026-06-10 對 k1visual.com 線上版本的逐頁檢查。
+| 位置 | 現狀問題 | 嚴重度
+| /products | 產品只以卡片＋篩選（Series T / Series F / Holographic）形式呈現，沒有任何產品詳情頁。客戶看到卡片後無處深入：沒有完整規格表、沒有型號對比、沒有安裝說明、沒有案例視頻。B2B 客戶無法憑此頁完成「了解→詢價」的決策。 | ★★★ 致命
+| 全站 | 產品命名（Series T 透明海報屏 / Series F 柔性膜）與公司實際的三款產品線（晶膜屏、全息屏、LED貼膜屏）對應關係不清晰，客戶與銷售溝通時容易對不上號。 | ★★ 高
+| 全站 | 缺少真實案例內容。文件夾裡有 60+ 條工程實拍視頻（北京大興機場、澳門星際、可口可樂、廣汽本田、上海雅詩蘭黛、西安芯派展廳等），這是最有說服力的銷售素材，目前網站完全沒有使用。 | ★★★ 致命
+| /solutions | 行業應用版塊做得不錯（保留），但每個行業卡片只能跳回 products 篩選頁，應改為跳到對應產品詳情頁的對應錨點。 | ★ 中
+| 全站 | 規格信息幾乎缺失：客戶最關心的「點間距有哪些、模組尺寸多大、透光率多少、多重、怎麼供電、怎麼安裝」都查不到。 | ★★★ 致命
+| 頁腳/聯絡 | 社交圖標全部是 # 空鏈接，顯得網站未完工，傷害信任感。要麼填真實鏈接，要麼先移除。 | ★ 中
+2新資訊架構與路由
+2.1 路由規劃 新增
+| 路由 | 頁面 | 說明
+| /products | 產品總覽（列表頁） | 保留並改版，見第 8 節。三張大型產品卡，點擊進入詳情頁。
+| /products/crystal-film | 產品①詳情：Crystal Film LED Screen（晶膜LED貼膜屏） | 新建，內容見第 5 節
+| /products/holographic | 產品②詳情：SMD Holographic Invisible Screen（全息LED貼膜屏） | 新建，內容見第 6 節
+| /products/soft-led-display | 產品③詳情：Soft LED Display（軟性LED字幕屏） | 新建，內容見第 7 節。資料已到位，與前兩款同批上線。
+2.2 導航修改 修改
+頂部導航 Products 改為下拉菜單（桌面 hover / 移動端展開）：
+• Crystal Film LED Screen
+• Holographic Invisible Screen
+• Soft LED Display
+• View All Products →（去 /products）
+頁腳「Products」欄三個鏈接同步改為指向三個詳情頁，替換現有的 ?series= 篩選鏈接。
+原有 Series T / Series F / Holographic 的叫法停止對外使用。如果現有代碼中 Series T/F 各自有獨立卡片數據，將它們合併歸入「Crystal Film LED Screen」詳情頁的型號表（P5–P20 共用同一產品架構，差異只在點間距/燈珠）。
+產品命名定稿（全站統一使用）：
+① Crystal Film LED Screen（晶膜LED貼膜屏）— 自粘柔性透明貼膜屏，供應鏈對應 REEFILM Rex/Rem 系列，型號 P6.25 / P8 / P10 / P15 / P20（案例中另有 P5、P6 工程定制）。
+② SMD Holographic Invisible Screen（SMD全息LED貼膜屏）— 高密度全息隱形屏，型號 P2.5 / P3.91 / P6.25 / P10。
+③ Soft LED Display（軟性LED字幕屏）— 即插即用的柔性 LED 字幕屏成品，App＋遙控控制，型號 HRP 系列三尺寸：M 35" / L 52" / XL 70"。與前兩款的本質區別：這是面向中小商戶的標準化成品（按台賣），而非工程項目制產品（按平米賣）——頁面敘事、CTA 都要按「零售/分銷產品」邏輯來做（見 7.0 定位說明）。
+3素材資產總表（上傳前重命名對照）
+所有檔案位於 LED promotion/ 文件夾。上站時統一放入 /assets/images/products/ 與 /assets/videos/，按下表重命名。下方各節引用素材時，同時給出「原始路徑」與「上站檔名」。
+3.1 產品①晶膜屏 — 應用場景圖（9 張，效果圖彩頁）
+| 原始路徑（LED promotion/ 下） | 上站檔名 | 畫面內容（核對用）
+| 彩页效果图LED晶膜屏/微信图片_20260603115251_650_226.jpg | cf-app-facade-curve-night.jpg | 曲面玻璃幕牆夜景，橙色星球+三角形視覺內容，可見燈珠網點
+| 彩页效果图LED晶膜屏/微信图片_20260603115252_651_226.jpg | cf-app-glassbox-angel.jpg | 玻璃盒展館，藍色天使全息畫面，白天通透效果極佳
+| 彩页效果图LED晶膜屏/微信图片_20260603115253_652_226.jpg | cf-app-curved-pavilion.jpg | 異形曲面展亭，粉紫色人像內容，展示可彎曲貼合異形玻璃
+| 彩页效果图LED晶膜屏/微信图片_20260603115254_653_226.jpg | cf-app-storefront-real.jpg | 真實工程實拍：街邊玻璃幕牆白天播放畫面，透過玻璃可見室內
+| 彩页效果图LED晶膜屏/微信图片_20260603115256_654_226.jpg | cf-app-retail-window-street.jpg | 街頭兩面巨幅櫥窗屏（PRECION 海報），行人經過，零售場景
+| 彩页效果图LED晶膜屏/微信图片_20260603115256_655_226.jpg | cf-app-mall-escalator.jpg | 商場中庭扶梯玻璃欄板全貼屏，多彩圖形內容
+| 彩页效果图LED晶膜屏/微信图片_20260603115257_656_226.jpg | cf-app-restaurant-glass.jpg | 餐廳內倒錐形異形玻璃體，多彩透光效果，餐飲/酒店場景
+| 彩页效果图LED晶膜屏/微信图片_20260603115258_657_226.jpg | cf-app-corporate-podium.jpg | 辦公樓裙樓曲面玻璃幕牆，人像海報內容，戶外廣場視角
+| 彩页效果图LED晶膜屏/微信图片_20260603115259_658_226.jpg | cf-app-fullbuilding-color.jpg | 整棟建築立面巨幅彩色人像，建築媒體立面場景
+3.2 產品①晶膜屏 — 工程案例視頻（精選 12 條 + 備選）
+來源 案例1 (3)/案例1~3/，共 35 條。精選下列 12 條上站（畫面類型覆蓋機場/展廳/櫥窗/異形/海外），其餘作為備選不上傳。視頻需轉碼壓縮（規範見第 10 節）。
+| 原始路徑 | 上站檔名 | 用途
+| 案例1 (3)/案例2/北京大兴机场P6.25.MP4 | cf-case-beijing-daxing-airport-p625.mp4 | 案例牆⭐旗艦案例：北京大興機場
+| 案例1 (3)/案例3/可口可乐P6.25.mp4 | cf-case-cocacola-p625.mp4 | 案例牆⭐知名品牌：可口可樂
+| 案例1 (3)/案例2/P6广汽本田.MP4 | cf-case-gac-honda-p6.mp4 | 案例牆：汽車 4S 店
+| 案例1 (3)/案例1/P6.25日本.MP4 | cf-case-japan-p625.mp4 | 案例牆：海外（日本）
+| 案例1 (3)/案例1/P8乌兹别克斯坦正面.MP4 | cf-case-uzbekistan-front-p8.mp4 | 案例牆：海外（烏茲別克斯坦）正面效果
+| 案例1 (3)/案例1/P8乌兹别克斯坦背面.MP4 | cf-case-uzbekistan-back-p8.mp4 | 與上一條成對：同一塊屏背面看的通透效果（放「透明度」版塊，非常有說服力）
+| 案例1 (3)/案例1/P6.25 圆 上下对拼 软排线.MP4 | cf-case-cylinder-p625.mp4 | 「柔性彎曲」版塊：圓柱形上下拼接
+| 案例1 (3)/案例3/西安赛格广场P6.25.MP4 | cf-case-xian-saige-p625.mp4 | 案例牆：大型商業體
+| 案例1 (3)/案例2/香港瑜伽馆P6.25.MP4 | cf-case-hongkong-yoga-p625.mp4 | 案例牆：臨街店鋪櫥窗
+| 案例1 (3)/案例2/东莞P20家具展厅.MP4 | cf-case-dongguan-p20-showroom.mp4 | 案例牆：P20 大間距（展示低密度型號實效）
+| 案例1 (3)/案例3/广西某银行P6.25.MP4 | cf-case-bank-p625.mp4 | 案例牆：銀行網點
+| 案例1 (3)/案例3/海外P8企业橱窗.MP4 | cf-case-overseas-window-p8.mp4 | 案例牆：海外企業櫥窗
+3.3 產品②全息屏 — 產品渲染主圖（15 張）
+來源 数视达资料 (1)/产品资料/全息主图/（组 2 / 4 / 7 / 8 / 9 / 10 / 11 / 12 / 13 / 15 / 17 / 19 / 21 / 23 / 25.jpg）。均為產品三維渲染圖：透明網狀屏體＋底部電源盒，分白底與黑底兩個系列。重命名為 holo-render-01.jpg ~ holo-render-15.jpg（按組號升序）。必用：「组 2」（白底單屏，做產品結構圖）、「组 8」（黑底雙屏點亮對比，做 Hero 備選）。
+3.4 產品②全息屏 — 細節/特寫素材（15 張）
+| 原始路徑 | 上站檔名 | 用途
+| 数视达资料 (1)/产品资料/素材/全息屏08与硬币对比.121.png | holo-detail-coin-scale-1.jpg | 屏體與硬幣對比特寫 → 「輕薄」版塊（直觀尺寸感）
+| 数视达资料 (1)/产品资料/素材/全息屏08与硬币对比.137.png | holo-detail-coin-scale-2.jpg | 同上，備選/輪播第二張
+| 数视达资料 (1)/产品资料/素材/全息屏03.139.png 等其餘 13 張 | holo-detail-01.jpg ~ holo-detail-13.jpg | 燈珠網格特寫、屏體彎曲、透明度展示 → 散布在特性版塊與畫廊
+3.5 產品②全息屏 — 分型號實拍圖（12 張）
+| 原始路徑 | 上站檔名 | 用途
+| 数视达资料 (1)/产品资料/SMDȫϢ/P3.91/001~004.jpg | holo-p391-01.jpg ~ 04.jpg | P3.91 型號圖（規格表旁的型號圖廊）
+| 数视达资料 (1)/产品资料/SMDȫϢ/P6.25/001~004.jpg | holo-p625-01.jpg ~ 04.jpg | P6.25 型號圖
+| 数视达资料 (1)/产品资料/SMDȫϢ/P10.4/SMDȫϢP10.4 (1)~(4).jpg | holo-p104-01.jpg ~ 04.jpg | P10 型號圖
+注意：SMDȫϢ 是「SMD全息」的亂碼文件夾名，內容正常，照用即可。
+3.6 產品②全息屏 — 安裝與維護素材
+| 原始路徑 | 上站檔名 | 用途
+| 数视达资料 (1)/安装方式和维修/6e1d164c167d4989fa83221937772147.jpg | holo-install-front-facing.jpg | 正貼安裝六步圖（Front Facing）— 英文原版，直接可用
+| 数视达资料 (1)/安装方式和维修/25f615c0b42148d4ab9f2be34bee0342.jpg | holo-install-back-sticker.jpg | 背貼安裝五步圖（Back Sticker）— 英文原版，直接可用
+| 数视达资料 (1)/安装方式和维修/44bf646dbdf8315a440f41ce7f05e48e.mp4 | holo-install-video.mp4 | 安裝過程實拍視頻 → 安裝版塊
+| 数视达资料 (1)/安装方式和维修/维修灯珠视频.mp4 | holo-repair-led-bead.mp4 | 燈珠維修視頻 → 「可維護性」FAQ／售後版塊
+3.7 產品②全息屏 — 案例素材
+| 原始路徑 | 上站檔名 | 用途
+| 202508西安芯派展厅 全息6.25/video_1765424666.mp4 | holo-case-xian-showroom-1.mp4 | ⭐旗艦案例：西安芯派展廳 P6.25
+| 202508西安芯派展厅 全息6.25/4d45f990bc83b07a8601c8d9b3d0b9df.mp4 | holo-case-xian-showroom-2.mp4 | 同案例第二機位
+| 202508西安芯派展厅 全息6.25/d581c32f-d425-4827-ad97-7a9e2db25d5b.jpg | holo-case-xian-showroom.jpg | 該案例封面圖（視頻 poster）
+| 数视达资料 (1)/案例/纯案例视频/video(2)~(44).mp4（41 條） | holo-case-01.mp4 起 | 挑 6 條畫質最好、場景不同的上站（執行時逐條預覽挑選：優先櫥窗、展廳、玻璃幕牆、奢侈品店場景）
+| 数视达资料 (1)/案例/ 下各 zip（澳門星際P6.0晶芯屏、上海雅詩蘭黛、廣州白雲機場夢之藍、柬埔寨賭場、長春光電產業園、合肥萬達郵政銀行、馬山旅遊度假區、南寧中廣視） | 解壓後按 holo-case-{地點}.{ext} 命名 | 解壓檢視後，為案例牆補齊「名稱可考」的案例（命名含地點與型號，可信度高）。注意：澳門星際/長春/合肥為晶芯屏案例，歸入產品①案例牆。
+3.8 產品③軟性LED字幕屏 — 素材（文件夾 LED soft screen/）
+| 原始路徑（LED promotion/LED soft screen/ 下） | 上站檔名 | 用途
+| Photos/Main photo 35_inch/35_inch.JPG | soft-m35-main.jpg | M 35" 型號主圖（含包裝/配件全家福）
+| Photos/Main Photo 52_inch/52_inch.JPG | soft-l52-main.jpg | L 52" 型號主圖（屏體彎曲展示＋App＋遙控器＋電源全家福）
+| Photos/Main photo 70_inch/70_inch.JPG | soft-xl70-main.jpg | XL 70" 型號主圖
+| Photos/Main photo {尺寸}/1~16.jpg 各尺寸圖庫 | soft-m35-01.jpg 等 | 各型號 Tab 內圖廊，每尺寸挑 4–5 張（優先：彎曲特寫、安裝、配件、效果）
+| Photos/Main Photo 52_inch/16144详情英文_01~05.jpg | （不直接上站） | 供應商英文詳情長圖。不要整圖貼上網站（電商風格與站點不符），但其內容是文案與版塊依據：_01 場景、_02 柔性彎曲、_03 六大功能、_04 App 控制、_05 App 素材庫。可裁切局部使用（如 _02 的 S 形彎曲圖、_04 的 App 截圖組）。
+| Photos/Main Photo 52_inch/遥控器英文.jpg（70_inch 同圖） | soft-remote.jpg | 遙控器按鍵說明圖 → 「控制方式」版塊
+| Photos/Other Display Scenarios photo/Display Scenarios-*.JPG（10 張：Coffee Shop / Bakery / Burger / Smoke Shop ×2 / Vape ×2 / Vape Lounge / Home Decor / Bar Lounge） | soft-scene-coffee.jpg 等按場景命名 | 應用場景畫廊（全部可用，構圖統一、質量高）
+| videos/How to use video.MP4 | soft-howto.mp4 | ⭐使用教學視頻 → 「How it works」版塊
+| videos/Manual video.mp4 | soft-manual.mp4 | 操作手冊視頻 → FAQ／支持版塊
+| videos/waterproof video.mp4 | soft-waterproof-test.mp4 | 防水測試實拍 → 「防水」特性卡（實證素材，必用）
+| videos/Videos Retailer se scenarios/ 六類商戶實拍（Hair Salon & Barber 20 條、Restaurant & Bar 35 條、Smoke Shops 19 條、Grocery & Liquor 11 條、Nail & Massage 6 條、Accessories Store 12 條，多為 .MOV） | soft-case-barber-01.mp4 等按行業命名 | 案例牆：每個行業挑 2–3 條最清晰的，共 12–15 條。MOV 必須轉碼為 H.264 MP4，HEIC 圖轉 JPG。
+| Certifications/ 4 份 PDF（FCC ID、CE-RED、UKCA、UL/BCTC 測試報告，型號 HRP-1696） | soft-cert-fcc.pdf 等 | 「認證」版塊：四枚徽章＋PDF 下載鏈接（B2B 採購方很看重）
+| Package details.pdf | （數據已提取至 7.5 規格表） | 裝箱/批發數據來源；PDF 本身可做「Distributor pack info」下載件
+4產品詳情頁通用模板（三款產品共用）
+每個產品詳情頁由以下 11 個版塊按順序組成。這個順序就是客戶的認知路徑：先被打動 → 明白是什麼 → 確認用得上 → 查到規格 → 相信靠譜 → 行動。
+| 序 | 版塊 | 規範
+| 1 | Hero 全屏首屏 | 全寬視頻（自動播放/靜音/循環/帶 poster）或大圖。左下疊加：產品中英文名、一句話定位、3 個關鍵數字章（透光率/厚度/重量）、兩個按鈕「Request a Quote」「Download Spec Sheet」。視頻高度 70–80vh。
+| 2 | What is it 是什麼 | 左文右圖。3–4 句話講清楚產品本質（結構、貼在哪、為什麼透明）。右側放產品結構渲染圖。下方一行「適用場景速覽」圖標列。
+| 3 | 數字總覽條 | 一行 4–5 個大數字（透光率、厚度、重量、刷新率、壽命），滾動進入時數字滾動動畫。
+| 4 | 核心特性 | 6 個特性卡（圖標+標題+2 句說明），其中 2–3 個特性配實拍特寫圖或視頻（如背面通透視頻、硬幣對比圖）。
+| 5 | 型號與規格 Models & Specs | 本頁核心。型號切換 Tab（如 P6.25 / P8 / P10…），每個 Tab 顯示：型號圖、該型號完整規格表、適用觀看距離建議。表格下方放「全型號橫向對比表」＋「How to choose 選型指引」（觀看距離 ≈ 點間距數字，單位米）。提供整表下載 PDF 按鈕。
+| 6 | 尺寸與拼接 Size & Splicing | 模組標準尺寸示意圖（標註 mm）、可拼接方向、可定制說明。用簡單的 SVG 線框圖繪製，不要只用文字。
+| 7 | 應用場景 Applications | 大圖瀑布/橫滑畫廊（8–9 張場景圖），每張帶場景標籤（Retail / Airport / Facade…），點擊放大 lightbox。
+| 8 | 安裝 Installation | 兩種安裝方式步驟圖（正貼/背貼）＋安裝實拍視頻＋「無需鋼結構」說明。步驟用編號卡片重排，不要直接貼原圖死圖（原圖同時保留為可下載 PDF）。
+| 9 | 案例 Case Studies | 視頻牆：3 列網格，每格視頻 hover 播放（移動端點擊播放），下方標註「項目名＋型號＋地點」。首位放旗艦案例大卡。
+| 10 | FAQ | 6–8 條手風琴。必含：怎麼供電？壞了怎麼修？能戶外用嗎？怎麼上內容？最小起訂？交期？
+| 11 | CTA + 相關產品 | 詢價表單帶（預填產品名與型號下拉）＋另外兩款產品的交叉推薦卡。
+互動細節（三頁統一）：① 規格表在移動端改為「標籤：值」雙列卡片，禁止橫向滾動表格；② 所有視頻 preload="none"＋poster 圖，進入視口才加載；③ 頁內錨點導航條（What it is / Specs / Applications / Installation / Cases / FAQ）吸頂顯示；④ 每個版塊滾動進入時 16px 上移＋淡入動畫，動畫時長 ≤500ms。
+5產品頁①：晶膜LED貼膜屏 — /products/crystal-film
+英文名：Crystal Film LED Screen　|　定位語（翻譯成英文用於 Hero）：「自粘式柔性透明 LED 貼膜屏 — 2.5mm 薄、90% 以上透光，無需鋼結構，貼上玻璃即成媒體幕牆。」
+5.1 Hero 首屏 新增
+背景視頻：cf-case-beijing-daxing-airport-p625.mp4（北京大興機場），裁取最亮眼的 10–15 秒做循環；poster 用 cf-app-storefront-real.jpg。
+標題：Crystal Film LED Screen；副題（中文稿，請譯英）：「貼在玻璃上的透明顯示。白天是窗，亮起是屏。」
+三個數字章：≥90% 透光率｜2.5mm 厚｜1.3kg/模組。
+Hero 背景視頻案例1 (3)/案例2/北京大兴机场P6.25.MP4
+Hero poster / What-is 配圖彩页效果图LED晶膜屏/…653_226.jpg（真實工程實拍）
+5.2 What is it（中文稿，請譯英）
+晶膜LED貼膜屏是一種自粘式柔性透明 LED 顯示屏：燈驅合一的 Mini LED 燈珠封裝在僅 2.5mm 厚的柔性透明膜基材上，採用自研灌膠工藝，屏體自帶黏性，直接貼附在玻璃表面即可，無需鋼結構、無需打孔，接上電源信號線就能播放。透光率 90% 以上，不亮燈時幾乎隱形、不影響採光；點亮後玻璃幕牆、櫥窗瞬間變成高亮媒體屏。隱形網格電路＋燈珠內置芯片（專利），通透度行業領先。最小彎曲直徑 6cm，可貼合圓柱、弧面等異形玻璃。
+右側配圖：cf-app-glassbox-angel.jpg（白天通透效果最直觀）。場景速覽圖標行：Storefront / Glass Facade / Mall / Showroom / Airport / Exhibition。
+5.3 數字總覽條
+≥90% 透光率　·　2.5mm 屏體厚度　·　5kg/m² 重量　·　3840Hz 刷新率　·　100,000h 燈珠壽命　·　Ø6cm 最小彎曲直徑
+5.4 核心特性（6 卡，中文稿請譯英）
+| 特性卡 | 內容要點 | 配套素材
+| ① 高透光 High Transparency | 透光率 90–95%（依型號），隱形網格電路＋燈珠內置芯片專利，白天不擋光、不擋視線 | 視頻 cf-case-uzbekistan-back-p8.mp4（從屏背面看出去的通透實拍，⭐必放）
+| ② 免鋼構安裝 Stick & Play | 自研灌膠工藝屏體自帶黏性，直接貼玻璃，黏性隨時間增強；接電即用，省安裝時間與費用 | 圖 cf-app-storefront-real.jpg
+| ③ 柔性可彎 Flexible | 最小彎曲直徑 6cm，貼合圓柱/弧面/異形玻璃 | 視頻 cf-case-cylinder-p625.mp4（圓柱拼接實拍）＋圖 cf-app-curved-pavilion.jpg
+| ④ 輕薄 Ultra-thin & Light | 2.5mm 厚、約 5kg/m²，玻璃幕牆零負擔，運輸安裝便捷 | 圖：從 reefilm 下載 https://www.reefilm-led.com/upload/image/20230620/p6-display.jpg（貼膜特寫）
+| ⑤ 斷點續傳/高可靠 Reliable | 雙向驅動，單點故障時備份信號自動無縫切換；故障燈珠保持熄滅不亂閃；真 16bit 灰階 | 圖：reefilm https://www.reefilm-led.com/upload/image/20230620/p6-led-video-wall.jpg
+| ⑥ 耐候阻燃 Durable | 抗 UV 5–10 年不黃化，阻燃等級 V1，工作溫度 -20~55°C | 圖標卡即可，不必配圖
+5.5 型號與規格（Tab 切換：P6.25 / P8 / P10 / P15 / P20）
+共用參數放表頭說明，差異參數逐型號列出。數據已逐項核對供應商型號頁，照抄：
+| 參數 | P6.25 | P8 | P10 | P15 | P20
+| 像素間距 | 6.25×6.25mm | 8×8mm | 10×10mm | 15×15mm | 20×20mm
+| 模組尺寸 | 1000×400mm | 1000×400mm | 1000×400mm | 990×390mm | 1000×400mm
+| 模組分辨率 | 160×64（10,240點） | 125×50（6,250點） | 100×40（4,000點） | 66×26（1,716點） | 50×20（1,000點）
+| 像素密度 | 25,600/m² | 15,625/m² | 10,000/m² | 4,356/m² | 2,500/m²
+| 透光率 | 90% | 92% | 94% | 94% | 95%
+| 燈珠 | REE1515 | REE1515 | REE1515 | REE2022 | REE2022
+| 建議觀看距離 | ≥6m | ≥8m | ≥10m | ≥15m | ≥20m
+全系列共用參數：亮度 2000/4000nit 兩檔｜厚度 2.5mm｜模組重量 1.3kg（約5kg/m²）｜峰值功耗 600W/m²、平均 200W/m²｜刷新率 3840Hz｜灰階 16bit｜視角 160°｜靜態驅動｜控制系統 Nova / Colorlight｜輸入電壓 AC110–240V 50/60Hz｜像素構成 R1G1B1｜壽命 100,000h｜工作環境 -20~55°C、10–90%RH。
+選型指引（How to choose，放規格表下方）：經驗法則「點間距數字 ≈ 最近清晰觀看距離（米）」。櫥窗/近距零售選 P6.25；臨街中距選 P8/P10；大樓立面遠距選 P15/P20（透光率也更高、更省電）。另註明：P5、P6 等間距可工程定制（案例中有 SK-P6、海外電子煙 P5 項目）。
+5.6 尺寸與拼接
+SVG 線框圖：1000×400mm 模組，標註厚度 2.5mm、出線位置；示意上下/左右拼接成任意大屏；標註「可按玻璃分格定制裁切」。
+配 reefilm 安裝接線圖：https://www.reefilm-led.com/upload/image/20230620/p6-led-display.jpg（安裝＋接線示意，下載重畫或直接用）。
+5.7 應用場景畫廊（9 張全部使用）
+Architectural Facadecf-app-facade-curve-night
+Glass Pavilioncf-app-glassbox-angel
+Curved / Irregularcf-app-curved-pavilion
+Street-front Glazing（實拍）cf-app-storefront-real
+Retail Windowcf-app-retail-window-street
+Mall Interiorcf-app-mall-escalator
+Hospitality / F&Bcf-app-restaurant-glass
+Corporatecf-app-corporate-podium
+Media Facadecf-app-fullbuilding-color
+5.8 安裝版塊
+1
+清潔玻璃表面，紅外水平儀定位放線
+2
+撕開離型膜，屏體自帶黏膠直接貼附玻璃，硅膠輥由上至下壓實
+3
+多片拼接：對齊燈珠行列，輥壓接縫
+4
+連接電源/信號線（Nova 或 Colorlight 控制系統），通電調試
+標語：「No steel structure — stick, connect, play.」配圖用 5.6 的接線示意圖。本產品的安裝步驟圖暫缺實拍版（見第 11 節缺料清單），先用 SVG 步驟卡呈現。
+5.9 案例牆（視頻 12 條，3 列網格）
+旗艦大卡：北京大興機場 P6.25。其餘按表 3.2 全部放入，每條標註「項目｜型號｜地點」。zip 案例中屬於晶膜/晶芯屏的補充：澳門星際娛樂城 P6.0（20240104）、長春光電產業園（20250612）、合肥萬達郵政銀行（20251015）——解壓挑 1–2 張圖/視頻補進案例牆。
+Coca-Cola · P6.25
+GAC Honda 4S · P6
+烏茲別克斯坦 P8 · 背面通透實拍（放特性①）
+5.10 FAQ（中文稿請譯英）
+不亮的時候看得到屏嗎？→ 透光率 90%+，3 米外幾乎不可見，不影響室內採光。
+要不要鋼結構/打孔？→ 不要。屏體自粘貼玻璃，僅電源盒需小型固定。
+耗電多少？→ 平均 200W/m²，峰值 600W/m²（全白最高亮度）。日常視頻內容遠低於峰值。
+能貼曲面玻璃嗎？→ 可以，最小彎曲直徑 6cm。
+壞了怎麼辦？→ 單點故障自動旁路不黑屏；燈珠可單點維修。
+怎麼播內容？→ Nova/Colorlight 控制系統，支持同步/異步，手機或電腦發布。
+能用在戶外嗎？→ 屏體貼在玻璃內側，隔玻璃對外顯示（半戶外），抗UV 5–10 年。
+最小起訂量？→ 按項目報價，無固定 MOQ（沿用網站現有 FAQ 口徑）。
+6產品頁②：SMD全息LED貼膜屏 — /products/holographic
+英文名：SMD Holographic Invisible Screen　|　定位語：「小於 3mm 的高密度全息隱形屏 — 鏤空網狀 PCB，無邊框，貼上玻璃近乎隱形，點亮即是懸浮影像。」與產品①的差異化話術：更高像素密度（最小 P2.5）、畫質更細膩、支持 3D 內容（120fps），適合近距觀看的高端櫥窗/展廳；產品①則勝在更大幅面與性價比。
+6.1 Hero 首屏
+背景視頻：holo-case-xian-showroom-1.mp4（西安芯派展廳），poster 用 holo-case-xian-showroom.jpg。
+三個數字章：最高 93% 透光｜<3mm 厚｜最小 P2.5 間距。
+Hero 視頻西安芯派展廳 P6.25
+What-is 結構圖全息主图/组 2.jpg（白底渲染）
+Hero 備選 / 特性配圖全息主图/组 8.jpg（黑底點亮對比）
+6.2 What is it（中文稿，請譯英）
+SMD全息隱形屏採用鏤空網狀電路 PCB 燈板，整體無邊框結構，屏厚不足 3mm，可彎曲、可裁切，貼附於透明玻璃上渾然一體。自研驅動芯片＋高標準工藝，全系列體感通透率 80% 以上（P10 達 93%）。高像素密度帶來細膩畫質，支持 60fps、高刷 3D 內容 120fps——在玻璃上呈現「懸浮」的全息視覺效果。廣泛用於商業櫥窗、玻璃幕牆、展廳、文旅與汽車 4S 店。
+右側配圖：组 2.jpg，並以標註線標出「鏤空網狀燈板 / 電源盒 / 無邊框」三個部位。
+6.3 數字總覽條
+<3mm 屏體厚度　·　最高93% 透光率　·　≥3840Hz 刷新率　·　4000:1 對比度　·　120fps 3D 高刷　·　100,000h 芯片壽命
+6.4 核心特性（6 卡）
+| 特性卡 | 內容要點 | 配套素材
+| ① 薄 Thin | 屏厚 <3mm，貼上玻璃渾然一體 | 圖 holo-detail-coin-scale-1/2.jpg（與硬幣對比特寫，⭐必放）
+| ② 輕 Light | 單模組最輕 1.2kg，搬運安裝快，省時省費 | 圖：全息主图 组 11 或 组 13（單屏渲染）
+| ③ 巧 Ingenious / Bendable | 可彎曲、可裁切，貼合弧形與異形玻璃（內弧安裝） | 圖：素材/ 中選彎曲特寫（如 图层 66.png）
+| ④ 隱形 Invisible | 鏤空網狀電路，不亮時近乎隱形，保留建築原貌與採光 | 圖 组 8.jpg（亮/滅對比）
+| ⑤ 高畫質 High Fidelity | 最高 160,000 點/m²（P2.5）、4000:1 對比度、2000–9500K 色溫可調、支持 3D 120fps | 視頻：纯案例视频中挑 1 條畫質特寫
+| ⑥ 模組化拼接 Modular | 標準模組上下對接、左右無限擴展，整幅畫面無限延伸 | 圖：全息主图 组 23 / 组 25（多屏拼接渲染）
+6.5 型號與規格（Tab：P2.5 / P3.91 / P6.25 / P10 拼接模組）
+數據來源《LED全息隱形屏說明書》PDF（p.11–14 拼接模組），照抄：
+| 參數 | P2.5 | P3.91 | P6.25 | P10
+| 像素間距 | 2.5×2.5mm | 3.91×3.91mm | 6.25×6.25mm | 10×10mm
+| 像素密度 | 160,000/m² | 65,536/m² | 25,600/m² | 10,000/m²
+| 透光率 | 70% | 80% | 90% | 93%
+| 亮度 | ≥1,800cd/m² | ≥3,000cd/m² | ≥5,000cd/m² | ≥5,000cd/m²
+| 模組寬度 | 125mm | 250mm | 250mm | 250mm
+| 模組長度 | 1035 / 1235mm | 1035 / 1235 / 1535mm | 1235 / 1535mm | 1035 / 1535mm
+| 模組分辨率 | 50×400 / 50×480 | 64×256 / 64×307 / 64×384 | 40×192 / 40×240 | 25×100 / 25×150
+| 峰值功耗 | 800W/m² | 1,000W/m² | 1,000W/m² | 1,000W/m²
+| 平均功耗 | 350W/m² | 370W/m² | 370W/m² | 370W/m²
+| 建議觀看距離 | ≥2.5m | ≥4m | ≥6m | ≥10m
+| 型號圖廊 | —（用渲染圖） | holo-p391-01~04 | holo-p625-01~04 | holo-p104-01~04
+全系列共用參數：視角 140°（水平/垂直）｜最高對比度 4,000:1｜刷新率 ≥3,840Hz｜換幀 60fps、3D 高刷 120fps｜色溫 2,000–9,500K 可調｜防護等級 IP20｜輸入電壓 AC110–240V 50/60Hz｜平均無故障時間 ≥10,000h｜LED 芯片壽命 100,000h｜工作環境 -10~60°C、10–90%RH 無凝結｜安裝方式：玻璃直貼 / 吊裝 / 內弧安裝，支持尺寸裁剪與彎曲｜亮度與尺寸均可按需定制。
+實測功耗補充（來自工廠測試表，可做成「Real-world power」小卡增加可信度）：P6.25 播放視頻內容實測僅 180–300W/m²（1000–最高亮度檔），P3.91 為 200–280W/m²——遠低於白平衡峰值。
+延伸產品（規格 Tab 後加一小節「Ready-made formats」）：除拼接模組外，另有成品形態可選——P2.5/P3.91 室內全彩吊牌（如 758×1323mm、1008×1623mm，吊裝）與 P3.91 室內全彩廣告機（1008×2449 / 2008×2449 / 2008×2948mm，立式/吊裝）。數據在說明書 PDF p.4–10，做成 2 張小卡即可，不必全表。
+6.6 尺寸與拼接
+SVG 示意：單模組 1230×250mm（手冊口徑），上下對接＋左右無限擴展；標註 P2.5 模組寬度為 125mm。
+「支持裁切」：用 素材/ 中的裁切/彎曲特寫圖佐證。
+6.7 應用場景
+四大解決方案卡（手冊原有框架，文案照手冊提煉翻譯）：櫥窗廣告（商品展示/促銷活動）、機場大廳（航班信息/導航）、汽車 4S 店（3D 車型展示/配置器）、建築幕牆（廣告/室內裝飾藝術）。配圖：從「纯案例视频」與全息主图中各取場景對應素材；可補用 milestrong 官方圖 https://www.milestrongled.com/uploads/34121/transparent-holographic-led-display-screen93e97.jpg。
+6.8 安裝版塊（素材齊全，⭐照此執行）
+Tab 切換兩種方式：Front Facing 正貼（6 步）與 Back Sticker 背貼（5 步）。步驟文字直接取自原圖（已是英文），重排成編號卡片；原圖 holo-install-front-facing.jpg、holo-install-back-sticker.jpg 同時提供「Download installation guide」原圖下載。
+嵌入安裝實拍視頻 holo-install-video.mp4。
+網站現有 /solutions 頁的兩張安裝示意圖（scene-install-front-facing.jpg / scene-install-back-sticker.jpg）與此版塊內容對應，保留不動。
+正貼六步圖holo-install-front-facing.jpg
+背貼五步圖holo-install-back-sticker.jpg
+燈珠維修視頻放 FAQ「壞了怎麼修」處
+6.9 案例牆
+旗艦大卡：西安芯派展廳 P6.25（兩條視頻＋封面圖，2025-08）。
+具名案例（解壓 zip 取材）：上海雅詩蘭黛（2025-08）、廣州白雲機場·夢之藍展台 P6.25（2025-12）、柬埔寨 Las Vegas Sun 賭場（2025-09）、馬山旅遊度假區室內全息（2025-06）、南寧中廣視 P6.25 正貼（2025-11）。
+補位：纯案例视频/video(2)~(44).mp4 中挑 6 條不同場景。
+6.10 FAQ 增補（相對產品①模板多加 3 條）
+和 Crystal Film 怎麼選？→ 近看（2–6m）/要 3D 細膩畫質選全息屏；大幅面/預算優先/遠看選晶膜屏。並放兩產品對比小表（間距範圍、透光率、厚度、單價檔位）。
+燈珠壞了能修嗎？→ 可單點維修，配維修視頻 holo-repair-led-bead.mp4。
+支持 3D 內容嗎？→ 支持，高刷 120fps。
+7產品頁③：軟性LED字幕屏 — /products/soft-led-display
+英文名：Soft LED Display（副名 Flexible LED Matrix Sign）　|　定位語：「即插即用的柔性 LED 字幕屏——撕開貼上、手機編輯，5 分鐘讓你的店面亮起來。」
+7.0 定位說明（決定整頁敘事，先讀這段）
+這款產品和前兩款邏輯完全不同：晶膜屏/全息屏是「項目制」——客戶是建築師、集成商，按平米定制報價；軟屏是「成品零售」——客戶是理髮店、餐廳、煙草店老闆或者區域分銷商，按台購買，到貨即用。因此本頁要做三處差異化：
+① 套用第 4 節模板，但把「安裝 Installation」版塊改為「How it works 三步上手」（無需安裝是它的賣點）；「尺寸與拼接」改為「選尺寸 Choose your size」。
+② 增加兩個專屬版塊：「App 控制」與「認證與批發 Certifications & Wholesale」。
+③ CTA 文案不用「Request a Quote」，改為「Get Pricing / Become a Reseller」雙按鈕——零售詢單和分銷詢單分流。
+7.1 Hero 首屏
+背景：從六類商戶實拍視頻中選 1 條夜間店面效果最佳的做循環（建議從 Smoke Shops 的「Project Highlights-Smoke Shop Indoor Multiple Displays.MP4」或 Restaurant & Bar 中挑）；poster 用 soft-scene-coffee.jpg。
+三個數字章：3 種尺寸（35"/52"/70"）｜10W 超低功耗｜5 分鐘即裝即用。
+標題副題（中文稿，請譯英）：「Soft LED Display — 你的店面招牌，現在會動了。文字、動畫、促銷信息，手機上改，立刻生效。」
+產品全家福（52"）屏體＋App＋遙控器＋電源，型號 Tab 主圖
+Hero poster / 場景圖soft-scene-coffee.jpg
+How it works 教學視頻soft-howto.mp4
+7.2 What is it（中文稿，請譯英）
+Soft LED Display 是一塊可彎曲的柔性 LED 點陣字幕屏：16 點高的 LED 矩陣封裝在柔軟基材上，可貼合櫥窗玻璃、牆面甚至弧形表面；USB / Type-C 5V 供電，整屏功耗僅 10W。通過藍牙連接 iPixel Color App（iOS/Android）或附帶的遙控器，即可編輯滾動文字（多語言）、DIY 像素圖案、動畫、時鐘、音樂律動等內容，內置海量素材模板。防水設計，室內外櫥窗皆可用。無需任何安裝工程——開箱、貼上、配對，5 分鐘開播。
+右側配圖：供應商詳情長圖 _02 的 S 形彎曲展示圖（裁切使用），直觀傳達「軟」。
+7.3 數字總覽條
+3 種尺寸　·　10W 功耗　·　5V USB 供電　·　16×192 最大點陣　·　IP 防水（實測視頻佐證）　·　0 安裝工程
+7.4 核心特性（6 卡）
+| 特性卡 | 內容要點 | 配套素材
+| ① 即插即用 Plug & Play | USB/Type-C 5V 供電，免安裝，貼上即用 | 視頻 soft-howto.mp4
+| ② App + 遙控雙控制 | 藍牙連 iPixel Color App：文字/DIY 圖案/動畫/時鐘/音樂律動/節目單；遙控器快速切換預設 | App 截圖組（詳情長圖 _04/_05 裁切）＋ soft-remote.jpg
+| ③ 柔性可彎 Flexible | 軟質屏體可貼曲面、捲曲收納搬運 | 詳情長圖 _02 彎曲圖（裁切）
+| ④ 防水 Waterproof | 櫥窗內外、雨棚下都能用 | 視頻 soft-waterproof-test.mp4（實測，⭐必放）
+| ⑤ 超低功耗 10W | 等同一顆燈泡的耗電，全天候滾動播放無壓力 | 圖標卡即可
+| ⑥ 多語言/海量模板 | 多語言文字、表情符號、內置素材庫，促銷文案隨時換 | App Gallery 截圖（詳情長圖 _05 裁切）
+7.5 選尺寸與規格（Tab：M 35" / L 52" / XL 70"）
+數據來源 Package details.pdf 與認證文件，照抄：
+| 參數 | M — 35" | L — 52" | XL — 70"
+| 型號 | HRP-1696PLUS（16×96 Plus） | HRP-128（16×144） | HRP-16192（16×192）
+| 點陣分辨率 | 16×96 | 16×144 | 16×192
+| LED 燈珠數 | 1,536 | 2,304 | 3,072
+| 屏體尺寸 | 89.8×19.2cm（35.35"×7.56"） | 133×19.2cm（52.36"×7.56"） | 176.2×19.2cm（69.37"×7.56"）
+| 供電 | 5V 2A | 5V 4A | 5V 4A
+| 功耗 | 10W | 10W | 10W
+| 型號主圖 | soft-m35-main.jpg | soft-l52-main.jpg | soft-xl70-main.jpg
+全系列共用：App（iPixel Color，藍牙）＋遙控器雙控制｜USB & Type-C 線材標配｜防水｜免安裝｜多語言文字、DIY 圖案、動畫、時鐘、音樂律動。
+選尺寸指引：單扇門面/收銀台後選 M 35"；標準櫥窗選 L 52"；寬店面/多扇連排選 XL 70" 或多條拼排（案例視頻中有多屏同店做法，見 Smoke Shop Indoor Multiple Displays）。
+7.6 認證與批發 Certifications & Wholesale 本頁專屬版塊
+四枚認證徽章＋PDF 下載：FCC ID（美國）、CE-RED（歐盟）、UKCA（英國）、UL/BCTC 測試報告（2025-01，型號 HRP-1696，申請方 Shenzhen Shangu Innovation Technology）。北美分銷正是 K1trends 的定位，認證放顯眼位置。
+分銷信息小表（來自 Package details.pdf）：M 35" 每箱 18 台（17×14×14"，40lb）；L 52" 每箱 12 台（17×16×11"，40lb）；XL 70" 每箱 8 台。配「Become a Reseller」CTA。
+7.7 應用場景畫廊（10 張場景圖全用）
+soft-scene-*.jpg：Coffee Shop / Bakery / Burger / Smoke Shop ×2 / Vape Shop ×2 / Vape Lounge / Home Decor / Bar Lounge。每張帶行業標籤。此產品的場景重點是「中小商戶門頭與櫥窗」，與前兩款的「建築/高端零售」明確區隔。
+7.8 How it works（取代安裝版塊，3 步）
+1
+Stick it — 開箱，把軟屏貼/掛到櫥窗或牆面（免工具）
+2
+Pair it — USB 供電，藍牙連接 iPixel Color App（掃包裝 QR 下載）
+3
+Play it — 輸入文字或挑個模板，立即上屏；遙控器一鍵切換預設
+右側嵌 soft-howto.mp4；FAQ 區補 soft-manual.mp4 作完整操作手冊。
+7.9 案例牆（按行業分組，12–15 條）
+六個行業 Tab：Barber & Hair Salon（20 條選 3，如 All Cuts Barber Shop.MOV、369 Barber Shop.MOV）、Restaurant & Bar（35 條選 3，如 Kingston Grill、Sports Bar、Pizzeria）、Smoke Shop（19 條選 3，含 Real-world Examples 系列）、Grocery & Liquor（選 2）、Nail & Massage（選 2）、Accessories / Auto / Realtor（選 2，如 Jewelry Store、Realtor Agency）。這批全是北美真實商戶實拍，是本頁最強的轉化素材；每條標註行業即可，不寫店名。全部 MOV 轉碼 H.264 MP4、豎屏視頻保持 9:16 卡片。
+7.10 FAQ（中文稿請譯英）
+需要請人安裝嗎？→ 不需要，USB 供電貼上即用，5 分鐘搞定。
+怎麼改內容？→ 手機 App（iPixel Color）藍牙連接編輯，或遙控器切換預設。
+能放戶外嗎？→ 防水設計（附實測視頻），可用於門頭、櫥窗外側；建議避免長期暴曬直淋。
+支持哪些語言？→ App 支持多語言文字輸入與表情符號。
+耗電多少？→ 10W，約等於一顆節能燈泡。
+有認證嗎？→ FCC / CE-RED / UKCA / UL 測試報告，PDF 可下載。
+我想批發/做代理？→ 引導至 Become a Reseller 表單（附整箱裝箱數據）。
+8Products 列表頁改版 — /products 修改
+移除 Series T / Series F / Holographic 篩選器，改為三張全寬大產品卡，縱向排列，每卡佔約 60vh：左側大圖/循環視頻，右側產品名＋一句定位＋3 個關鍵數字＋「View Product →」。
+產品①卡片視覺：cf-app-retail-window-street.jpg（或大興機場視頻 hover 播放）；產品②卡片視覺：组 8.jpg（或西安展廳視頻）；產品③卡片視覺：soft-scene-coffee.jpg（或商戶實拍視頻）。
+卡片下方加「Which one do I need?」對比表（三產品並排）：產品形態（工程定制 / 工程定制 / 即插即用成品）、像素間距或點陣、透光率（軟屏一欄填「—」）、厚度、適用觀看距離、典型場景（建築幕牆 / 高端櫥窗展廳 / 中小商戶門頭）、相對價位（$$$ / $$$ / $）。這是客戶最常見的第一個問題，放在列表頁直接回答。
+保留現有頁首 Hero 圖與文案（「Transparent, holographic & flexible LED displays」），meta 不變。
+9首頁 / Solutions 頁聯動修改 修改
+首頁：產品區塊的卡片鏈接由 /products?series=… 全部改為對應詳情頁；首頁增加一個「Featured Projects」橫滑條，放 4 條案例視頻（大興機場、可口可樂、西安芯派展廳、雅詩蘭黛），點擊進入對應產品頁案例錨點——真實案例是目前首頁最缺的信任要素。
+Solutions 頁：六張行業卡的「See Products →」改為指向具體詳情頁錨點：Retail & Storefront → /products/crystal-film#applications；Architecture & Facades → /products/crystal-film#applications（大幅面）；Hospitality → /products/crystal-film；Corporate & Lobbies → /products/holographic；Events & Exhibitions → /products/holographic（展廳案例多）；Digital Signage → /products/soft-led-display（中小商戶字幕屏正是此場景）。Solutions 頁可考慮新增第七張行業卡「Small Business Storefronts」直連產品③。
+頁腳：社交圖標填入真實鏈接，沒有的先刪除；Products 欄改三個詳情頁鏈接。
+10SEO 與技術要求
+10.1 素材處理規範
+視頻：H.264 MP4，1080p，Hero 循環段 ≤8MB（10–15 秒、去音軌），案例視頻 ≤20MB；全部生成首幀 poster JPG；preload="none"，懶加載。
+圖片：輸出 WebP（保留 JPG 後備），場景大圖寬 1920px、卡片圖 800px；全部寫有意義的英文 alt（描述場景＋產品名）。
+檔名：全部按第 3 節對照表重命名，僅用小寫字母、數字、連字符。
+10.2 每頁 SEO（請按此寫，翻譯潤色允許）
+| 頁面 | title | meta description 要點
+| /products/crystal-film | Crystal Film LED Screen — Self-Adhesive Transparent LED Film | K1 Visual Solutions | 90%+ 透光、2.5mm、免鋼構自粘安裝、P6.25–P20、機場/零售/幕牆案例
+| /products/holographic | SMD Holographic Invisible LED Screen — P2.5 to P10 | K1 Visual Solutions | <3mm 無邊框、最高 93% 透光、3D 120fps、玻璃直貼、櫥窗/展廳
+| /products/soft-led-display | Soft LED Display — Flexible Programmable LED Sign, 35"/52"/70" | K1 Visual Solutions | 即插即用、App+遙控、藍牙、防水、10W、FCC/CE/UKCA 認證、商戶門頭櫥窗
+兩個詳情頁加 JSON-LD Product 結構化數據（name、image、description、brand: K1 Visual Solutions、offers 用 ContactPoint 詢價型）。
+更新 sitemap.xml，加入三條新路由。
+產品③素材轉碼專項：商戶實拍為 iPhone 拍攝的 .MOV（HEVC）與 .HEIC，必須全部轉為 H.264 MP4 / JPG，否則部分瀏覽器無法播放顯示。
+麵包屑：Home / Products / {產品名}，帶 BreadcrumbList 結構化數據。
+11數據矛盾與缺料清單（執行時務必注意）
+數據矛盾（已裁定，照此執行）：
+全息屏 P6.25 透光率：說明書 PDF 寫 90%，產品手冊 docx 寫 92% → 採用 90%（PDF 較新且為正式說明書）。
+全息屏防護等級：docx 寫 IP43，PDF 拼接模組頁寫 IP20 → 採用 IP20（拼接模組為主售形態，不誇大）。
+晶膜屏 P8 像素密度：供應商頁面寫 25,600/m²，按模組分辨率計算應為 15,625/m²（125×50÷0.4m²）→ 採用 15,625/m²（供應商頁為複製粘貼錯誤）。
+晶膜屏視角：供應商寫 160°；全息屏 PDF 寫 140°——兩產品不同屬正常，不要互相「統一」。
+缺料與待確認（需要用戶補充，不阻塞上線）：
+產品③包裝盒印有供應商品牌「PIXELLAB」、App 為第三方「iPixel Color」——網站上以 K1 名義售賣時，產品圖中的包裝盒照片建議避開或裁掉品牌字樣（優先用屏體與場景圖）；App 名稱照實寫（用戶需下載它），品牌歸屬請用戶確認是否需要白標處理。
+晶膜屏的安裝步驟實拍圖/分步圖（目前只有供應商接線示意圖；安裝版塊先用 SVG 步驟卡）。
+具名案例的授權確認：機場、可口可樂、本田、雅詩蘭黛等品牌名是否可公開展示——上線前請用戶確認一次；若不確認，改為「International Airport, Beijing」「Global Beverage Brand」等匿名化寫法。
+頁腳社交媒體真實鏈接。
+12驗收清單
+☐ /products/crystal-film、/products/holographic、/products/soft-led-display 三頁上線，版塊齊全，移動端規格表為卡片式無橫向滾動
+☐ 兩頁規格數字與本方案第 5.5 / 6.5 節逐項一致（抽查：晶膜 P8 密度 15,625；全息 P6.25 透光 90%、亮度 ≥5,000）
+☐ 全部素材已重命名為英文檔名並本地託管，無中文 URL、無熱鏈接
+☐ 視頻全部有 poster、懶加載，Hero 視頻 ≤8MB；Lighthouse 移動端 Performance ≥80
+☐ 導航下拉、頁腳、首頁、Solutions 頁所有產品鏈接已指向新詳情頁，無殘留 ?series= 鏈接
+☐ 產品③：MOV/HEIC 全部轉碼；認證徽章＋4 份 PDF 可下載；CTA 為 Get Pricing / Become a Reseller 雙按鈕；包裝品牌字樣已按第 11 節處理
+☐ JSON-LD（Product + BreadcrumbList）通過 Rich Results 測試；sitemap 已更新
+☐ 每頁含至少 3 條真實案例視頻且能播放；「Request a Quote」表單帶產品名預填
+☐ 烏茲別克斯坦背面通透視頻已放入晶膜屏特性①；硬幣對比圖已放入全息屏特性①
+— 方案完 · 素材路徑均相對於「LED promotion」文件夾 · 規格數據來源：reefilm-led.com 型號頁（2026-06-10 抓取）、《LED全息隱形屏說明書》PDF、全息屏產品手冊 docx、工廠亮度功耗測試表 xlsx、LED soft screen/Package details.pdf 與認證文件（2026-06-10 增補）—
