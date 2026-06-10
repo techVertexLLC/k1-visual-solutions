@@ -9,30 +9,105 @@ import { CASES } from "@/lib/cases";
  * Case studies preview — the top two installations shown in full, with the
  * remaining projects offered through an expandable reveal so the home page stays
  * focused but the depth is one click away.
+ *
+ * Cases with a `video` play it on hover (muted, looped) over the primary photo;
+ * the video element only mounts once the card nears the viewport so the page
+ * never pulls clips it doesn't need.
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+function CaseMedia({ item }) {
+  const [primary] = item.images;
+  const boxRef = useRef(null);
+  const videoRef = useRef(null);
+  const [ready, setReady] = useState(false);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    if (!item.video || !boxRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setReady(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(boxRef.current);
+    return () => observer.disconnect();
+  }, [item.video]);
+
+  const play = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+      setPlaying(true);
+    }
+  };
+
+  const pause = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setPlaying(false);
+    }
+  };
+
+  return (
+    <div
+      ref={boxRef}
+      className="relative aspect-[16/10] overflow-hidden"
+      onMouseEnter={item.video ? play : undefined}
+      onMouseLeave={item.video ? pause : undefined}
+      onClick={item.video ? () => (playing ? pause() : play()) : undefined}
+    >
+      <Image
+        src={primary.src}
+        alt={primary.alt}
+        fill
+        loading="lazy"
+        quality={78}
+        sizes="(max-width: 768px) 100vw, 50vw"
+        placeholder="blur"
+        blurDataURL={BLUR}
+        className="object-cover transition-transform duration-700 ease-premium group-hover:scale-105"
+      />
+      {item.video && ready && (
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            playing ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <source src={item.video} type="video/mp4" />
+        </video>
+      )}
+      {item.video && (
+        <div
+          aria-hidden
+          className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full transition-opacity duration-300"
+          style={{ background: "rgba(0,0,0,0.55)", opacity: playing ? 0 : 1 }}
+        >
+          <span className="pl-0.5 text-sm leading-none text-white">▶</span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function CaseCard({ item }) {
-  const [primary, ...secondary] = item.images;
+  const secondary = item.images.slice(1);
   return (
     <article
       className="group flex h-full flex-col overflow-hidden rounded-2xl shadow-card transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-1 hover:shadow-card-hover"
       style={{ border: `1px solid ${COLOR.gray}`, background: "#fff" }}
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <Image
-          src={primary.src}
-          alt={primary.alt}
-          fill
-          loading="lazy"
-          quality={78}
-          sizes="(max-width: 768px) 100vw, 50vw"
-          placeholder="blur"
-          blurDataURL={BLUR}
-          className="object-cover transition-transform duration-700 ease-premium group-hover:scale-105"
-        />
-      </div>
+      <CaseMedia item={item} />
       <div className="flex flex-1 flex-col p-7">
         {secondary.length > 0 && (
           <div className="mb-5 flex gap-3">
@@ -114,8 +189,9 @@ export default function CaseStudiesPreview() {
             Light, set into real places
           </h2>
           <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
-            From a campus media facade to a resort's curved interior — a look at
-            where K1 transparent and flexible displays are already at work.
+            From a campus media facade to airport retail, casino floors, and bank
+            branches — a look at where K1 transparent and flexible displays are
+            already at work across Asia and beyond.
           </p>
         </Reveal>
 
@@ -130,7 +206,7 @@ export default function CaseStudiesPreview() {
         {expanded && rest.length > 0 && (
           <div className="mt-8 grid gap-8 md:mt-10 md:grid-cols-2 md:gap-10">
             {rest.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.1}>
+              <Reveal key={item.title} delay={Math.min(i, 3) * 0.1}>
                 <CaseCard item={item} />
               </Reveal>
             ))}
@@ -143,7 +219,7 @@ export default function CaseStudiesPreview() {
               onClick={() => setExpanded((v) => !v)}
               className="btn-lift inline-flex items-center gap-2 rounded-full border border-[#1A1A1A] px-6 py-3 text-sm font-medium text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
             >
-              {expanded ? "Show fewer projects" : "View more projects"}
+              {expanded ? "Show fewer projects" : `View all ${CASES.length} projects`}
               <span
                 className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
                 aria-hidden
