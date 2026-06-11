@@ -66,4 +66,53 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     range.addEventListener('input', update); update();
   }
+
+  // mobile menu (panel markup injected here so all pages stay in sync)
+  const toggle = document.querySelector('.nav-toggle');
+  if (toggle) {
+    const here = location.pathname.split('/').pop() || 'index.html';
+    const NAV = [
+      ['index.html', 'Home'],
+      ['products.html', 'Products'],
+      ['solutions.html', 'Solutions'],
+      ['cases.html', 'Cases'],
+      ['about.html', 'About'],
+      ['contact.html', 'Contact']
+    ];
+    const SUB = [
+      ['product-crystal-film.html', 'Crystal Film LED Screen'],
+      ['product-holographic.html', 'Holographic Invisible Screen'],
+      ['product-soft-led.html', 'Soft LED Display'],
+      ['selector.html', 'Find Your Product →']
+    ];
+    const act = (href, isProducts) => (href === here || (isProducts && /^(product|selector)/.test(here))) ? ' class="active"' : '';
+    const menu = document.createElement('div');
+    menu.className = 'mobile-menu';
+    menu.id = 'mobile-menu';
+    menu.innerHTML =
+      '<div class="mm-bar">' +
+        '<a class="brand" href="index.html"><span class="k1">K1</span><span class="rest">Visual Solutions</span></a>' +
+        '<button class="mm-close" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>' +
+      '</div>' +
+      '<nav class="mm-links">' +
+        NAV.map(([href, label]) => {
+          const sub = label === 'Products'
+            ? '<div class="mm-sub">' + SUB.map(([sh, sl]) => '<a href="' + sh + '"' + act(sh) + '>' + sl + '</a>').join('') + '</div>'
+            : '';
+          return '<a href="' + href + '"' + act(href, label === 'Products') + '>' + label + '</a>' + sub;
+        }).join('') +
+        '<a class="btn mm-cta" href="contact.html">Request a Quote</a>' +
+      '</nav>';
+    document.body.appendChild(menu);
+
+    const setOpen = open => {
+      menu.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open);
+    };
+    toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+    menu.querySelector('.mm-close').addEventListener('click', () => setOpen(false));
+    menu.addEventListener('click', e => { if (e.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false); });
+  }
 });
