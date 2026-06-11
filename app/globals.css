@@ -7,7 +7,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior handled by Lenis on homepage; native elsewhere */
   /* Sticky navbar is 7rem tall — keep anchored headings clear of it. */
   scroll-padding-top: 8rem;
   /* Belt-and-suspenders against horizontal scroll on mobile: some browsers

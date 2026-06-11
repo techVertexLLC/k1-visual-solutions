@@ -26,9 +26,10 @@ export default function SmoothScrollProvider({ children }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.6,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
+      wheelMultiplier: 1.2,
       // Let Lenis tell ScrollTrigger about the true scroll position
       syncTouch: false,
     });
