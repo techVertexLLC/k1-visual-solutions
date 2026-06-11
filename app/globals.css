@@ -393,6 +393,16 @@ textarea:focus-visible {
   overscroll-behavior: contain;
 }
 
+/* Horizontally scrollable rows (filter chip rails) — keep the scroll, hide the
+   bar; a visible scrollbar under every chip row reads as clutter. */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

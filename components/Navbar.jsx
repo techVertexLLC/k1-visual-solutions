@@ -36,6 +36,7 @@ const PRODUCT_SUBLINKS = [
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products", sublinks: PRODUCT_SUBLINKS },
+  { label: "Projects", href: "/projects" },
   { label: "Solutions", href: "/solutions" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

@@ -26,6 +26,7 @@ import { CONTACT } from "../lib/demo";
 const EXPLORE = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
+  { label: "Projects", href: "/projects" },
   { label: "Solutions", href: "/solutions" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
