@@ -203,7 +203,7 @@ h2.title{font-family:var(--ff-display);font-size:clamp(30px,3.6vw,44px);line-hei
 .site-footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px}
 .site-footer h5{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
 .site-footer ul{list-style:none}
-.site-footer li{margin-bottom:9px}
+.site-footer li{margin-bottom:9px;white-space:nowrap}
 .site-footer a{font-size:14.5px;color:var(--ink2)}
 .site-footer a:hover{color:var(--accent)}
 .site-footer .blurb{font-size:14px;color:var(--muted);margin-top:14px;max-width:300px}
