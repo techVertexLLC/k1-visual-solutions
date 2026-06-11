@@ -1,72 +1,55 @@
-"use client";
-
 import Reveal from "@/components/ui/Reveal";
-import ProductCard from "@/components/products/ProductCard";
-import { COLOR, FONT } from "./tokens";
-import { getAllProducts } from "@/lib/products";
+import { getAllProducts, CATEGORY_LABEL } from "@/lib/products";
 
 /**
- * Featured products preview for the home page — three representative products,
- * one per technology, linking through to their detail pages and the full
- * catalog. Reuses the shared ProductCard.
+ * 01 · Featured Products — the three product lines as .pcard tiles: tagged
+ * media, Playfair title, one-line pitch, and the pitch/size meta row.
  */
-
-const FEATURED_SLUGS = [
-  "crystal-film",
-  "holographic",
-  "soft-led-display",
-];
-
-const FEATURED = getAllProducts().filter((p) => FEATURED_SLUGS.includes(p.slug));
-
 export default function FeaturedProducts() {
+  const products = getAllProducts();
+
   return (
-    <section
-      id="products"
-      aria-label="Featured products"
-      className="scroll-mt-24 py-16 md:py-24"
-      style={{ background: COLOR.gray }}
-    >
-      <div className="mx-auto max-w-6xl px-6 lg:px-10">
-        <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <div
-              className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em]"
-              style={{ color: COLOR.muted }}
-            >
-              <span style={{ color: COLOR.accent }}>01</span>
-              <span aria-hidden className="h-px w-8" style={{ background: "#D4CFC8" }} />
-              <span>Featured Products</span>
-            </div>
-            <h2
-              className="mt-6 text-2xl leading-tight md:text-4xl"
-              style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-            >
-              A transparent LED display for every surface
-            </h2>
-            <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
-              A look across the range — self-adhesive crystal film, holographic
-              invisible screens, and plug-and-play soft LED signs.
-            </p>
+    <section className="section">
+      <div className="container">
+        <Reveal className="sec-head wide">
+          <div className="kicker">
+            <span className="num">01</span> Featured Products
           </div>
-
-          <a
-            href="/products"
-            className="group inline-flex flex-none items-center gap-2 text-sm font-medium"
-            style={{ color: COLOR.accent }}
-          >
-            View all products
-            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
+          <div className="row">
+            <h2 className="title">A transparent LED display for every surface</h2>
+            <a className="link-arrow" href="/products">
+              View all products →
+            </a>
+          </div>
+          <p>
+            Self-adhesive crystal film, holographic invisible screens, and plug-and-play soft LED
+            signs.
+          </p>
         </Reveal>
-
-        <div className="mt-14 grid gap-8 md:mt-16 md:grid-cols-3">
-          {FEATURED.map((product, i) => (
-            <Reveal key={product.slug} delay={i * 0.08}>
-              <ProductCard product={product} />
-            </Reveal>
+        <Reveal className="gridx c3">
+          {products.map((product) => (
+            <a className="pcard" href={`/products/${product.slug}`} key={product.slug}>
+              <div className="media">
+                <span className="tag">{CATEGORY_LABEL[product.category]}</span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={product.cardImage} alt={product.name} loading="lazy" />
+              </div>
+              <div className="body">
+                <h3>{product.name}</h3>
+                <p>{product.shortDescription}</p>
+                <div className="meta">
+                  <div>
+                    <div className="card-label">
+                      {product.productType === "retail" ? "Sizes" : "Pixel Pitch"}
+                    </div>
+                    <b>{product.pixelPitch}</b>
+                  </div>
+                  <span className="link-arrow">View Details →</span>
+                </div>
+              </div>
+            </a>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

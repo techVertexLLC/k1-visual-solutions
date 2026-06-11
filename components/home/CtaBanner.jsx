@@ -1,148 +1,34 @@
-"use client";
+import Reveal from "@/components/ui/Reveal";
 
 /**
- * CtaBanner — GSAP ScrollTrigger fade-in upgrade.
- *
- * When the section enters the viewport, a staggered reveal plays:
- *   1. Card container fades + rises  (0.7s)
- *   2. Heading follows closely       (-0.45s overlap)
- *   3. Body copy next                (-0.4s overlap)
- *   4. Buttons last                  (-0.35s overlap)
- *
- * The animation plays once (toggleActions: "play none none none") and is
- * skipped entirely for prefers-reduced-motion — all elements start visible.
- * Uses gsap.context() for proper cleanup on route transitions.
+ * CTA band — dark rounded panel with the quote pitch and two actions.
+ * Shared by the home page and the inner pages that close on a quote ask.
  */
-
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { COLOR, FONT } from "./tokens";
-
-gsap.registerPlugin(ScrollTrigger);
-
-export default function CtaBanner() {
-  const sectionRef = useRef(null);
-  const cardRef = useRef(null);
-  const headingRef = useRef(null);
-  const parasRef = useRef(null);
-  const buttonsRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    // Accessibility: skip animation, keep everything visible
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      [cardRef, headingRef, parasRef, buttonsRef].forEach((r) => {
-        if (r.current) {
-          r.current.style.opacity = "1";
-          r.current.style.transform = "none";
-        }
-      });
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      // Start hidden
-      gsap.set(
-        [
-          cardRef.current,
-          headingRef.current,
-          parasRef.current,
-          buttonsRef.current,
-        ],
-        { opacity: 0, y: 32 }
-      );
-
-      // Staggered reveal timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      tl.to(cardRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power3.out",
-      })
-        .to(
-          headingRef.current,
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-          "-=0.45"
-        )
-        .to(
-          parasRef.current,
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-          "-=0.4"
-        )
-        .to(
-          buttonsRef.current,
-          { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" },
-          "-=0.35"
-        );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
+export default function CtaBanner({
+  title = "Tell us about your space",
+  body = "Share the glazing dimensions and the effect you're after — we'll come back with the right product, a clear spec, and an indicative price within 24 hours.",
+  primary = { label: "Request a Quote", href: "/contact" },
+  secondary = { label: "Browse Products →", href: "/products" },
+}) {
   return (
-    <section
-      ref={sectionRef}
-      aria-label="Request a quote"
-      className="px-6 py-16 md:py-24 lg:px-10"
-      style={{ background: COLOR.bg }}
-    >
-      <div className="mx-auto max-w-6xl">
-        <div
-          ref={cardRef}
-          className="grain overflow-hidden rounded-3xl px-8 py-14 text-center sm:px-12 sm:py-16"
-          style={{ background: COLOR.gray, willChange: "transform, opacity" }}
-        >
-          <h2
-            ref={headingRef}
-            className="mx-auto max-w-2xl text-2xl leading-tight md:text-4xl"
-            style={{
-              fontFamily: FONT.serif,
-              color: COLOR.ink,
-              willChange: "transform, opacity",
-            }}
-          >
-            Tell us about your space
-          </h2>
-          <p
-            ref={parasRef}
-            className="mx-auto mt-5 max-w-xl text-base leading-relaxed"
-            style={{ color: COLOR.body, willChange: "transform, opacity" }}
-          >
-            Share the dimensions and the effect you're after, and we'll come
-            back with the right product, a clear spec, and an indicative price.
-          </p>
-          <div
-            ref={buttonsRef}
-            className="mt-9 flex flex-wrap items-center justify-center gap-x-4 gap-y-3"
-            style={{ willChange: "transform, opacity" }}
-          >
-            <a
-              href="/contact"
-              className="btn-lift btn-glow btn-shimmer rounded-full bg-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-white hover:bg-[#5A50C7]"
-            >
-              Request a Quote
-            </a>
-            <a
-              href="/products"
-              className="group btn-lift inline-flex items-center gap-2 rounded-full border border-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-[#4F46B5] hover:bg-[#4F46B5]/[0.06]"
-            >
-              Browse Products
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </a>
+    <section className="section tight">
+      <div className="container">
+        <Reveal className="ctaband">
+          <div>
+            <h2>{title}</h2>
+            <p>{body}</p>
           </div>
-        </div>
+          <div className="actions">
+            <a className="btn light" href={primary.href}>
+              {primary.label}
+            </a>
+            {secondary && (
+              <a className="btn ghost onDark" href={secondary.href}>
+                {secondary.label}
+              </a>
+            )}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

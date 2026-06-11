@@ -1,4 +1,4 @@
-import { Inter, DM_Serif_Display } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/ui/BackToTop";
@@ -9,16 +9,16 @@ import { SITE_URL, siteJsonLd } from "@/lib/structured-data";
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
 });
 
-// Editorial serif for headlines — the chosen G1 pairing (DM Serif Display + Inter).
-const dmSerif = DM_Serif_Display({
+// Editorial serif for headlines — Playfair Display, per the reference design.
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-dmserif",
+  weight: ["600", "700", "900"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -64,7 +64,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${dmSerif.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         {/*
           Animation fallback: framer-motion server-renders its reveal elements
@@ -81,11 +81,11 @@ export default function RootLayout({ children }) {
             Breadcrumb schema reference the Organization by @id. */}
         <JsonLd data={siteJsonLd()} />
       </head>
-      <body className="bg-[#FAF8F5] font-sans antialiased overflow-x-hidden">
+      <body className="antialiased overflow-x-hidden">
         {/* Skip link — visible only on keyboard focus, jumps past the nav. */}
         <a
           href="#main-content"
-          className="sr-only z-[100] rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-[100] rounded-full bg-[#16130F] px-5 py-2.5 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
           Skip to content
         </a>

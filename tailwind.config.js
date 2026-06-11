@@ -4,6 +4,11 @@ module.exports = {
     "./app/**/*.{js,jsx}",
     "./components/**/*.{js,jsx}",
   ],
+  // The design system defines its own .container (globals.css); Tailwind's
+  // responsive container utility would fight it for max-width.
+  corePlugins: {
+    container: false,
+  },
   theme: {
     extend: {
       colors: {

@@ -15,19 +15,25 @@ export default function Reveal({
   y = 24,
   className = "",
   as = "div",
+  style,
 }) {
   const shouldReduce = useReducedMotion();
 
   // No animation for users who prefer reduced motion (accessibility)
   if (shouldReduce) {
     const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
+    return (
+      <Tag className={className} style={style}>
+        {children}
+      </Tag>
+    );
   }
 
   const MotionTag = motion[as] || motion.div;
   return (
     <MotionTag
       className={className}
+      style={style}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}

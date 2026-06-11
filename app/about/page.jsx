@@ -1,14 +1,11 @@
-import Image from "next/image";
-import PageBanner from "@/components/ui/PageBanner";
 import Reveal from "@/components/ui/Reveal";
-import CtaBanner from "@/components/home/CtaBanner";
+import Counter from "@/components/site/Counter";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/ui/JsonLd";
-import { CheckIcon, PinIcon, DualDriveIcon } from "@/components/ui/icons";
-import { COLOR, FONT, BLUR } from "@/components/home/tokens";
 import { pageMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 import { CONTACT } from "@/lib/demo";
+import { PROJECTS } from "@/lib/projects";
 
 export const metadata = pageMetadata({
   title: "About — LED Display Distributor for North America",
@@ -19,274 +16,122 @@ export const metadata = pageMetadata({
   imageAlt: `${CONTACT.companyLegal} office`,
 });
 
-const FACTS = [
-  { label: "Based in", value: CONTACT.cityState },
-  { label: "Serving", value: "North America" },
-  { label: "Focus", value: "Transparent & flexible LED" },
-  { label: "Parent", value: CONTACT.companyLegal },
-];
-
-const VALUES = [
-  {
-    Icon: CheckIcon,
-    title: "Honest Specs",
-    body: "We publish real-world numbers, not datasheet maximums. What you read is what you get on site.",
-  },
-  {
-    Icon: PinIcon,
-    title: "North American Support",
-    body: `Same-timezone response, local accountability, and an ${CONTACT.city} showroom you can visit.`,
-  },
-  {
-    Icon: DualDriveIcon,
-    title: "Integrator-Friendly",
-    body: "Every system ships with mounting docs, wiring diagrams, and clear content input specs. No guesswork for your installer.",
-  },
-];
-
-const PRINCIPLES = [
-  {
-    title: "Source the right technology",
-    body: "We curate next-generation transparent, holographic, and flexible LED systems from manufacturers we've vetted — and only bring forward what we'd specify ourselves.",
-  },
-  {
-    title: "Specify it honestly",
-    body: "Transparency figures, brightness, pitch, weight — we quote the numbers that matter and match the product to the room, not the other way around.",
-  },
-  {
-    title: "Stand behind it",
-    body: "From the first quote to final commissioning, we stay involved — documentation, installation support, and a local point of accountability.",
-  },
-];
-
+/**
+ * /about — "Why K1": the factory-direct / local-service model, the number
+ * strip that backs it up, manufacturing partners, and a person to call.
+ */
 export default function AboutPage() {
   return (
-    <main id="main-content" className="page-enter min-h-screen" style={{ background: "#FAF8F5" }}>
+    <main id="main-content">
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "About" },
-        ])}
-      />
-      <PageBanner
-        eyebrow="About"
-        title="A quieter way to put light into a space"
-        description="K1 Visual Solutions brings high-clarity digital surfaces into glass, curves, and facades — without the bulk, glare, or visual noise of conventional signage."
-        image="/assets/images/applications/app-lobby.jpg"
-        imageAlt="Corporate lobby with a transparent LED display"
-        breadcrumb={
-          <>
-            <a href="/" className="hover:opacity-70">Home</a>
-            <span aria-hidden>/</span>
-            <span>About</span>
-          </>
-        }
+        data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "About" }])}
       />
 
-      {/* Story */}
-      <section aria-label="Who we are" className="py-16 md:py-24" style={{ background: COLOR.bg }}>
-        <div className="mx-auto grid max-w-6xl gap-14 px-6 md:grid-cols-2 md:gap-20 lg:px-10">
-          <Reveal>
-            <div
-              className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em]"
-              style={{ color: COLOR.muted }}
-            >
-              <span style={{ color: COLOR.accent }}>Who we are</span>
+      <section className="page-hero" style={{ minHeight: "42vh" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/images/applications/app-lobby.jpg"
+          alt="Corporate lobby with a transparent LED display"
+        />
+        <div className="shade" />
+        <div className="container">
+          <div className="crumbs">
+            <a href="/">Home</a> / About
+          </div>
+          <h1>Why K1</h1>
+          <p>
+            Factory-direct pricing. North American service. That&apos;s the whole pitch —
+            here&apos;s how we back it up.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal className="numstrip">
+            <div className="cell">
+              <b>
+                <Counter value={3} />
+              </b>
+              <span>product families in stock</span>
             </div>
-            <h2
-              className="mt-6 text-2xl leading-tight md:text-4xl"
-              style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-            >
-              An LED display distributor built for architects and integrators
-            </h2>
-            <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl"
-              style={{ background: COLOR.gray, border: `1px solid ${COLOR.gray}` }}
-            >
-              {FACTS.map((f) => (
-                <div key={f.label} className="p-5" style={{ background: "#fff" }}>
-                  <dt className="text-[11px] uppercase tracking-[0.16em]" style={{ color: COLOR.muted }}>
-                    {f.label}
-                  </dt>
-                  <dd className="mt-1 text-sm font-medium" style={{ color: COLOR.ink }}>
-                    {f.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <div className="cell">
+              <b>
+                <Counter value={PROJECTS.length} suffix="+" />
+              </b>
+              <span>documented projects</span>
+            </div>
+            <div className="cell">
+              <b>3-Year</b>
+              <span>warranty</span>
+            </div>
+            <div className="cell">
+              <b>24 h</b>
+              <span>quote turnaround</span>
+            </div>
+            <div className="cell">
+              <b>FCC · CE · UL</b>
+              <span>certified hardware</span>
+            </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="flex flex-col justify-center">
-            <div
-              className="relative mb-8 aspect-[16/10] overflow-hidden rounded-2xl"
-              style={{ border: `1px solid ${COLOR.gray}` }}
-            >
-              <Image
+          <div className="spec-flex" style={{ marginTop: 70 }}>
+            <Reveal>
+              <div className="kicker">
+                <span className="num">01</span> The model
+              </div>
+              <h2 className="title">Manufacturer pricing, without the overseas support gap</h2>
+              <p style={{ marginTop: 16, color: "var(--ink2)" }}>
+                K1 Visual Solutions ({CONTACT.companyLegal}) partners directly with leading
+                transparent-LED factories in Shenzhen — the same production lines behind the
+                projects on our Projects page. We hold stock and a warranty desk in{" "}
+                {CONTACT.cityState}, provide installation guidance in your timezone, and answer
+                quotes within 24 hours.
+              </p>
+              <p style={{ marginTop: 14, color: "var(--ink2)" }}>
+                You get the price of buying at the source, with a partner who picks up the phone in
+                North America.
+              </p>
+            </Reveal>
+            <Reveal className="photo" style={{ border: "1px solid var(--line)", borderRadius: 18, overflow: "hidden", background: "#fff" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/assets/images/k1-office-render.jpg"
                 alt="K1 Visual Solutions office — interior render"
-                fill
                 loading="lazy"
-                quality={82}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                placeholder="blur"
-                blurDataURL={BLUR}
-                className="object-cover"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-            </div>
-            <p className="text-lg leading-relaxed" style={{ color: COLOR.body }}>
-              K1 Visual Solutions is an {CONTACT.cityState}–based distributor of
-              premium transparent, flexible, and self-adhesive LED display
-              systems. We work with architects, retail brands, and system
-              integrators across North America to bring high-clarity digital
-              surfaces into glass, curves, and facades.
-            </p>
-            <p className="mt-5 text-lg leading-relaxed" style={{ color: COLOR.body }}>
-              Our role is simple: source the right technology, specify it
-              honestly, and stand behind it from quote to commissioning.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Principles */}
-      <section aria-label="How we work" className="py-16 md:py-24" style={{ background: COLOR.gray }}>
-        <div className="mx-auto max-w-6xl px-6 lg:px-10">
-          <Reveal className="max-w-2xl">
-            <h2
-              className="text-2xl leading-tight md:text-4xl"
-              style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-            >
-              How we work
-            </h2>
-            <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
-              Three principles guide every project we take on.
-            </p>
-          </Reveal>
-
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {PRINCIPLES.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.08}>
-                <div
-                  className="flex h-full flex-col rounded-2xl p-8"
-                  style={{ background: "#fff", border: `1px solid #D4CFC8` }}
-                >
-                  <span
-                    className="text-2xl"
-                    style={{ fontFamily: FONT.serif, color: COLOR.accent }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3
-                    className="mt-4 text-xl leading-snug"
-                    style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-                  >
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: COLOR.body }}>
-                    {p.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+            </Reveal>
           </div>
-        </div>
-      </section>
 
-      {/* Why K1 — values */}
-      <section aria-label="Why K1" className="py-16 md:py-24" style={{ background: COLOR.bg }}>
-        <div className="mx-auto max-w-6xl px-6 lg:px-10">
-          <Reveal className="max-w-2xl">
-            <div
-              className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em]"
-              style={{ color: COLOR.muted }}
-            >
-              <span style={{ color: COLOR.accent }}>Why K1</span>
+          <Reveal className="sec-head" style={{ marginTop: 80 }}>
+            <div className="kicker">
+              <span className="num">02</span> Manufacturing partners
             </div>
-            <h2
-              className="mt-6 text-2xl leading-tight md:text-4xl"
-              style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-            >
-              What you can count on
-            </h2>
-            <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
-              The things that make a K1 project easy to specify, easy to trust,
-              and easy to install.
+            <h2 className="title">Built on proven production lines</h2>
+            <p>
+              Our partner factories run full-chain production — LED encapsulation, SMT, adhesive
+              potting, aging tests — with the certifications to show for it (FCC, CE-RED, UKCA, UL
+              test reports on file, downloadable per product).
             </p>
           </Reveal>
 
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {VALUES.map((v, i) => (
-              <Reveal key={v.title} delay={i * 0.08}>
-                <div
-                  className="flex h-full flex-col rounded-2xl p-8"
-                  style={{ background: "#fff", border: `1px solid #D4CFC8` }}
-                >
-                  <div
-                    className="flex h-11 w-11 items-center justify-center rounded-xl p-2.5"
-                    style={{ background: COLOR.gray, color: COLOR.accent }}
-                  >
-                    <v.Icon />
-                  </div>
-                  <h3
-                    className="mt-5 text-xl leading-snug"
-                    style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-                  >
-                    {v.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: COLOR.body }}>
-                    {v.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Installation expertise */}
-      <section aria-label="Installation expertise" className="py-16 md:py-24" style={{ background: COLOR.gray }}>
-        <Reveal className="mx-auto max-w-6xl px-6 lg:px-10">
-          <div
-            className="grid items-stretch gap-px overflow-hidden rounded-2xl md:grid-cols-2"
-            style={{ border: `1px solid ${COLOR.gray}`, background: COLOR.gray }}
-          >
-            <div className="relative aspect-[3/2] md:aspect-auto">
-              <Image
-                src="/assets/images/applications/install-guide.jpg"
-                alt="Installation diagram for a K1 transparent LED display system"
-                fill
-                loading="lazy"
-                quality={80}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                placeholder="blur"
-                blurDataURL={BLUR}
-                className="object-cover"
-              />
-            </div>
-            <div className="flex flex-col justify-center p-8 sm:p-12" style={{ background: "#fff" }}>
-              <span
-                className="text-[11px] font-medium uppercase tracking-[0.24em]"
-                style={{ color: COLOR.muted }}
-              >
-                Specified to install
-              </span>
-              <h3
-                className="mt-3 text-2xl leading-snug sm:text-3xl"
-                style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-              >
-                Engineered for a clean install
-              </h3>
-              <p className="mt-4 text-[15px] leading-relaxed" style={{ color: COLOR.body }}>
-                Every system ships with clear mounting and wiring documentation,
-                so integrators know exactly how the panels carry, align, and
-                connect before they reach site. We specify the structure and stand
-                behind it from quote to commissioning.
+          <Reveal className="ctaband" style={{ marginTop: 40 }}>
+            <div>
+              <h2>Talk to a person, not a portal</h2>
+              <p>
+                {CONTACT.phone} · {CONTACT.email} · {CONTACT.cityState}
               </p>
             </div>
-          </div>
-        </Reveal>
+            <div className="actions">
+              <a className="btn light" href="/contact">
+                Contact Us
+              </a>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
-      <CtaBanner />
       <SiteFooter />
     </main>
   );

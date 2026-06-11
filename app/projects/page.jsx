@@ -1,14 +1,12 @@
-import ProjectsExplorer from "@/components/projects/ProjectsExplorer";
-import CtaBanner from "@/components/home/CtaBanner";
+import Reveal from "@/components/ui/Reveal";
+import VideoCard from "@/components/site/VideoCard";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/ui/JsonLd";
-import { COLOR, FONT } from "@/components/home/tokens";
 import { pageMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, itemListJsonLd } from "@/lib/structured-data";
 import { PROJECTS } from "@/lib/projects";
 
 export const metadata = pageMetadata({
-  // The root layout's title template appends "| K1 Visual Solutions".
   title: "Projects — LED Display Installations Worldwide",
   ogTitle: "Projects — LED Display Installations Worldwide | K1 Visual Solutions",
   description: `Browse ${PROJECTS.length} real LED display installations across 15+ countries — transparent crystal film, holographic, and soft LED screens at work in retail, hospitality, airports, showrooms, and more.`,
@@ -18,20 +16,39 @@ export const metadata = pageMetadata({
     "Brand experience center wrapped in transparent LED — a K1 Visual Solutions installation",
 });
 
+/* The portfolio reads as three product walls, reference cases.html order. */
+const GROUPS = [
+  {
+    product: "crystal-film",
+    kicker: "Crystal Film LED Screen",
+    title: "Architecture & retail glazing",
+    grid: "c3",
+    href: "/products/crystal-film",
+  },
+  {
+    product: "holographic",
+    kicker: "Holographic Invisible Screen",
+    title: "Showrooms & premium glass",
+    grid: "c3",
+    href: "/products/holographic",
+  },
+  {
+    product: "soft-led-display",
+    kicker: "Soft LED Display",
+    title: "North American storefronts",
+    grid: "c4",
+    href: "/products/soft-led-display",
+  },
+];
+
 /**
- * /projects — the full installation portfolio. A server-rendered hero and
- * grid HTML (all entries in the static page for crawlers), with filtering,
- * hover playback, and the lightbox layered on by the client-side explorer.
+ * /projects — every documented installation, grouped by product family.
+ * Hover (or tap) a card to roll the footage; photo-only documentation
+ * renders as a still.
  */
 export default function ProjectsPage() {
   return (
-    <main
-      id="main-content"
-      className="page-enter min-h-screen"
-      style={{ background: "#FAF8F5" }}
-    >
-      {/* ItemList enumerating every install (anchored per card) + the
-          Home / Projects breadcrumb trail. */}
+    <main id="main-content">
       <JsonLd
         data={[
           itemListJsonLd({
@@ -48,40 +65,79 @@ export default function ProjectsPage() {
         ]}
       />
 
-      {/* ── Hero ── */}
-      <section aria-label="Our projects" style={{ background: COLOR.bg }}>
-        <div className="mx-auto max-w-6xl px-6 pb-10 pt-14 lg:px-10 md:pb-14 md:pt-20">
-          <nav
-            aria-label="Breadcrumb"
-            className="flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em]"
-            style={{ color: COLOR.muted }}
-          >
-            <a href="/" className="hover:opacity-70">
-              Home
-            </a>
-            <span aria-hidden>/</span>
-            <span style={{ color: COLOR.accent }}>Projects</span>
-          </nav>
-          <h1
-            className="mt-6 text-4xl leading-[1.05] md:text-6xl"
-            style={{ fontFamily: FONT.serif, color: COLOR.ink }}
-          >
-            Our Projects
-          </h1>
-          <p
-            className="mt-5 max-w-2xl text-base leading-relaxed md:text-lg"
-            style={{ color: COLOR.body }}
-          >
-            Real installations across 15+ countries — filter by industry,
-            product, or region to see how transparent and flexible LED reads in
-            spaces like yours.
+      <section className="page-hero" style={{ minHeight: "42vh" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/images/cases/case-coca-cola-experience-p625.jpg"
+          alt="Brand experience center wrapped in transparent LED"
+        />
+        <div className="shade" />
+        <div className="container">
+          <div className="crumbs">
+            <a href="/">Home</a> / Projects
+          </div>
+          <h1>Light, set into real places</h1>
+          <p>
+            From airport concourses to main-street storefronts — every project below is documented
+            on camera. Hover any clip to play.
           </p>
         </div>
       </section>
 
-      <ProjectsExplorer />
+      <section className="section">
+        <div className="container">
+          {GROUPS.map((group, gi) => {
+            const items = PROJECTS.filter((p) => p.product === group.product);
+            if (items.length === 0) return null;
+            return (
+              <div key={group.product}>
+                <Reveal
+                  className="sec-head wide"
+                  style={gi > 0 ? { marginTop: 80 } : undefined}
+                >
+                  <div className="kicker">
+                    <span className="num">{String(gi + 1).padStart(2, "0")}</span> {group.kicker}
+                  </div>
+                  <div className="row">
+                    <h2 className="title">{group.title}</h2>
+                    <a className="link-arrow" href={group.href}>
+                      View the product →
+                    </a>
+                  </div>
+                </Reveal>
+                <Reveal className={`gridx ${group.grid}`}>
+                  {items.map((project) => (
+                    <div key={project.id} id={project.id}>
+                      <VideoCard
+                        video={project.video}
+                        poster={project.poster}
+                        title={project.title}
+                        sub={[project.model, project.location].filter(Boolean).join(" · ")}
+                      />
+                    </div>
+                  ))}
+                </Reveal>
+              </div>
+            );
+          })}
 
-      <CtaBanner />
+          <Reveal className="ctaband" style={{ marginTop: 80 }}>
+            <div>
+              <h2>Your project could be next on this page</h2>
+              <p>
+                Send dimensions and a photo of the space — spec and indicative price within 24
+                hours.
+              </p>
+            </div>
+            <div className="actions">
+              <a className="btn light" href="/contact">
+                Request a Quote
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <SiteFooter />
     </main>
   );
