@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find Your Perfect LED Display | K1 Visual Solutions</title>
+<meta name="description" content="Answer 3 simple questions to find the ideal transparent LED display for your space. Crystal Film, Holographic, or Soft LED — we help you choose.">
+<meta property="og:title" content="Find Your Perfect LED Display | K1 Visual Solutions">
+<meta property="og:description" content="Answer 3 simple questions to find the ideal transparent LED display for your space. Crystal Film, Holographic, or Soft LED — we help you choose.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="selpage">
+
+<header class="site-header"><div class="container">
+  <a class="brand" href="index.html"><span class="k1">K1</span><span class="rest">Visual Solutions</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <div class="dd"><a href="products.html" class="active">Products</a><div class="dd-menu">
+      <a href="product-crystal-film.html">Crystal Film LED Screen<small>Self-adhesive transparent film · P6.25–P20</small></a>
+      <a href="product-holographic.html">Holographic Invisible Screen<small>Borderless mesh PCB · P2.5–P10</small></a>
+      <a href="product-soft-led.html">Soft LED Display<small>Plug-and-play sign · 35″/52″/70″</small></a>
+      <a class="find" href="selector.html">Find Your Product →<small>Answer 3 questions — we'll match the right display</small></a>
+      <a href="products.html"><b>View all products →</b></a></div></div>
+    <a href="solutions.html">Solutions</a><a href="cases.html">Cases</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  </nav>
+  <a class="btn header-cta" href="contact.html">Request a Quote</a>
+</div></header>
+
+<section class="selx-head"><div class="container">
+  <div class="crumbs"><a href="index.html">Home</a> / Find Your Product</div>
+  <h1 class="serif">Find your perfect LED display.</h1>
+  <p class="lead">Three questions. Thirty seconds. We'll match your space to the right product — Crystal Film, Holographic, or Soft LED — with the configuration to start from.</p>
+</div></section>
+
+<div class="selx-progress"><div class="container">
+  <div class="meta"><span id="selx-step-label">Step 1 of 3 — Installation Surface</span><a href="selector.html" id="selx-restart" hidden>Start over ↺</a></div>
+  <div class="track" role="progressbar" aria-label="Selector progress" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" id="selx-bar"><div class="fill" id="selx-fill"></div></div>
+</div></div>
+
+<main class="selx-stage"><div class="container">
+  <section id="selx-panel" class="selx-panel" aria-live="polite"></section>
+  <div class="selx-nav">
+    <button class="btn dark-ghost" id="selx-back" type="button" hidden>← Back</button>
+  </div>
+  <noscript><p style="color:#A9A29A;padding:40px 0">The selector needs JavaScript. Browse the range directly on the <a href="products.html" style="color:#9D97F1">products page</a> instead.</p></noscript>
+</div></main>
+
+<footer class="site-footer"><div class="container">
+  <div class="cols">
+    <div><a class="brand" href="index.html"><span class="k1">K1</span><span class="rest">Visual Solutions</span></a>
+      <p class="blurb">Premium transparent, flexible &amp; holographic LED display solutions, distributed across North America by K1trends Global Inc.</p></div>
+    <div><h5>Explore</h5><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="cases.html">Cases</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h5>Products</h5><ul><li><a href="product-crystal-film.html">Crystal Film LED Screen</a></li><li><a href="product-holographic.html">Holographic Invisible Screen</a></li><li><a href="product-soft-led.html">Soft LED Display</a></li><li><a href="selector.html">Find Your Product</a></li></ul></div>
+    <div><h5>Contact</h5><ul><li>525 W Wrightwood Avenue, Elmhurst, IL</li><li><a href="tel:+16303595931">+1 (630) 359-5931</a></li><li><a href="mailto:Andrewxu@vertexdistributor.com">Andrewxu@vertexdistributor.com</a></li></ul>
+      <a class="btn" style="margin-top:14px" href="contact.html">Request a Quote</a></div>
+  </div>
+  <div class="bottom">
+    <div class="socials"><a href="#">W</a><a href="#">IG</a><a href="#">f</a><a href="#">T</a><a href="#">in</a></div>
+    <div class="copy">© 2026 K1trends Global Inc. · K1 Visual Solutions. All rights reserved.</div>
+  </div>
+</div></footer>
+
+<script src="assets/products.js"></script>
+<script>
+/* Product Selector — 3-step wizard. State lives in `answers`, mirrored to
+   ?location=&distance=&scene= so any result is a shareable deep link. */
+(function () {
+  const PRODUCTS = window.K1_PRODUCTS;
+  const IMG = 'assets/images';
+
+  const STEPS = [
+    {
+      key: 'location', label: 'Installation Surface', title: 'Where will it live?',
+      sub: 'Pick the surface the display installs on or behind.',
+      options: [
+        { value: 'glass', title: 'Glass / Window', img: IMG + '/cf-app-retail-window.jpg',
+          desc: 'Shop windows, glazed facades, glass partitions — bonded to or hung behind glass.' },
+        { value: 'wall', title: 'Wall / Façade', img: IMG + '/cf-app-facade-night.jpg',
+          desc: 'Solid walls, building exteriors, interior feature walls.' },
+        { value: 'freestanding', title: 'Freestanding / Indoor', img: IMG + '/applications/app-product-display.jpg',
+          desc: 'Counters, shelving, stands and open interiors — no fixed structure.' }
+      ]
+    },
+    {
+      key: 'distance', label: 'Viewing Distance', title: 'How close is your audience?',
+      sub: 'Typical distance between the viewer and the screen — this sets the pixel pitch.',
+      options: [
+        { value: 'close', title: 'Close', big: '1–5 m', desc: 'Window shoppers, showroom visitors — fine detail matters.' },
+        { value: 'medium', title: 'Medium', big: '5–15 m', desc: 'Across a street, mall atrium or exhibition hall.' },
+        { value: 'far', title: 'Far', big: '15 m+', desc: 'Facades and large formats read from a distance.' }
+      ]
+    },
+    {
+      key: 'scene', label: 'Environment', title: 'What kind of space is it?',
+      sub: 'The environment decides brightness, content style and serviceability.',
+      options: [
+        { value: 'retail', title: 'Retail / Storefront', img: IMG + '/applications/app-retail.jpg',
+          desc: 'Shops, F&B, showcases — promos that change by the hour.' },
+        { value: 'corporate', title: 'Corporate / Exhibition', img: IMG + '/applications/app-lobby.jpg',
+          desc: 'Lobbies, showrooms, trade fairs — precision and polish.' },
+        { value: 'outdoor', title: 'Outdoor / Architecture', img: IMG + '/applications/app-architecture.jpg',
+          desc: 'Facades and street-facing glazing, in all weather.' },
+        { value: 'entertainment', title: 'Entertainment / Events', img: IMG + '/applications/app-event.jpg',
+          desc: 'Venues, stages, attractions — motion-heavy content.' }
+      ]
+    }
+  ];
+
+  const VALID = {};
+  STEPS.forEach(s => { VALID[s.key] = s.options.map(o => o.value); });
+
+  /* ---- recommendation engine ---- */
+  const PRIMARY_BY_LOCATION = { glass: 'crystal-film', wall: 'holographic', freestanding: 'soft-led-display' };
+
+  function recommend(a) {
+    const sc = { 'crystal-film': 0, 'holographic': 0, 'soft-led-display': 0 };
+    if (a.location === 'glass') { sc['crystal-film'] += 4; sc['holographic'] += 2; }
+    if (a.location === 'wall') {
+      if (a.distance === 'close') { sc['holographic'] += 4; sc['crystal-film'] += 1; }
+      else { sc['holographic'] += 3; sc['crystal-film'] += 2; }
+    }
+    if (a.location === 'freestanding') { sc['soft-led-display'] += 5; sc['holographic'] += 1; }
+    if (a.scene === 'retail') sc['soft-led-display'] += 2;
+    if (a.scene === 'corporate') sc['holographic'] += 2;
+    if (a.scene === 'outdoor') sc['crystal-film'] += 2;
+    if (a.scene === 'entertainment') { sc['holographic'] += 1; sc['crystal-film'] += 1; }
+    sc[PRIMARY_BY_LOCATION[a.location]] += 0.5; // tie-break: surface fit wins
+    const ranked = Object.keys(sc).sort((x, y) => sc[y] - sc[x]);
+    return { primary: ranked[0], secondary: sc[ranked[1]] >= 2 ? ranked[1] : null };
+  }
+
+  /* Suggested starting configuration, by product × distance. */
+  const CONFIG = {
+    'crystal-film': { unit: 'Pixel Pitch', close: 'P6.25 – P8', medium: 'P8 – P10', far: 'P16 – P20' },
+    'holographic': { unit: 'Pixel Pitch', close: 'P2.5 – P3.91', medium: 'P6.25', far: 'P6.25 – P10' },
+    'soft-led-display': { unit: 'Suggested Size', close: 'M — 35″', medium: 'L — 52″', far: 'XL — 70″' }
+  };
+
+  const REASON = {
+    'crystal-film': {
+      glass: 'Self-adhesive film bonds straight onto your glazing — no steel structure, no drilling — and 90%+ transparency keeps the window clear by day.',
+      wall: 'At roughly 5 kg/m² the flexible film turns walls and facades into media surfaces without heavy structure, and follows curves rigid panels can’t.',
+      freestanding: 'The flexible film wraps columns, arcs and shaped builds — a 6 cm minimum bend diameter goes where rigid panels can’t.'
+    },
+    'holographic': {
+      glass: 'The borderless mesh PCB bonds invisibly onto glass — up to 93% transparency with the sharpest close-range image in the range.',
+      wall: 'Fine pitch down to P2.5 holds up at arm’s length, and 120 fps 3D playback gives content true holographic depth.',
+      freestanding: 'Under 3 mm thick and borderless, it floats content mid-air on showcase and partition glass.'
+    },
+    'soft-led-display': {
+      glass: 'It hangs in any window and plays in five minutes — Bluetooth app + remote, 10 W draw, no engineering needed.',
+      wall: 'It mounts wherever a hook fits — soft body, waterproof, zero installation works.',
+      freestanding: 'Plug-and-play by design: unbox, hang, pair the app — live in five minutes with no installation at all.'
+    }
+  };
+
+  const SCENE_NOTE = {
+    retail: 'A favourite for storefronts that switch promotions in seconds.',
+    corporate: 'High pixel density and clean see-through aesthetics suit showrooms and exhibitions.',
+    outdoor: 'Weather-resistant and UV-stable for street-facing duty.',
+    entertainment: 'High brightness and a 3,840 Hz-class refresh handle motion-heavy content.'
+  };
+
+  const ANSWER_LABEL = {};
+  STEPS.forEach(s => s.options.forEach(o => { ANSWER_LABEL[s.key + ':' + o.value] = o.title; }));
+
+  /* ---- state ---- */
+  const answers = { location: null, distance: null, scene: null };
+  let step = 0;
+
+  const panel = document.getElementById('selx-panel');
+  const fill = document.getElementById('selx-fill');
+  const bar = document.getElementById('selx-bar');
+  const stepLabel = document.getElementById('selx-step-label');
+  const backBtn = document.getElementById('selx-back');
+  const restart = document.getElementById('selx-restart');
+
+  function syncURL() {
+    const url = new URL(window.location.href);
+    ['location', 'distance', 'scene'].forEach(k => {
+      if (answers[k]) url.searchParams.set(k, answers[k]); else url.searchParams.delete(k);
+    });
+    history.replaceState(null, '', url);
+  }
+
+  function setProgress(n, label) {
+    fill.style.width = (n / 3 * 100) + '%';
+    bar.setAttribute('aria-valuenow', n);
+    stepLabel.textContent = label;
+  }
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+  /* ---- step rendering ---- */
+  function renderStep(i, dir) {
+    step = i;
+    const s = STEPS[i];
+    setProgress(i, 'Step ' + (i + 1) + ' of 3 — ' + s.label);
+    backBtn.hidden = i === 0;
+    restart.hidden = true;
+
+    const cards = s.options.map((o, idx) => {
+      const sel = answers[s.key] === o.value;
+      const media = o.img
+        ? '<span class="media"><img src="' + o.img + '" alt="" loading="lazy"></span>'
+        : '<span class="big serif">' + o.big + '</span>';
+      return '<button type="button" class="selx-card' + (o.img ? '' : ' txt') + (sel ? ' selected' : '') +
+        '" style="--d:' + (idx * 70) + 'ms" data-value="' + o.value + '" aria-pressed="' + sel + '">' +
+        media + '<span class="body"><span class="t serif">' + esc(o.title) + '</span><span class="d">' + esc(o.desc) + '</span></span></button>';
+    }).join('');
+
+    panel.className = 'selx-panel ' + (dir || 'fwd');
+    panel.innerHTML = '<h2 class="serif">' + esc(s.title) + '</h2><p class="sub">' + esc(s.sub) + '</p>' +
+      '<div class="selx-grid n' + s.options.length + '">' + cards + '</div>';
+
+    panel.querySelectorAll('.selx-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers[s.key] = btn.dataset.value;
+        syncURL();
+        panel.querySelectorAll('.selx-card').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true');
+        setTimeout(() => { step < 2 ? renderStep(step + 1, 'fwd') : renderResult(); }, 240);
+      });
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ---- result rendering ---- */
+  function specRows(p, a) {
+    const conf = CONFIG[p.slug];
+    return p.specs.map(s0 => {
+      if (s0.label === 'Pixel Pitch' || s0.label === 'Sizes') {
+        return { label: conf.unit, value: conf[a.distance], note: 'for ' + ANSWER_LABEL['distance:' + a.distance].toLowerCase() + ' viewing (' + { close: '1–5 m', medium: '5–15 m', far: '15 m+' }[a.distance] + ')' };
+      }
+      return s0;
+    });
+  }
+
+  function renderResult() {
+    step = 3;
+    const a = answers;
+    const rec = recommend(a);
+    const p = PRODUCTS[rec.primary];
+    const p2 = rec.secondary ? PRODUCTS[rec.secondary] : null;
+    setProgress(3, 'Your match');
+    backBtn.hidden = false;
+    restart.hidden = false;
+
+    const chips = ['location', 'distance', 'scene'].map((k, i) =>
+      '<button type="button" class="chip" data-step="' + i + '">' + esc(ANSWER_LABEL[k + ':' + a[k]]) + ' ✎</button>').join('');
+
+    const specs = specRows(p, a).map(s0 =>
+      '<div class="cell"><b>' + esc(s0.value) + '</b><span>' + esc(s0.label) + (s0.note ? ' · ' + esc(s0.note) : '') + '</span></div>').join('');
+
+    const shots = (p.gallery[a.scene] || p.gallery.retail).slice(0, 3).map(g =>
+      '<figure><img src="' + g.src + '" alt="' + esc(p.short + ' — ' + g.label) + '" loading="lazy"><figcaption>' + esc(g.label) + '</figcaption></figure>').join('');
+
+    const reason = REASON[p.slug][a.location] + ' ' + SCENE_NOTE[a.scene];
+
+    let html =
+      '<div class="selx-chips">' + chips + '</div>' +
+      '<div class="selx-result">' +
+        '<div class="hero-card">' +
+          '<div class="media"><img src="' + p.heroImage + '" alt="' + esc(p.name) + '"></div>' +
+          '<div class="body">' +
+            '<div class="kicker">Our recommendation</div>' +
+            '<h2 class="serif">' + esc(p.name) + '</h2>' +
+            '<p class="ptype">' + esc(p.type) + '</p>' +
+            '<p class="why">' + esc(reason) + '</p>' +
+            '<div class="specs">' + specs + '</div>' +
+            '<div class="ctas">' +
+              '<a class="btn sel" href="' + p.detailPage + '">View Product Details</a>' +
+              '<a class="btn dark-ghost" href="contact.html?product=' + p.slug + '">Request a Quote</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="selx-shots">' + shots + '</div>';
+
+    if (p2) {
+      html +=
+        '<div class="selx-also">' +
+          '<div class="lbl">Also consider</div>' +
+          '<a class="also-card" href="' + p2.detailPage + '">' +
+            '<img src="' + p2.cardImage + '" alt="' + esc(p2.name) + '" loading="lazy">' +
+            '<span class="body"><b class="serif">' + esc(p2.name) + '</b><span>' + esc(p2.tagline) + '</span><span class="go">View details →</span></span>' +
+          '</a>' +
+        '</div>';
+    }
+
+    html +=
+      '<div class="selx-share">' +
+        '<span>Save or send this result —</span>' +
+        '<button type="button" class="btn dark-ghost" id="selx-copy">Copy share link</button>' +
+      '</div></div>';
+
+    panel.className = 'selx-panel result';
+    panel.innerHTML = html;
+
+    panel.querySelectorAll('.chip').forEach(c =>
+      c.addEventListener('click', () => renderStep(+c.dataset.step, 'back')));
+
+    const copy = document.getElementById('selx-copy');
+    copy.addEventListener('click', () => {
+      const link = window.location.href;
+      const done = () => { copy.textContent = '✓ Link copied'; setTimeout(() => { copy.textContent = 'Copy share link'; }, 2200); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done, () => prompt('Copy this link:', link));
+      else prompt('Copy this link:', link);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  backBtn.addEventListener('click', () => renderStep(step === 3 ? 2 : step - 1, 'back'));
+
+  /* ---- boot: restore from query params (shareable deep links) ---- */
+  const qs = new URLSearchParams(window.location.search);
+  ['location', 'distance', 'scene'].forEach(k => {
+    const v = qs.get(k);
+    if (v && VALID[k].indexOf(v) !== -1) answers[k] = v;
+  });
+  if (answers.location && answers.distance && answers.scene) renderResult();
+  else if (answers.location && answers.distance) renderStep(2, 'fwd');
+  else if (answers.location) renderStep(1, 'fwd');
+  else renderStep(0, 'fwd');
+})();
+</script>
+</body></html>
