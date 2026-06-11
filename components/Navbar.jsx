@@ -27,9 +27,10 @@ function isActivePath(href, pathname) {
  */
 
 const PRODUCT_SUBLINKS = [
-  { label: "Series T — Transparent Poster", href: "/products?series=series-t" },
-  { label: "Series F — Flexible Film", href: "/products?series=series-f" },
-  { label: "Holographic LED", href: "/products?series=holographic" },
+  { label: "Crystal Film LED Screen", href: "/products/crystal-film" },
+  { label: "Holographic Invisible Screen", href: "/products/holographic" },
+  { label: "Soft LED Display", href: "/products/soft-led-display" },
+  { label: "View All Products", href: "/products" },
 ];
 
 const NAV_LINKS = [

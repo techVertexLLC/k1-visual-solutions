@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { COLOR, FONT } from "@/components/home/tokens";
 
 /**
@@ -12,6 +13,10 @@ import { COLOR, FONT } from "@/components/home/tokens";
  * Email (valid format) and the project message (min 10 chars) are required and
  * show an inline red error beneath the field. The message field also carries a
  * live character count.
+ *
+ * Product detail pages deep-link here as /contact?product=<name> to pre-fill
+ * the product-interest dropdown (reading searchParams means the page must
+ * render this inside <Suspense>).
  */
 
 const inputBase =
@@ -47,12 +52,13 @@ function validateField(id, value) {
 const VALIDATED_FIELDS = ["name", "email", "scenario"];
 
 /* Product-interest dropdown options, in display order. The first is the
-   default for visitors who haven't settled on a product yet. */
+   default for visitors who haven't settled on a product yet. Detail-page CTAs
+   pre-fill via ?product= using these exact strings. */
 const PRODUCT_OPTIONS = [
   "Not sure yet",
-  "Series T — Transparent Poster",
-  "Series F — Flexible Film",
-  "Holographic LED",
+  "Crystal Film LED Screen",
+  "Holographic Invisible Screen",
+  "Soft LED Display",
   "Custom / Other",
 ];
 
@@ -112,6 +118,13 @@ export default function ContactForm() {
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
   const [messageLen, setMessageLen] = useState(0);
+
+  // ?product= deep link from a product detail page → pre-select that product.
+  const searchParams = useSearchParams();
+  const productParam = searchParams.get("product");
+  const initialProduct = PRODUCT_OPTIONS.includes(productParam)
+    ? productParam
+    : PRODUCT_OPTIONS[0];
 
   // Re-validate a field on blur, or after submit while the user corrects it.
   const handleBlur = (e) => {
@@ -217,7 +230,8 @@ export default function ContactForm() {
           id="productInterest"
           label="Product Interest (optional)"
           options={PRODUCT_OPTIONS}
-          defaultValue={PRODUCT_OPTIONS[0]}
+          key={initialProduct}
+          defaultValue={initialProduct}
         />
       </div>
       <div className="mt-6">

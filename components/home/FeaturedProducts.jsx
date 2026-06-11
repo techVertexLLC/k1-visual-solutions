@@ -12,9 +12,9 @@ import { getAllProducts } from "@/lib/products";
  */
 
 const FEATURED_SLUGS = [
-  "transparent-poster-screen",
-  "smd-holographic-p391",
-  "flexible-led-film",
+  "crystal-film",
+  "holographic",
+  "soft-led-display",
 ];
 
 const FEATURED = getAllProducts().filter((p) => FEATURED_SLUGS.includes(p.slug));
@@ -45,8 +45,8 @@ export default function FeaturedProducts() {
               A transparent LED display for every surface
             </h2>
             <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
-              A look across the range — from a freestanding transparent poster to
-              fine-pitch holographic panels and self-adhesive film.
+              A look across the range — self-adhesive crystal film, holographic
+              invisible screens, and plug-and-play soft LED signs.
             </p>
           </div>
 

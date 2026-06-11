@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import PageBanner from "@/components/ui/PageBanner";
 import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/contact/ContactForm";
@@ -66,8 +67,12 @@ export default function ContactPage() {
               The more you can share about dimensions, environment, and content,
               the sharper our first response will be.
             </p>
+            {/* Suspense: the form reads ?product= via useSearchParams for the
+                product-interest pre-fill from detail-page CTAs. */}
             <div className="mt-8">
-              <ContactForm />
+              <Suspense fallback={<div className="min-h-[480px]" />}>
+                <ContactForm />
+              </Suspense>
             </div>
           </Reveal>
 
