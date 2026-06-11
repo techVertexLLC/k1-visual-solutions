@@ -404,7 +404,7 @@ export default function Hero() {
         >
           <motion.p
             variants={item}
-            className="text-[11px] font-medium uppercase tracking-[0.34em]"
+            className="text-sm sm:text-base font-semibold uppercase tracking-[0.28em]"
             style={{ color: COLOR.accent }}
           >
             Invisible Displays
@@ -412,7 +412,7 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="mt-7 text-4xl leading-[1.08] sm:text-5xl lg:text-6xl"
+            className="mt-6 text-4xl leading-[1.08] sm:text-5xl lg:text-6xl"
             style={{ fontFamily: FONT.serif, color: COLOR.ink }}
           >
             Redefining Spaces with Invisible Displays
@@ -420,7 +420,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="mx-auto mt-7 max-w-xl text-lg leading-relaxed md:mx-0"
+            className="mx-auto mt-6 max-w-xl text-lg sm:text-xl leading-relaxed md:mx-0"
             style={{ color: COLOR.body }}
           >
             Premium transparent LED display &amp; holographic solutions for
