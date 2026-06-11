@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * CategorySidebar — 兩層樹狀側欄（K1 Series / MileStrong），含 mobile select。
+ * CategorySidebar — 兩層樹狀側欄（K1 Products / MileStrong），含 mobile select。
  *
  * 設計決策：
  * - 暖白卡片（#FAF8F5 bg, #E8E4DF border）與 K1 設計系統一致。
@@ -25,22 +25,22 @@ const COLOR = {
 // 兩層樹狀結構：group → items → children
 const CATEGORY_TREE = [
   {
-    groupLabel: "K1 Series",
+    groupLabel: "K1 Products",
     items: [
       {
+        key: "crystal-film",
+        label: "Crystal Film LED Screen",
+        children: ["P6.25", "P8", "P10", "P15", "P20"],
+      },
+      {
         key: "holographic",
-        label: "Holographic LED",
-        children: ["SMD Holographic P3.91", "SMD Holographic P6.25", "SMD Holographic P10.4"],
+        label: "Holographic Invisible Screen",
+        children: ["P2.5", "P3.91", "P6.25", "P10"],
       },
       {
-        key: "series-t",
-        label: "Series T — Transparent Poster",
-        children: ["Transparent LED Poster Screen"],
-      },
-      {
-        key: "series-f",
-        label: "Series F — Flexible Film",
-        children: ["Flexible LED Film", "Crystal Film Display"],
+        key: "soft-led-display",
+        label: "Soft LED Display",
+        children: ["M — 35″", "L — 52″", "XL — 70″"],
       },
     ],
   },
@@ -83,11 +83,11 @@ const CATEGORY_TREE = [
 
 // Mobile <select> 的扁平選項
 const MOBILE_OPTIONS = [
-  { key: "all",             label: "All Products" },
+  { key: "all",              label: "All Products" },
   // K1
-  { key: "holographic",     label: "K1 — Holographic LED" },
-  { key: "series-t",        label: "K1 — Series T" },
-  { key: "series-f",        label: "K1 — Series F" },
+  { key: "crystal-film",     label: "K1 — Crystal Film LED Screen" },
+  { key: "holographic",      label: "K1 — Holographic Invisible Screen" },
+  { key: "soft-led-display", label: "K1 — Soft LED Display" },
   // MileStrong
   { key: "control-room",    label: "MileStrong — Control Room" },
   { key: "transparent-led", label: "MileStrong — Transparent LED" },

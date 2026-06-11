@@ -38,7 +38,7 @@ const SAMPLE = {
   h2: "Light that lives in glass",
   h3: "Flexible Transparent Film",
   body: "Transparent and flexible LED, engineered to disappear into architecture and reappear as motion, colour, and presence. Up to 95% transparency, a 6 cm bend radius, and a self-adhesive film just 4 mm thin.",
-  caption: "Series F — 80–95% transparency · ~4 mm · P6.25–P20",
+  caption: "Crystal Film — 90–95% transparency · 2.5 mm · P6.25–P20",
   button: "Request a Quote",
 };
 
@@ -642,14 +642,14 @@ function Whitespace() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <ProductCard />
               <ProductCard
-                title="Rigid Transparent Poster"
-                spec="70–85% transparency · Hang / Floor · P2.8–P7.8"
-                series="Series T"
+                title="Holographic Invisible Screen"
+                spec="70–93% transparency · Glass-bonded · P2.5–P10"
+                series="Holographic"
               />
               <ProductCard
-                title="Self-Adhesive LED Film"
-                spec="~4 mm thin · 3–6 kg/m² · peel-and-place"
-                series="Series A"
+                title="Soft LED Display"
+                spec="35″/52″/70″ · 10 W · plug-and-play"
+                series="Soft LED"
               />
             </div>
           </figure>
@@ -661,8 +661,8 @@ function Whitespace() {
 
 function ProductCard({
   title = SAMPLE.h3,
-  spec = SAMPLE.caption.replace("Series F — ", ""),
-  series = "Series F",
+  spec = SAMPLE.caption.replace("Crystal Film — ", ""),
+  series = "Crystal Film",
 }) {
   return (
     <div

@@ -18,7 +18,7 @@ export const metadata = pageMetadata({
   title: "Product Catalog — Transparent, Holographic & Flexible LED",
   ogTitle: "K1 Product Catalog — Full LED Display Range",
   description:
-    "Browse the complete K1 range: SMD Holographic panels (P3.91 / P6.25 / P10.4), Transparent Poster Screens, Flexible LED Film and Crystal Film Displays. Filter by series to find the right solution.",
+    "Browse the complete K1 range — Crystal Film LED Screen, SMD Holographic Invisible Screen, and the Soft LED Display — alongside MileStrong control-room, poster, immersive and outdoor LED systems.",
   path: "/catalog",
   image: "/assets/images/products/smd-p625-new-01.jpg",
   imageAlt: "K1 SMD holographic LED panel detail",

@@ -15,11 +15,12 @@ import {
 /**
  * Solutions — industry-based navigation. Six environments, each a card with a
  * 16:9 image, an inline icon, a short note on how transparent / holographic LED
- * solves that industry's problem, and two routes onward: filtered products and
- * a quote. Two-column grid on desktop, single column on mobile.
+ * solves that industry's problem, and two routes onward: the matching product
+ * detail page and a quote. Two-column grid on desktop, single column on mobile.
  *
- * The `series` value deep-links the catalog filter via ?series= (honoured by
- * ProductCatalog); `label` is the lead product family shown as a quiet tag.
+ * `href` points each industry at its product detail page (with an
+ * #applications anchor where the scene gallery is the payoff); `label` is the
+ * lead product line shown as a quiet tag. Routing per redesign spec §9.
  */
 const CATEGORIES = [
   {
@@ -30,8 +31,8 @@ const CATEGORIES = [
     imageAlt:
       "Transparent LED storefront window running a promotion, street visible through the glass",
     copy: "Transform window displays into dynamic, see-through media walls. Transparent LED lets natural light in while running promotions, product launches, and seasonal campaigns — visible from the street, day or night.",
-    series: "series-t",
-    label: "Series T — Transparent Poster",
+    href: "/products/crystal-film#applications",
+    label: "Crystal Film LED Screen",
   },
   {
     key: "architecture",
@@ -39,10 +40,10 @@ const CATEGORIES = [
     Icon: FacadeIcon,
     image: "/assets/images/scenes/scene-architecture-facade.jpg",
     imageAlt:
-      "Glass curtain-wall facade at dusk with holographic LED content integrated flush with the glazing",
-    copy: "Turn building glass into a media canvas without sacrificing transparency. Holographic LED panels integrate flush with curtain walls and atriums, adding motion and brand presence while preserving the architect's sightlines.",
-    series: "holographic",
-    label: "Holographic LED",
+      "Glass curtain-wall facade at dusk with transparent LED content integrated flush with the glazing",
+    copy: "Turn building glass into a media canvas without sacrificing transparency. Self-adhesive Crystal Film bonds straight onto curtain walls and atrium glazing — no steel structure — adding motion and brand presence while preserving the architect's sightlines.",
+    href: "/products/crystal-film#applications",
+    label: "Crystal Film LED Screen",
   },
   {
     key: "hospitality",
@@ -52,8 +53,8 @@ const CATEGORIES = [
     imageAlt:
       "Transparent LED display in a restaurant window, warm lit interior visible behind",
     copy: "Set the mood with ambient visuals that don't crowd the space. Transparent screens behind bars, in café windows, or across hotel lobbies deliver content without walls — keeping the interior open and inviting.",
-    series: "series-t",
-    label: "Series T, Holographic",
+    href: "/products/crystal-film",
+    label: "Crystal Film LED Screen",
   },
   {
     key: "corporate",
@@ -62,9 +63,9 @@ const CATEGORIES = [
     image: "/assets/images/applications/app-lobby.jpg",
     imageAlt:
       "Corporate lobby glazing carrying composed transparent LED branding above the reception area",
-    copy: "Welcome visitors with a composed digital presence across lobby glazing. Display company messaging, wayfinding, or branded content on transparent panels that maintain the reception area's clean, open feel.",
-    series: "holographic",
-    label: "Holographic LED",
+    copy: "Welcome visitors with a composed digital presence across lobby glazing. Display company messaging, wayfinding, or branded content on near-invisible panels that maintain the reception area's clean, open feel.",
+    href: "/products/holographic",
+    label: "Holographic Invisible Screen",
   },
   {
     key: "events",
@@ -72,21 +73,21 @@ const CATEGORIES = [
     Icon: ExhibitionIcon,
     image: "/assets/images/applications/app-event.jpg",
     imageAlt:
-      "Exhibition booth wrapped in flexible LED film curving around columns and displays",
-    copy: "Create immersive booth experiences with flexible LED film that wraps columns, curves around displays, and transforms any surface into a screen — then rolls up when the show is over.",
-    series: "series-f",
-    label: "Series F — Flexible Film",
+      "Exhibition space with holographic invisible screens floating content on glass",
+    copy: "Create immersive booth and showroom experiences with holographic invisible screens — fine-pitch, 3D-capable imagery that floats on the glass and reads from every aisle, while the exhibit behind stays in full view.",
+    href: "/products/holographic",
+    label: "Holographic Invisible Screen",
   },
   {
     key: "signage",
-    title: "Digital Signage & Wayfinding",
+    title: "Digital Signage & Storefronts",
     Icon: SignageIcon,
     image: "/assets/images/applications/app-signage.jpg",
     imageAlt:
-      "Transparent LED signage panel showing real-time messaging with the space behind still visible",
-    copy: "Replace static signs with transparent LED panels that deliver real-time messaging — transit schedules, directory maps, promotions — readable at a glance without blocking the view behind.",
-    series: "series-t",
-    label: "Series T, Holographic",
+      "Storefront window with a bright programmable LED sign scrolling a message",
+    copy: "Give any storefront a sign that moves. The plug-and-play Soft LED Display sticks to glass or walls, runs on USB power, and updates from your phone — promotions, hours, and messages live in five minutes.",
+    href: "/products/soft-led-display",
+    label: "Soft LED Display",
   },
 ];
 
@@ -101,9 +102,9 @@ function SolutionCard({ item, index }) {
           border: `1px solid ${COLOR.gray}`,
         }}
       >
-        {/* Image — 16:9, links straight to the filtered catalog */}
+        {/* Image — 16:9, links straight to the matching product detail page */}
         <a
-          href={`/products?series=${item.series}`}
+          href={item.href}
           className="relative block aspect-[16/9] overflow-hidden"
           aria-label={`See ${item.title} products`}
         >
@@ -154,7 +155,7 @@ function SolutionCard({ item, index }) {
           {/* Routes onward */}
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
-              href={`/products?series=${item.series}`}
+              href={item.href}
               className="btn-lift btn-glow inline-flex items-center gap-2 rounded-full bg-[#4F46B5] px-5 py-2 text-sm font-medium text-white hover:bg-[#5A50C7]"
             >
               See Products

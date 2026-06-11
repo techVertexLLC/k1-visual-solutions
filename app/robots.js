@@ -4,7 +4,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/moodboard", "/variant-a", "/variant-b"],
+        disallow: ["/api/", "/_next/", "/moodboard"],
       },
     ],
     sitemap: "https://k1visual.com/sitemap.xml",

@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Hero from "@/components/home/Hero";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
+import FeaturedProjects from "@/components/home/FeaturedProjects";
 import CaseStudiesPreview from "@/components/home/CaseStudiesPreview";
 import CtaBanner from "@/components/home/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
@@ -31,7 +32,8 @@ export const metadata = pageMetadata({
  * detail now lives on /products; the home page tells the story and previews
  * the range.
  *
- * Flow: Hero → Featured Products → Case Studies preview → CTA banner → Footer.
+ * Flow: Hero → Featured Products → Featured Projects rail → Case Studies
+ * preview → CTA banner → Footer.
  */
 export default function Home() {
   return (
@@ -39,6 +41,7 @@ export default function Home() {
       <main id="main-content" className="min-h-screen bg-[#FAF8F5]">
         <Hero />
         <FeaturedProducts />
+        <FeaturedProjects />
         <CaseStudiesPreview />
         <CtaBanner />
         <SiteFooter />

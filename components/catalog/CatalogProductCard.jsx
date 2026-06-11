@@ -23,9 +23,9 @@ const COLOR = {
 
 // 分類對應的 badge 文字
 const CATEGORY_LABEL = {
-  "series-t":        "Series T",
-  "series-f":        "Series F",
+  "crystal-film":    "Crystal Film",
   holographic:       "Holographic",
+  "soft-led-display": "Soft LED",
   "control-room":    "Control Room",
   "transparent-led": "Transparent LED",
   "led-poster":      "LED Poster",
