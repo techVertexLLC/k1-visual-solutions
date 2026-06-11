@@ -11,6 +11,8 @@ export const COLOR = {
   bg: "#FAF8F5", // warm white — primary surface (~80%)
   gray: "#E8E4DF", // warm gray — cards, dividers, secondary surfaces (~15%)
   accent: "#4F46B5", // brand blue-purple — used sparingly (≤5%)
+  accentLight: "#B7B1F2", // accent lifted for dark surfaces — #4F46B5 is unreadable on them
+  dark: "#14110E", // deep warm charcoal — dark sections (hero base, featured projects)
   ink: "#1A1A1A", // primary text (headings)
   body: "#4A4A4A", // secondary text (body)
   muted: "#6B655C", // quiet labels / captions

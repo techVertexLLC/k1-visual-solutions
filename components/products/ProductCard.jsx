@@ -34,12 +34,18 @@ export default function ProductCard({ product, variant = "regular" }) {
   // Overlay visible when hovered (or always when reduced motion — just opacity)
   const overlayVisible = hovered;
 
-  // Spec overlay values pulled from product.specs (spec §10)
-  const overlaySpecs = [
-    { label: "Pixel pitch",  value: product.specs?.["Pixel pitch"]  ?? product.pixelPitch },
-    { label: "Brightness",   value: product.specs?.["Brightness"]   ?? "—" },
-    { label: "Transparency", value: product.specs?.["Transparency"] ?? "—" },
-  ];
+  // Retail products (Soft LED) are sold by size, not pixel pitch — the footer
+  // figure "35″ / 52″ / 70″" needs the matching label.
+  const isRetail = product.productType === "retail";
+  const footerSpecLabel = isRetail ? "Sizes" : "Pixel pitch";
+
+  // Spec overlay rows pulled from product.specs (spec §10). The footer row
+  // already shows pixel pitch / sizes, so the overlay skips those and surfaces
+  // the next three real specs instead of duplicating (or printing "—").
+  const overlaySpecs = Object.entries(product.specs ?? {})
+    .filter(([label]) => label !== "Pixel pitch" && label !== "Sizes")
+    .slice(0, 3)
+    .map(([label, value]) => ({ label, value }));
 
   return (
     <article
@@ -175,11 +181,10 @@ export default function ProductCard({ product, variant = "regular" }) {
           </a>
         </h3>
 
+        {/* Two lines for every variant — copy in lib/products.js is written to
+            land inside them as a complete phrase (clamp breaks on words). */}
         <p
-          className={[
-            "mt-3 flex-1 text-sm leading-relaxed",
-            isFeatured ? "line-clamp-2" : "line-clamp-1",
-          ].join(" ")}
+          className="mt-3 flex-1 text-sm leading-relaxed line-clamp-2"
           style={{ color: COLOR.body }}
         >
           {product.shortDescription}
@@ -190,13 +195,13 @@ export default function ProductCard({ product, variant = "regular" }) {
           className="mt-5 flex items-center justify-between border-t pt-4"
           style={{ borderColor: COLOR.gray }}
         >
-          {/* Pixel pitch */}
+          {/* Pixel pitch (project products) / Sizes (retail) */}
           <div>
             <span
               className="block text-[10px] uppercase tracking-[0.16em]"
               style={{ color: COLOR.muted }}
             >
-              Pixel pitch
+              {footerSpecLabel}
             </span>
             <span
               className="block text-sm font-medium"

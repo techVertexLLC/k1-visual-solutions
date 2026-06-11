@@ -111,7 +111,7 @@ function ProjectCard({ item }) {
 
       <div className="p-6">
         <span
-          className="text-[11px] font-medium uppercase tracking-[0.22em]"
+          className="text-xs font-medium uppercase tracking-[0.22em]"
           style={{ color: COLOR.muted }}
         >
           {item.location || item.productName}
@@ -123,7 +123,7 @@ function ProjectCard({ item }) {
           {item.title}
         </h3>
         <span
-          className="mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-medium tracking-[0.04em]"
+          className="mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium tracking-[0.04em]"
           style={{ background: COLOR.gray, color: COLOR.accent }}
         >
           {item.productName}
@@ -148,31 +148,40 @@ export default function FeaturedProjects() {
   if (FEATURED.length === 0) return null;
 
   return (
+    /* Dark band in the home page's light→dark→light rhythm: deep warm charcoal
+       behind white cards, so the case footage carries the colour. */
     <section
       id="featured-projects"
       aria-label="Featured projects"
       className="scroll-mt-24 py-16 md:py-24"
-      style={{ background: COLOR.bg }}
+      style={{ background: COLOR.dark }}
     >
       <style dangerouslySetInnerHTML={{ __html: RAIL_STYLES }} />
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <Reveal className="flex items-end justify-between gap-6">
           <div className="max-w-2xl">
             <div
-              className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em]"
-              style={{ color: COLOR.muted }}
+              className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em]"
+              style={{ color: "rgba(255,255,255,0.55)" }}
             >
-              <span style={{ color: COLOR.accent }}>02</span>
-              <span aria-hidden className="h-px w-8" style={{ background: "#D4CFC8" }} />
+              <span style={{ color: COLOR.accentLight }}>02</span>
+              <span
+                aria-hidden
+                className="h-px w-8"
+                style={{ background: "rgba(255,255,255,0.22)" }}
+              />
               <span>Featured Projects</span>
             </div>
             <h2
               className="mt-6 text-2xl leading-tight md:text-4xl"
-              style={{ fontFamily: FONT.serif, color: COLOR.ink }}
+              style={{ fontFamily: FONT.serif, color: COLOR.bg }}
             >
               Proven on glass, at scale
             </h2>
-            <p className="mt-5 text-base leading-relaxed" style={{ color: COLOR.body }}>
+            <p
+              className="mt-5 text-base leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.72)" }}
+            >
               Four flagship installations on camera — an international airport, a
               global beverage brand, a semiconductor showroom, and a luxury
               flagship. Tap any project to see its full case wall.
@@ -185,8 +194,8 @@ export default function FeaturedProjects() {
               type="button"
               onClick={() => nudge(-1)}
               aria-label="Scroll projects left"
-              className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 hover:border-[#4F46B5] hover:text-[#4F46B5] active:scale-95"
-              style={{ borderColor: "#D4CFC8", color: COLOR.ink }}
+              className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 hover:border-[#B7B1F2] hover:text-[#B7B1F2] active:scale-95"
+              style={{ borderColor: "rgba(255,255,255,0.28)", color: COLOR.bg }}
             >
               ←
             </button>
@@ -194,8 +203,8 @@ export default function FeaturedProjects() {
               type="button"
               onClick={() => nudge(1)}
               aria-label="Scroll projects right"
-              className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 hover:border-[#4F46B5] hover:text-[#4F46B5] active:scale-95"
-              style={{ borderColor: "#D4CFC8", color: COLOR.ink }}
+              className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 hover:border-[#B7B1F2] hover:text-[#B7B1F2] active:scale-95"
+              style={{ borderColor: "rgba(255,255,255,0.28)", color: COLOR.bg }}
             >
               →
             </button>

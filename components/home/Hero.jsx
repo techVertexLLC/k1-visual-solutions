@@ -15,9 +15,10 @@ import { TransparencyIcon, CheckIcon, PinIcon } from "@/components/ui/icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Quick trust signals, absorbed from the old "Why K1" block. Kept light. */
+/* Quick trust signals, absorbed from the old "Why K1" block. Kept light.
+   95% = Crystal Film P20's measured transparency (lib/products.js). */
 const TRUST = [
-  { Icon: TransparencyIcon, label: "Up to 90% Transparency" },
+  { Icon: TransparencyIcon, label: "Up to 95% Transparency" },
   { Icon: CheckIcon, label: "3-Year Warranty" },
   { Icon: PinIcon, label: "North American Support" },
 ];
@@ -313,7 +314,7 @@ export default function Hero() {
       id="hero"
       aria-label="Introduction"
       className="relative flex min-h-[92vh] items-center overflow-hidden"
-      style={{ background: COLOR.bg }}
+      style={{ background: COLOR.dark }}
     >
       {/* Layer 1 — Parallax background: video (default) or static image (reduced-motion).
           scale-125 給 parallax drift 留出 headroom，避免邊緣露白。
@@ -329,9 +330,10 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Layer 2 — Warm-white wash overlay.
-          Keeps type effortless to read without darkening the image or introducing
-          a cold/sci-fi cast. Strongest on the left, under the headline.
+      {/* Layer 2 — Dark scrim, strongest on the left under the headline and
+          easing off to the right so the showroom footage stays visible. Sits
+          in the ~30–40% range overall; the left stop runs deeper because the
+          source scene is mid-gray and white type needs the extra contrast.
           GSAP ScrollTrigger transitions opacity for depth cue on scroll.
 
           暗角設計：四邊額外一層 radial vignette，遮住 upscale 邊緣的畫質損失，
@@ -341,7 +343,8 @@ export default function Hero() {
         className="absolute inset-0"
         aria-hidden
         style={{
-          background: `linear-gradient(100deg, ${COLOR.bg}f5 0%, ${COLOR.bg}e0 38%, ${COLOR.bg}88 64%, ${COLOR.bg}50 100%)`,
+          background:
+            "linear-gradient(100deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.48) 38%, rgba(0,0,0,0.28) 66%, rgba(0,0,0,0.12) 100%)",
           willChange: "opacity",
         }}
       />
@@ -364,9 +367,9 @@ export default function Hero() {
           onClick={requestIOSPermission}
           className="absolute bottom-8 right-6 z-20 flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium backdrop-blur-sm transition-all duration-300 active:scale-95"
           style={{
-            borderColor: `${COLOR.accent}60`,
-            color: COLOR.accent,
-            background: `${COLOR.bg}cc`,
+            borderColor: "rgba(255,255,255,0.4)",
+            color: "rgba(255,255,255,0.92)",
+            background: "rgba(0,0,0,0.35)",
           }}
           aria-label="Enable AR view with gyroscope"
         >
@@ -402,10 +405,12 @@ export default function Hero() {
           animate="show"
           className="max-w-2xl text-center md:text-left"
         >
+          {/* Brand colour held, lifted one step (accentLight) — raw #4F46B5
+              sits under 2:1 contrast on the darkened footage. */}
           <motion.p
             variants={item}
             className="text-sm sm:text-base font-semibold uppercase tracking-[0.28em]"
-            style={{ color: COLOR.accent }}
+            style={{ color: COLOR.accentLight }}
           >
             Invisible Displays
           </motion.p>
@@ -413,7 +418,7 @@ export default function Hero() {
           <motion.h1
             variants={item}
             className="mt-6 text-4xl leading-[1.08] sm:text-5xl lg:text-6xl"
-            style={{ fontFamily: FONT.serif, color: COLOR.ink }}
+            style={{ fontFamily: FONT.serif, color: "#FFFFFF" }}
           >
             Redefining Spaces with Invisible Displays
           </motion.h1>
@@ -421,7 +426,7 @@ export default function Hero() {
           <motion.p
             variants={item}
             className="mx-auto mt-6 max-w-xl text-lg sm:text-xl leading-relaxed md:mx-0"
-            style={{ color: COLOR.body }}
+            style={{ color: "rgba(255,255,255,0.86)" }}
           >
             Premium transparent LED display &amp; holographic solutions for
             architecture, retail, and exhibitions — distributed across North
@@ -440,10 +445,10 @@ export default function Hero() {
               Request a Quote
             </a>
 
-            {/* Secondary — calm outline; gains a whisper of accent fill on hover */}
+            {/* Secondary — calm outline; white border + label on the dark scrim */}
             <a
               href="/products"
-              className="group btn-lift inline-flex items-center gap-2 rounded-full border border-[#4F46B5] px-7 py-3 text-sm font-medium tracking-wide text-[#4F46B5] hover:bg-[#4F46B5]/[0.06]"
+              className="group btn-lift inline-flex items-center gap-2 rounded-full border border-white/80 px-7 py-3 text-sm font-medium tracking-wide text-white hover:bg-white/10"
             >
               Explore Products
               <span className="transition-transform duration-300 group-hover:translate-x-1">
@@ -452,7 +457,7 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          {/* Trust signals — small, warm-gray, evenly spaced. Subtle by design. */}
+          {/* Trust signals — small, light-on-dark, evenly spaced. Subtle by design. */}
           <motion.ul
             variants={item}
             className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-start"
@@ -461,9 +466,13 @@ export default function Hero() {
               <li
                 key={label}
                 className="flex items-center gap-2 text-xs font-medium"
-                style={{ color: COLOR.muted }}
+                style={{ color: "rgba(255,255,255,0.82)" }}
               >
-                <span className="h-4 w-4 flex-none" style={{ color: COLOR.accent }} aria-hidden>
+                <span
+                  className="h-4 w-4 flex-none"
+                  style={{ color: COLOR.accentLight }}
+                  aria-hidden
+                >
                   <Icon />
                 </span>
                 {label}
