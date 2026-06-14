@@ -225,6 +225,7 @@ h2.title{font-family:var(--ff-display);font-size:clamp(30px,3.6vw,44px);line-hei
 .site-footer .socials a[data-tip]::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 9px);left:50%;transform:translate(-50%,3px);background:var(--dark);color:#fff;font-size:11px;font-weight:600;line-height:1;white-space:nowrap;padding:6px 10px;border-radius:6px;opacity:0;pointer-events:none;transition:.18s}
 .site-footer .socials a[data-tip]:hover::after{opacity:1;transform:translate(-50%,0)}
 .site-footer .copy{font-size:13px;color:var(--muted)}
+.site-footer .crafted-by{font-size:0.7rem;color:#888;margin:4px 0 0;letter-spacing:.02em}
 
 /* page hero (subpages) */
 .page-hero{position:relative;min-height:46vh;display:flex;align-items:end;color:#fff;overflow:hidden;padding-bottom:48px}
